@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_margin="@dimen/_15sdp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/_15sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/intermedium"
+                    android:text="Leave Dates"
+                    android:textColor="#A8A8A8"
+                    android:textSize="@dimen/_12sdp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/interbold"
+                    android:text="22 Sept 2022 - 22 Sept 2022"
+                    android:textColor="@color/textcolor"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/intermedium"
+                    android:text="No of days"
+                    android:textColor="#A8A8A8"
+                    android:textSize="@dimen/_12sdp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/interbold"
+                    android:text="1"
+                    android:textColor="@color/textcolor"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/intermedium"
+                    android:text="Leave Type"
+                    android:textColor="#A8A8A8"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/interbold"
+                    android:text="Casual Leave"
+                    android:textColor="@color/textcolor"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/intermedium"
+                            android:text="Status"
+                            android:textColor="#A8A8A8"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/interbold"
+                            android:text="Approved"
+                            android:textColor="#2DDA93"
+                            android:textSize="@dimen/_14sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:background="@drawable/border6">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Change"
+                                android:fontFamily="@font/interregular"
+                                android:textColor="#007AC3"
+                                android:layout_gravity="center"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:background="@drawable/border10">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Cancel"
+                                android:fontFamily="@font/interregular"
+                                android:textColor="@color/red"
+                                android:layout_gravity="center"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/intermedium"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="Approved By"
+                    android:textColor="#A8A8A8"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/intermedium"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="--"
+                    android:textColor="@color/textcolor"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/intermedium"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Comments"
+                    android:textColor="#A8A8A8"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/interbold"
+                    android:text="Visit native place"
+                    android:textColor="@color/textcolor"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp" />
+
+
+
+
+            </LinearLayout>
+
+
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="#A8A8A8" />
+
+
+
+            <TextView
+                android:id="@+id/btnPopupclose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/intermedium"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:text="Close"
+                android:textAlignment="center"
+                android:textColor="#007AC3"
+                android:textSize="@dimen/_12sdp" />
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

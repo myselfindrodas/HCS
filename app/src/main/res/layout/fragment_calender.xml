@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgbackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:context=".fragment.CalenderFragment">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/ll_nav"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/btn_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imgback"
+                            android:layout_width="@dimen/_14sdp"
+                            android:layout_height="@dimen/_14sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/_15sdp"
+                            android:gravity="center"
+                            android:src="@drawable/ic_arrow" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="9"
+                        android:fontFamily="@font/intermedium"
+                        android:text="Calendar"
+                        android:textColor="@color/textcolor"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/btnNotification"
+                            android:layout_width="@dimen/_16sdp"
+                            android:layout_height="@dimen/_16sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center"
+                            android:textAllCaps="false" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_nav"
+                    android:orientation="vertical">
+
+
+                    <CalendarView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:theme="@style/CalenderViewCustom"
+                        android:layout_margin="@dimen/_10sdp"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="#007AC3"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/card_bg1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/card_bg1"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="@dimen/_10sdp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <View
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="5dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:background="#4FAAAAAA" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/interbold"
+                                    android:text="Schedule"
+                                    android:layout_marginLeft="@dimen/_15sdp"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:textColor="@color/textcolor"
+                                    android:textSize="@dimen/_13sdp" />
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_15sdp"
+                                    android:layout_marginRight="@dimen/_15sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_12sdp"
+                                            android:layout_height="@dimen/_12sdp"
+                                            android:src="@drawable/ic_dot"
+                                            app:tint="@color/red"/>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Departmant meeting"
+                                            android:layout_marginLeft="@dimen/_10sdp"
+                                            android:textColor="@color/textcolor"
+                                            android:fontFamily="@font/intermedium"
+                                            android:textSize="@dimen/_12sdp"/>
+
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginLeft="@dimen/_22sdp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/ic_clock"/>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="10:00 AM"
+                                            android:layout_marginLeft="@dimen/_10sdp"
+                                            android:textColor="#88868B"
+                                            android:fontFamily="@font/intermedium"
+                                            android:textSize="@dimen/_10sdp"/>
+
+
+
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="@dimen/_10sdp"
+                                        android:background="#4FAAAAAA" />
+
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_15sdp"
+                                    android:layout_marginRight="@dimen/_15sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_12sdp"
+                                            android:layout_height="@dimen/_12sdp"
+                                            android:src="@drawable/ic_dot"
+                                            app:tint="#FFCC00"/>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Call manager"
+                                            android:layout_marginLeft="@dimen/_10sdp"
+                                            android:textColor="@color/textcolor"
+                                            android:fontFamily="@font/intermedium"
+                                            android:textSize="@dimen/_12sdp"/>
+
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginLeft="@dimen/_22sdp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/ic_clock"/>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="10:00 AM"
+                                            android:layout_marginLeft="@dimen/_10sdp"
+                                            android:textColor="#88868B"
+                                            android:fontFamily="@font/intermedium"
+                                            android:textSize="@dimen/_10sdp"/>
+
+
+
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="@dimen/_10sdp"
+                                        android:background="#4FAAAAAA" />
+
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/_15sdp"
+                                    android:layout_marginRight="@dimen/_15sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:layout_marginBottom="@dimen/_20sdp"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_12sdp"
+                                            android:layout_height="@dimen/_12sdp"
+                                            android:src="@drawable/ic_dot"
+                                            app:tint="#2DDA93"/>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Project Delivery"
+                                            android:layout_marginLeft="@dimen/_10sdp"
+                                            android:textColor="@color/textcolor"
+                                            android:fontFamily="@font/intermedium"
+                                            android:textSize="@dimen/_12sdp"/>
+
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginLeft="@dimen/_22sdp"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/ic_clock"/>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="10:00 AM"
+                                            android:layout_marginLeft="@dimen/_10sdp"
+                                            android:textColor="#88868B"
+                                            android:fontFamily="@font/intermedium"
+                                            android:textSize="@dimen/_10sdp"/>
+
+
+
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="@dimen/_10sdp"
+                                        android:background="#4FAAAAAA" />
+
+
+
+                                </LinearLayout>
+
+
+
+
+
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </RelativeLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

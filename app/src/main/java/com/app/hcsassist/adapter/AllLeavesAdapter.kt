@@ -19,9 +19,6 @@ class AllLeavesAdapter(
         return MyViewHolder(v)
     }
 
-    companion object {
-
-    }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 

@@ -7,24 +7,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.app.hcsassist.MainActivity
 import com.app.hcsassist.R
 import com.app.hcsassist.adapter.AllLeaveListAdapter
-import com.app.hcsassist.adapter.ShiftChangeListAdapter
+import com.app.hcsassist.adapter.LeaveTotalAdapter
+import com.app.hcsassist.adapter.ShortcodeListAdapter
 import com.app.hcsassist.databinding.FragmentLeaveBinding
 import com.app.hcsassist.model.LeaveModel
-import com.app.hcsassist.model.ShiftChangeListModel
 import com.app.hcsassist.modelfactory.LeaveModelFactory
-import com.app.hcsassist.modelfactory.UserdetailsModelFactory
 import com.app.hcsassist.retrofit.ApiClient
 import com.app.hcsassist.retrofit.ApiHelper
 import com.app.hcsassist.utils.Status
@@ -41,14 +35,16 @@ class LeaveFragment : Fragment() {
 
     lateinit var fragmentLeaveBinding: FragmentLeaveBinding
     lateinit var typesOfLeavesAdapter:TypesOfLeavesAdapter
-    var allLeavesAdapter: AllLeavesAdapter?=null
     lateinit var allLeaveListAdapter: AllLeaveListAdapter
-    lateinit var leavesListAdapter: LeavesListAdapter
+    lateinit var leaveTotalAdapter: LeaveTotalAdapter
+    lateinit var shortcodeListAdapter: ShortcodeListAdapter
     var arrayList :ArrayList<String> = ArrayList()
     lateinit var mainActivity: MainActivity
     var sessionManager: SessionManager? = null
     private lateinit var leaveListViewModel: LeaveListViewModel
     private var list: ArrayList<LeaveModel> = ArrayList()
+    private var allleavelist: ArrayList<LeaveModel> = ArrayList()
+    private var shortcodelist: ArrayList<String> = ArrayList()
 
 
 
@@ -67,6 +63,10 @@ class LeaveFragment : Fragment() {
         }
 
         leaveListViewModel = vm
+        shortcodeListAdapter = ShortcodeListAdapter(mainActivity, this)
+        allLeaveListAdapter = AllLeaveListAdapter(mainActivity, this)
+        leaveTotalAdapter = LeaveTotalAdapter(mainActivity, this)
+
 
         allLeave()
 
@@ -82,46 +82,36 @@ class LeaveFragment : Fragment() {
 
         }
 
-//        leavesListAdapter = LeavesListAdapter(requireContext(), arrayList)
-//        val mLayoutManager: RecyclerView.LayoutManager =
-//            GridLayoutManager(requireContext(), 1)
-//        fragmentLeaveBinding.recLeaves.layoutManager = mLayoutManager
-//        fragmentLeaveBinding.recLeaves.itemAnimator = DefaultItemAnimator()
-//        fragmentLeaveBinding.recLeaves.adapter = leavesListAdapter
 
-        allLeavesAdapter = AllLeavesAdapter(
-            requireContext(),
-            arrayList
+
+        fragmentLeaveBinding.recLeftoverLeave.setAdapter(
+            shortcodeListAdapter
         )
-
-        val horizontaLayoutManagaer =
-            LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
         fragmentLeaveBinding.recLeftoverLeave.setLayoutManager(
-            horizontaLayoutManagaer
-        )
-        fragmentLeaveBinding.recLeftoverLeave.setAdapter(allLeavesAdapter)
-
-
-
-        typesOfLeavesAdapter = TypesOfLeavesAdapter(
-            requireContext(),
-            arrayList
-        )
-
-        val horizontaLayoutManagaer1 =
             LinearLayoutManager(
-                requireContext(),
+                mainActivity,
                 LinearLayoutManager.HORIZONTAL,
                 false
             )
-        fragmentLeaveBinding.recTypesleaves.setLayoutManager(
-            horizontaLayoutManagaer1
         )
-        fragmentLeaveBinding.recTypesleaves.setAdapter(typesOfLeavesAdapter)
+
+
+
+//        typesOfLeavesAdapter = TypesOfLeavesAdapter(
+//            requireContext(),
+//            arrayList
+//        )
+//
+//        val horizontaLayoutManagaer1 =
+//            LinearLayoutManager(
+//                requireContext(),
+//                LinearLayoutManager.HORIZONTAL,
+//                false
+//            )
+//        fragmentLeaveBinding.recTypesleaves.setLayoutManager(
+//            horizontaLayoutManagaer1
+//        )
+//        fragmentLeaveBinding.recTypesleaves.setAdapter(typesOfLeavesAdapter)
 
 
 
@@ -140,26 +130,39 @@ class LeaveFragment : Fragment() {
                         Status.SUCCESS -> {
                             hideProgressDialog()
                             list = ArrayList<LeaveModel>()
+                            shortcodelist = ArrayList<String>()
+                            allleavelist = ArrayList<LeaveModel>()
                             for (i in it.data?.result!!) {
                                 val leaveModel = LeaveModel()
                                 leaveModel.leave_date_from = i?.leave_date_from
                                 leaveModel.leave_date_to = i?.leave_date_to
                                 leaveModel.no_of_leave = i?.leave_type?.no_of_leave
                                 leaveModel.status = i?.leave_type?.status
+                                leaveModel.short_code = i?.leave_type?.short_code
+                                leaveModel.leave_type = i?.leave_type?.leave_type
+                                if (!shortcodelist.contains(leaveModel.short_code)){
+                                    shortcodelist.add(leaveModel.short_code!!)
+                                }
                                 list.add(leaveModel)
+                                allleavelist.add(leaveModel)
                             }
-                            allLeaveListAdapter =
-                                AllLeaveListAdapter(mainActivity, list, this)
-                            fragmentLeaveBinding.rvAllleave.setAdapter(
-                                allLeaveListAdapter
-                            )
+
+                            shortcodeListAdapter.updateData(shortcodelist,list)
+                            allLeaveListAdapter.updateData(list)
+                            leaveTotalAdapter.updateData(allleavelist)
+
+
+
+                            fragmentLeaveBinding.rvAllleave.setAdapter(allLeaveListAdapter)
                             fragmentLeaveBinding.rvAllleave.setLayoutManager(
-                                LinearLayoutManager(
-                                    mainActivity,
-                                    LinearLayoutManager.VERTICAL,
-                                    false
-                                )
+                                LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false)
                             )
+
+                            fragmentLeaveBinding.recTypesleaves.setAdapter(leaveTotalAdapter)
+                            fragmentLeaveBinding.recTypesleaves.setLayoutManager(
+                                LinearLayoutManager(mainActivity, LinearLayoutManager.HORIZONTAL, false)
+                            )
+
 
                         }
                         Status.ERROR -> {
@@ -185,6 +188,21 @@ class LeaveFragment : Fragment() {
 
                 }
             }
+
+    }
+
+
+    fun shortcodeonClick(leaveModel: String){
+
+        val mList=ArrayList<LeaveModel>()
+            for (i in list){
+                if (leaveModel==i.short_code){
+
+                    mList.add(i)
+                }
+
+            }
+        allLeaveListAdapter.updateData(mList)
 
     }
 

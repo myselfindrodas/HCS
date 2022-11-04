@@ -75,6 +75,9 @@ data class leave_type(
     @field:SerializedName("leave_type")
     val leave_type: String? = null,
 
+    @field:SerializedName("short_code")
+    val short_code: String? = null,
+
     @field:SerializedName("no_of_leave")
     val no_of_leave: String? = null,
 

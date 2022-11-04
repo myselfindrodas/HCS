@@ -3,6 +3,7 @@ package com.app.hcsassist.fragment
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -493,6 +495,26 @@ class HomeFragment : Fragment() {
         if (mProgressDialog != null && mProgressDialog!!.isShowing) {
             mProgressDialog!!.dismiss()
         }
+    }
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true)
+            {
+                override fun handleOnBackPressed() {
+                    mainActivity.finishAffinity()
+                    if(activity != null) {
+                        activity?.finish()
+                    }
+
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            callback
+        )
     }
 
 }

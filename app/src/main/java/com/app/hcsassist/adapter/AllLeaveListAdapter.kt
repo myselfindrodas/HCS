@@ -1,5 +1,6 @@
 package com.app.hcsassist.adapter
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -23,11 +24,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class AllLeaveListAdapter(
     ctx: MainActivity,
-    leaveModelArrayList: ArrayList<LeaveModel>,
     val mFragment : Fragment) :
     RecyclerView.Adapter<AllLeaveListAdapter.MyViewHolder>() {
     private val inflater: LayoutInflater
-    private val leaveModelArrayList: ArrayList<LeaveModel>
+    private var leaveModelArrayList: ArrayList<LeaveModel> = ArrayList()
     var ctx: Context
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -82,6 +82,12 @@ class AllLeaveListAdapter(
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateData(list: List<LeaveModel>) {
+        leaveModelArrayList = list as ArrayList<LeaveModel>
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
         return leaveModelArrayList.size
     }
@@ -105,7 +111,6 @@ class AllLeaveListAdapter(
 
     init {
         inflater = LayoutInflater.from(ctx)
-        this.leaveModelArrayList = leaveModelArrayList
         this.ctx = ctx
     }
 }

@@ -21,6 +21,7 @@
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/leavetype.xml" value="0.166" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/roundedborder.xml" value="0.166" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/roundedborder2.xml" value="0.1565" />
+        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/select_box.xml" value="0.16" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/white_background.xml" value="0.166" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/white_curve.xml" value="0.166" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/activity_changepassword.xml" value="0.2" />
@@ -42,7 +43,7 @@
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_feedback.xml" value="0.2" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_feedbacksubmit.xml" value="0.2" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_leave.xml" value="0.22" />
+        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_leave.xml" value="0.25" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_markattendance.xml" value="0.2" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_markpunchout.xml" value="0.1921875" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_mss.xml" value="0.25" />

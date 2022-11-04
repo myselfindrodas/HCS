@@ -89,7 +89,7 @@ interface ApiInterface {
 
 
 
-    @POST("my-leave")
+    @GET("my-leave")
     suspend fun myleave(
         @Header("Authorization") Authorization: String,
     ): AllLeaveResponse

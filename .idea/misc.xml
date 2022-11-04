@@ -42,7 +42,7 @@
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_feedback.xml" value="0.2" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_feedbacksubmit.xml" value="0.2" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_leave.xml" value="0.1921875" />
+        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_leave.xml" value="0.22" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_markattendance.xml" value="0.2" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_markpunchout.xml" value="0.1921875" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_mss.xml" value="0.25" />
@@ -56,10 +56,10 @@
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/layout_markoutattendance.xml" value="0.25" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/layout_shiftchange.xml" value="0.25" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/layout_userdetails.xml" value="0.25" />
-        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/leaves_layout.xml" value="0.1921875" />
+        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/leaves_layout.xml" value="0.25" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/rv_leavetype.xml" value="0.33" />
-        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/rv_shiftchangelist.xml" value="0.49444444444444446" />
-        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/types_of_leaveslayout.xml" value="0.18" />
+        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/rv_shiftchangelist.xml" value="0.25" />
+        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/types_of_leaveslayout.xml" value="0.25" />
       </map>
     </option>
   </component>

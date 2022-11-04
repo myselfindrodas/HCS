@@ -393,8 +393,17 @@ class HomeFragment : Fragment() {
                             fragmentHomeBinding.llDetails.tvUsername.text = resource.data.data?.name
                             fragmentHomeBinding.llDetails.tvEmail.text = resource.data.data?.email
                             fragmentHomeBinding.llDetails.tvEmpcode.text = resource.data.data?.usercode
-                            fragmentHomeBinding.llDetails.tvReporterhead.text = resource.data.data?.reporting_manager?.user?.name + " "+
-                                    resource.data.data?.reporting_manager?.user?.last_name
+                            if (resource.data.data?.reporting_manager?.user?.name==null ||
+                                resource.data.data?.reporting_manager?.user?.last_name==null){
+
+                                fragmentHomeBinding.llDetails.tvReporterhead.text = ""
+
+                            }else{
+
+                                fragmentHomeBinding.llDetails.tvReporterhead.text = resource.data.data?.reporting_manager?.user?.name + " "+
+                                        resource.data.data?.reporting_manager?.user?.last_name
+                            }
+
                             phonenumber = resource.data.data?.phone.toString()
                             if (resource.data.data?.reporting_manager?.user?.full_address.equals("null")){
                                 fragmentHomeBinding.llDetails.tvLocation.text = ""

@@ -11,7 +11,7 @@ data class AllLeaveResponse(
 
 
     @field:SerializedName("data")
-    val data: dataobj? = null,
+    val result: List<dataobj?>? = null,
 
 )
 

@@ -1,5 +1,7 @@
 package com.app.hcsassist.fragment
 
+import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,11 +18,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.hcsassist.MainActivity
 import com.app.hcsassist.R
+import com.app.hcsassist.adapter.AllLeaveListAdapter
+import com.app.hcsassist.adapter.ShiftChangeListAdapter
 import com.app.hcsassist.databinding.FragmentLeaveBinding
+import com.app.hcsassist.model.LeaveModel
+import com.app.hcsassist.model.ShiftChangeListModel
 import com.app.hcsassist.modelfactory.LeaveModelFactory
 import com.app.hcsassist.modelfactory.UserdetailsModelFactory
 import com.app.hcsassist.retrofit.ApiClient
 import com.app.hcsassist.retrofit.ApiHelper
+import com.app.hcsassist.utils.Status
 import com.app.hcsassist.viewmodel.LeaveListViewModel
 import com.app.hcsassist.viewmodel.UserdetailsViewModel
 import com.example.hllapplication.Adapter.AllLeavesAdapter
@@ -34,11 +41,15 @@ class LeaveFragment : Fragment() {
 
     lateinit var fragmentLeaveBinding: FragmentLeaveBinding
     lateinit var typesOfLeavesAdapter:TypesOfLeavesAdapter
-    lateinit var allLeavesAdapter: AllLeavesAdapter
+    var allLeavesAdapter: AllLeavesAdapter?=null
+    lateinit var allLeaveListAdapter: AllLeaveListAdapter
+    lateinit var leavesListAdapter: LeavesListAdapter
     var arrayList :ArrayList<String> = ArrayList()
     lateinit var mainActivity: MainActivity
     var sessionManager: SessionManager? = null
     private lateinit var leaveListViewModel: LeaveListViewModel
+    private var list: ArrayList<LeaveModel> = ArrayList()
+
 
 
     override fun onCreateView(
@@ -57,6 +68,7 @@ class LeaveFragment : Fragment() {
 
         leaveListViewModel = vm
 
+        allLeave()
 
         fragmentLeaveBinding.floatingBtn.setOnClickListener {
 
@@ -70,6 +82,17 @@ class LeaveFragment : Fragment() {
 
         }
 
+//        leavesListAdapter = LeavesListAdapter(requireContext(), arrayList)
+//        val mLayoutManager: RecyclerView.LayoutManager =
+//            GridLayoutManager(requireContext(), 1)
+//        fragmentLeaveBinding.recLeaves.layoutManager = mLayoutManager
+//        fragmentLeaveBinding.recLeaves.itemAnimator = DefaultItemAnimator()
+//        fragmentLeaveBinding.recLeaves.adapter = leavesListAdapter
+
+        allLeavesAdapter = AllLeavesAdapter(
+            requireContext(),
+            arrayList
+        )
 
         val horizontaLayoutManagaer =
             LinearLayoutManager(
@@ -103,13 +126,83 @@ class LeaveFragment : Fragment() {
 
 
         return root
+
     }
 
 
 
     private fun allLeave(){
 
+        leaveListViewModel.leavelist(authtoken = "Bearer " + sessionManager?.getToken())
+            .observe(mainActivity) {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            hideProgressDialog()
+                            list = ArrayList<LeaveModel>()
+                            for (i in it.data?.result!!) {
+                                val leaveModel = LeaveModel()
+                                leaveModel.leave_date_from = i?.leave_date_from
+                                leaveModel.leave_date_to = i?.leave_date_to
+                                leaveModel.no_of_leave = i?.leave_type?.no_of_leave
+                                leaveModel.status = i?.leave_type?.status
+                                list.add(leaveModel)
+                            }
+                            allLeaveListAdapter =
+                                AllLeaveListAdapter(mainActivity, list, this)
+                            fragmentLeaveBinding.rvAllleave.setAdapter(
+                                allLeaveListAdapter
+                            )
+                            fragmentLeaveBinding.rvAllleave.setLayoutManager(
+                                LinearLayoutManager(
+                                    mainActivity,
+                                    LinearLayoutManager.VERTICAL,
+                                    false
+                                )
+                            )
 
+                        }
+                        Status.ERROR -> {
+                            hideProgressDialog()
+                            val builder = AlertDialog.Builder(mainActivity)
+                            builder.setMessage(it.message)
+                            builder.setPositiveButton(
+                                "Ok"
+                            ) { dialog, which ->
+
+                                dialog.cancel()
+
+                            }
+                            val alert = builder.create()
+                            alert.show()
+                        }
+
+                        Status.LOADING -> {
+                            showProgressDialog()
+                        }
+
+                    }
+
+                }
+            }
+
+    }
+
+    var mProgressDialog: ProgressDialog? = null
+
+    fun showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = ProgressDialog(mainActivity)
+            mProgressDialog!!.setMessage("Loading...")
+            mProgressDialog!!.isIndeterminate = true
+        }
+        mProgressDialog!!.show()
+    }
+
+    fun hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
+            mProgressDialog!!.dismiss()
+        }
     }
 
 

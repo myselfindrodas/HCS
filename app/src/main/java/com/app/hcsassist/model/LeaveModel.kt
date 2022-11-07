@@ -7,4 +7,10 @@ class LeaveModel {
     var status: String? = null
     var short_code: String? = null
     var leave_type:String?=null
+    var approvedname:String?=null
+    var approvedlastname:String?=null
+    var commnent:String?=null
+    var noofdays:String?=null
+    var id:String?=null
+
 }

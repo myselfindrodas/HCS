@@ -13,15 +13,20 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.hcsassist.MainActivity
 import com.app.hcsassist.R
+import com.app.hcsassist.adapter.LeaveAdapter
 import com.app.hcsassist.adapter.ShiftChangeListAdapter
+import com.app.hcsassist.apimodel.LeaveApprovalRequest
 import com.app.hcsassist.apimodel.ShiftApprovalRequest
 import com.app.hcsassist.databinding.FragmentMssBinding
+import com.app.hcsassist.model.RequestedLeaveModel
 import com.app.hcsassist.model.ShiftChangeListModel
+import com.app.hcsassist.modelfactory.RequestleavelistModelFactory
 import com.app.hcsassist.modelfactory.ShiftChangeListModelFactory
 import com.app.hcsassist.modelfactory.ShiftchangeApprovalModelFactory
 import com.app.hcsassist.retrofit.ApiClient
 import com.app.hcsassist.retrofit.ApiHelper
 import com.app.hcsassist.utils.Status
+import com.app.hcsassist.viewmodel.RequestedLeavelistViewModel
 import com.app.hcsassist.viewmodel.ShiftChangeListViewModel
 import com.app.hcsassist.viewmodel.ShiftchangeApprovalViewModel
 import com.example.wemu.session.SessionManager
@@ -32,9 +37,12 @@ class MssFragment : Fragment() {
     lateinit var mainActivity: MainActivity
     var sessionManager: SessionManager? = null
     lateinit var shiftChangeListAdapter: ShiftChangeListAdapter
+    lateinit var leaveAdapter: LeaveAdapter
     private var list: ArrayList<ShiftChangeListModel> = ArrayList()
+    private var leavelist: ArrayList<RequestedLeaveModel> = ArrayList()
     lateinit var shiftChangeListViewModel: ShiftChangeListViewModel
     lateinit var shiftchangeApprovalViewModel: ShiftchangeApprovalViewModel
+    lateinit var requestedLeavelistViewModel: RequestedLeavelistViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,8 +65,16 @@ class MssFragment : Fragment() {
         val shiftchangeapprovalvm: ShiftchangeApprovalViewModel by viewModels {
             ShiftchangeApprovalModelFactory(ApiHelper(ApiClient.apiService))
         }
+
+        val requestedleavelistvm: RequestedLeavelistViewModel by viewModels {
+            RequestleavelistModelFactory(ApiHelper(ApiClient.apiService))
+        }
+
+
         shiftChangeListViewModel = vm
         shiftchangeApprovalViewModel = shiftchangeapprovalvm
+        requestedLeavelistViewModel = requestedleavelistvm
+
 
         fragmentMssBinding.btnBack.setOnClickListener {
 
@@ -92,6 +108,7 @@ class MssFragment : Fragment() {
             fragmentMssBinding.includeAttendance.llAttendance.visibility = View.GONE
             fragmentMssBinding.includeLeave.llLeave.visibility = View.VISIBLE
             fragmentMssBinding.includeShiftchange.llShiftchange.visibility = View.GONE
+            leavelist()
 
         }
 
@@ -172,6 +189,63 @@ class MssFragment : Fragment() {
                 }
             }
 
+
+    }
+
+    private fun leavelist(){
+
+        requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken())
+            .observe(mainActivity) {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            hideProgressDialog()
+                            leavelist = ArrayList<RequestedLeaveModel>()
+                            for (i in it.data?.result!!) {
+                                val RequestedLeaveModel = RequestedLeaveModel()
+                                RequestedLeaveModel.name = i?.data?.name + " " + i?.data?.last_name
+                                RequestedLeaveModel.leave_date_from = i?.leave_date_from
+                                RequestedLeaveModel.leave_date_to = i?.leave_date_to
+                                RequestedLeaveModel.image = i?.data?.full_profile_image
+                                RequestedLeaveModel.id = i?.id
+                                leavelist.add(RequestedLeaveModel)
+                            }
+                            leaveAdapter = LeaveAdapter(mainActivity, leavelist, this)
+                            fragmentMssBinding.includeLeave.rvleave.setAdapter(
+                                leaveAdapter
+                            )
+                            fragmentMssBinding.includeLeave.rvleave.setLayoutManager(
+                                LinearLayoutManager(
+                                    mainActivity,
+                                    LinearLayoutManager.VERTICAL,
+                                    false
+                                )
+                            )
+
+                        }
+                        Status.ERROR -> {
+                            hideProgressDialog()
+                            val builder = AlertDialog.Builder(mainActivity)
+                            builder.setMessage(it.message)
+                            builder.setPositiveButton(
+                                "Ok"
+                            ) { dialog, which ->
+
+                                dialog.cancel()
+
+                            }
+                            val alert = builder.create()
+                            alert.show()
+                        }
+
+                        Status.LOADING -> {
+                            showProgressDialog()
+                        }
+
+                    }
+
+                }
+            }
 
     }
 
@@ -257,6 +331,87 @@ class MssFragment : Fragment() {
 
     }
 
+
+    fun acceptleave(requestedLeaveModel: RequestedLeaveModel){
+
+        requestedLeavelistViewModel.approveleave(
+            authtoken = "Bearer " + sessionManager?.getToken(),
+            LeaveApprovalRequest(request_id = requestedLeaveModel.id, status = "2")
+        ).observe(mainActivity) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        hideProgressDialog()
+                        leavelist()
+                        Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT).show()
+
+                    }
+                    Status.ERROR -> {
+                        hideProgressDialog()
+                        val builder = AlertDialog.Builder(mainActivity)
+                        builder.setMessage(it.message)
+                        builder.setPositiveButton(
+                            "Ok"
+                        ) { dialog, which ->
+
+                            dialog.cancel()
+
+                        }
+                        val alert = builder.create()
+                        alert.show()
+                    }
+
+                    Status.LOADING -> {
+                        showProgressDialog()
+                    }
+
+                }
+
+            }
+        }
+
+    }
+
+
+    fun rejectleave(requestedLeaveModel: RequestedLeaveModel){
+
+        requestedLeavelistViewModel.approveleave(
+            authtoken = "Bearer " + sessionManager?.getToken(),
+            LeaveApprovalRequest(request_id = requestedLeaveModel.id, status = "3")
+        ).observe(mainActivity) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        hideProgressDialog()
+                        leavelist()
+                        Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT).show()
+
+                    }
+                    Status.ERROR -> {
+                        hideProgressDialog()
+                        val builder = AlertDialog.Builder(mainActivity)
+                        builder.setMessage(it.message)
+                        builder.setPositiveButton(
+                            "Ok"
+                        ) { dialog, which ->
+
+                            dialog.cancel()
+
+                        }
+                        val alert = builder.create()
+                        alert.show()
+                    }
+
+                    Status.LOADING -> {
+                        showProgressDialog()
+                    }
+
+                }
+
+            }
+        }
+
+    }
 
 
 

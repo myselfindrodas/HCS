@@ -2,7 +2,7 @@ package com.app.hcsassist.apimodel
 
 import com.google.gson.annotations.SerializedName
 
-data class AllLeaveResponse(
+data class LeaveResponse(
     @field:SerializedName("status")
     val status: Boolean? = null,
 
@@ -11,11 +11,11 @@ data class AllLeaveResponse(
 
 
     @field:SerializedName("data")
-    val result: List<dataobj?>? = null,
+    val result: List<data2?>? = null,
 
 )
 
-data class dataobj(
+data class data2(
     @field:SerializedName("id")
     val id: String? = null,
 
@@ -37,9 +37,6 @@ data class dataobj(
     @field:SerializedName("leave_date_to")
     val leave_date_to: String? = null,
 
-    @field:SerializedName("no_of_days")
-    val no_of_days: String? = null,
-
     @field:SerializedName("applied_on")
     val applied_on: String? = null,
 
@@ -52,48 +49,17 @@ data class dataobj(
     @field:SerializedName("app_reject_on")
     val app_reject_on: String? = null,
 
+
+    @field:SerializedName("user")
+    val data: userclass? = null,
+
     @field:SerializedName("leave_type")
-    val leave_type: leave_type? = null,
-
-    @field:SerializedName("reported_to")
-    val reported_to: reported_to? = null,
-
+    val leavetype: leavetype? = null,
 
 
     )
 
-data class leave_type(
-    @field:SerializedName("id")
-    val id: String? = null,
-
-    @field:SerializedName("company_id")
-    val company_id: String? = null,
-
-    @field:SerializedName("emp_type_id")
-    val emp_type_id: String? = null,
-
-    @field:SerializedName("location_id")
-    val location_id: String? = null,
-
-    @field:SerializedName("leave_type")
-    val leave_type: String? = null,
-
-    @field:SerializedName("short_code")
-    val short_code: String? = null,
-
-    @field:SerializedName("no_of_leave")
-    val no_of_leave: String? = null,
-
-    @field:SerializedName("leave_type_code")
-    val leave_type_code: String? = null,
-
-    @field:SerializedName("status")
-    val status: String? = null,
-)
-
-
-data class reported_to(
-
+data class userclass(
     @field:SerializedName("id")
     val id: String? = null,
 
@@ -121,6 +87,7 @@ data class reported_to(
     @field:SerializedName("company_id")
     val company_id: String? = null,
 
+
     @field:SerializedName("phone")
     val phone: String? = null,
 
@@ -135,4 +102,34 @@ data class reported_to(
 
     @field:SerializedName("full_profile_image")
     val full_profile_image: String? = null,
+)
+
+
+data class leavetype(
+    @field:SerializedName("id")
+    val id: String? = null,
+
+    @field:SerializedName("company_id")
+    val company_id: String? = null,
+
+    @field:SerializedName("emp_type_id")
+    val emp_type_id: String? = null,
+
+    @field:SerializedName("location_id")
+    val location_id: String? = null,
+
+    @field:SerializedName("leave_type")
+    val leave_type: String? = null,
+
+    @field:SerializedName("short_code")
+    val short_code: String? = null,
+
+    @field:SerializedName("no_of_leave")
+    val no_of_leave: String? = null,
+
+    @field:SerializedName("leave_type_code")
+    val leave_type_code: String? = null,
+
+    @field:SerializedName("status")
+    val status: String? = null,
 )

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -16,6 +17,7 @@ import com.app.hcsassist.R
 import com.app.hcsassist.adapter.AllLeaveListAdapter
 import com.app.hcsassist.adapter.LeaveTotalAdapter
 import com.app.hcsassist.adapter.ShortcodeListAdapter
+import com.app.hcsassist.apimodel.CancelLeaveRequest
 import com.app.hcsassist.databinding.FragmentLeaveBinding
 import com.app.hcsassist.model.LeaveModel
 import com.app.hcsassist.modelfactory.LeaveModelFactory
@@ -140,6 +142,11 @@ class LeaveFragment : Fragment() {
                                 leaveModel.status = i?.leave_type?.status
                                 leaveModel.short_code = i?.leave_type?.short_code
                                 leaveModel.leave_type = i?.leave_type?.leave_type
+                                leaveModel.approvedname = i?.reported_to?.name
+                                leaveModel.approvedlastname = i?.reported_to?.last_name
+                                leaveModel.noofdays = i?.no_of_days
+                                leaveModel.commnent = i?.comment
+                                leaveModel.id = i?.id
                                 if (!shortcodelist.contains(leaveModel.short_code)){
                                     shortcodelist.add(leaveModel.short_code!!)
                                 }
@@ -203,6 +210,44 @@ class LeaveFragment : Fragment() {
 
             }
         allLeaveListAdapter.updateData(mList)
+
+    }
+
+
+    fun leavecancel(leaveModel: LeaveModel){
+
+        leaveListViewModel.leavecancel(authtoken = "Bearer " + sessionManager?.getToken(),
+            CancelLeaveRequest(request_id = leaveModel.id, status = "0"))
+            .observe(mainActivity) {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            hideProgressDialog()
+                            Toast.makeText(mainActivity, resource.data?.message, Toast.LENGTH_SHORT).show()
+                        }
+                        Status.ERROR -> {
+                            hideProgressDialog()
+                            val builder = AlertDialog.Builder(mainActivity)
+                            builder.setMessage(it.message)
+                            builder.setPositiveButton(
+                                "Ok"
+                            ) { dialog, which ->
+
+                                dialog.cancel()
+
+                            }
+                            val alert = builder.create()
+                            alert.show()
+                        }
+
+                        Status.LOADING -> {
+                            showProgressDialog()
+                        }
+
+                    }
+
+                }
+            }
 
     }
 

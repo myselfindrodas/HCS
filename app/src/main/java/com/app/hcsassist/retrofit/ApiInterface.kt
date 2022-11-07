@@ -77,21 +77,62 @@ interface ApiInterface {
 
 
     @Multipart
-    @POST("leave-apply")
+    @POST("leave-apply/{Id}")
     suspend fun leaveapply(
         @Header("Authorization") Authorization: String?,
         @Part("leave_type_id") leave_type_id: RequestBody,
-        @Part("leave_date_from") leave_date_from: RequestBody,
+        @Path("Id") id:String,
+        @Path("leave_date_from") leave_date_from: RequestBody,
         @Part("leave_date_to") leave_date_to: RequestBody,
         @Part("comment") comment: RequestBody,
         @Part file: MultipartBody.Part,
     ): LeaveapplyResponse
 
 
+    @Multipart
+    @POST("leave-apply/{Id}")
+    suspend fun leaveapplywithoutdoc(
+        @Header("Authorization") Authorization: String?,
+        @Part("leave_type_id") leave_type_id: RequestBody,
+        @Path("Id") id:String,
+        @Part("leave_date_from") leave_date_from: RequestBody,
+        @Part("leave_date_to") leave_date_to: RequestBody,
+        @Part("comment") comment: RequestBody
+    ): LeaveapplyResponse
+
 
     @GET("my-leave")
     suspend fun myleave(
         @Header("Authorization") Authorization: String,
     ): AllLeaveResponse
+
+
+
+    @GET("requested-leave-list")
+    suspend fun requestedleavelist(
+        @Header("Authorization") Authorization: String,
+    ): LeaveResponse
+
+
+    @POST("approve-leave")
+    suspend fun approveleave(
+        @Header("Authorization") Authorization: String,
+        @Body requestBody: LeaveApprovalRequest
+    ): ShiftApprovalResponse
+
+
+    @POST("cancel-leave")
+    suspend fun leavecancel(
+        @Header("Authorization") Authorization: String,
+        @Body requestBody: CancelLeaveRequest
+    ): LeaveCancelResponse
+
+
+    @Multipart
+    @POST("upload-frs")
+    suspend fun uploadfrs(
+        @Header("Authorization") Authorization: String?,
+        @Part file: MultipartBody.Part
+    ): FRSResponse
 
 }

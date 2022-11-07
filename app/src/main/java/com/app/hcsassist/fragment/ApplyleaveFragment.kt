@@ -29,7 +29,6 @@ import com.app.hcsassist.retrofit.ApiHelper
 import com.app.hcsassist.utils.GetRealPathFromUri
 import com.app.hcsassist.utils.Status
 import com.app.hcsassist.viewmodel.LeaveViewModel
-import com.developers.imagezipper.ImageZipper
 import com.example.wemu.session.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -55,6 +54,11 @@ class ApplyleaveFragment : Fragment() {
     var pathFromUri: String?=""
     var selectedfromdate:String?=""
     var selectedtodate:String?=""
+    var leavefromdate:String?=""
+    var leavetodate:String?=""
+    var comments:String?=""
+    var noofdays:String?=""
+    var leaveid:String?=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,14 +80,72 @@ class ApplyleaveFragment : Fragment() {
         }
         leaveTypeViewModel = vm
 
-        val sdf = SimpleDateFormat("d")
-        val sdf2 = SimpleDateFormat("MMM yyyy E")
-        val currentDate = sdf.format(Date())
-        val currentDate2 = sdf2.format(Date())
-        fragmentApplyleaveBinding.llMarkoutattendance.tvFromdate.text = currentDate2
-        fragmentApplyleaveBinding.llMarkoutattendance.tvSelectedfromdate.text = currentDate
-        fragmentApplyleaveBinding.llMarkoutattendance.tvTodate.text = currentDate2
-        fragmentApplyleaveBinding.llMarkoutattendance.tvselectedTodate.text = currentDate
+        val bundle = this.arguments
+        if (bundle != null) {
+            leavefromdate = bundle.getString("leavefromdate").toString()
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val dateFormat3 = SimpleDateFormat("MMM yyyy E")
+            val date = dateFormat.parse(leavefromdate)
+            val date2 = dateFormat.parse(leavefromdate)
+            val dateFormat2 = SimpleDateFormat("d")
+            val selecteddate = dateFormat2.format(date)
+            val selecteddate2 = dateFormat3.format(date2)
+            fragmentApplyleaveBinding.llMarkoutattendance.tvSelectedfromdate.text = selecteddate
+            fragmentApplyleaveBinding.llMarkoutattendance.tvFromdate.text = selecteddate2
+        } else {
+            leavefromdate = ""
+            val sdf = SimpleDateFormat("d")
+            val sdf2 = SimpleDateFormat("MMM yyyy E")
+            val currentDate = sdf.format(Date())
+            val currentDate2 = sdf2.format(Date())
+            fragmentApplyleaveBinding.llMarkoutattendance.tvFromdate.text = currentDate2
+            fragmentApplyleaveBinding.llMarkoutattendance.tvSelectedfromdate.text = currentDate
+
+        }
+
+        if (bundle != null) {
+            leavetodate = bundle.getString("leavetodate").toString()
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val dateFormat3 = SimpleDateFormat("MMM yyyy E")
+            val date = dateFormat.parse(leavetodate)
+            val date2 = dateFormat.parse(leavetodate)
+            val dateFormat2 = SimpleDateFormat("d")
+            val selecteddate = dateFormat2.format(date)
+            val selecteddate2 = dateFormat3.format(date2)
+            fragmentApplyleaveBinding.llMarkoutattendance.tvselectedTodate.text = selecteddate
+            fragmentApplyleaveBinding.llMarkoutattendance.tvTodate.text = selecteddate2
+
+
+        } else {
+            leavetodate = ""
+            val sdf = SimpleDateFormat("d")
+            val sdf2 = SimpleDateFormat("MMM yyyy E")
+            val currentDate = sdf.format(Date())
+            val currentDate2 = sdf2.format(Date())
+            fragmentApplyleaveBinding.llMarkoutattendance.tvTodate.text = currentDate2
+            fragmentApplyleaveBinding.llMarkoutattendance.tvselectedTodate.text = currentDate
+        }
+
+        if (bundle != null) {
+            comments = bundle.getString("comment").toString()
+            fragmentApplyleaveBinding.llMarkoutattendance.etComment.setText(comments)
+        } else {
+            comments = ""
+        }
+
+        if (bundle != null) {
+            noofdays = bundle.getString("noofdays").toString()
+            fragmentApplyleaveBinding.llMarkoutattendance.tvTotaldays.text = noofdays + " Days"
+        } else {
+            noofdays = ""
+        }
+
+        if (bundle != null) {
+            leaveid = bundle.getString("id").toString()
+        } else {
+            leaveid = ""
+        }
+
 
         fragmentApplyleaveBinding.btnBack.setOnClickListener {
 
@@ -98,13 +160,19 @@ class ApplyleaveFragment : Fragment() {
                 Toast.makeText(mainActivity, "Select To date", Toast.LENGTH_SHORT).show()
             }else if (selectedleavetypeid==null){
                 Toast.makeText(mainActivity, "Select Leave Type", Toast.LENGTH_SHORT).show()
-            }else if(fragmentApplyleaveBinding.llMarkoutattendance.etComment.length()==0){
+            }else if(fragmentApplyleaveBinding.llMarkoutattendance.etComment.text.length ==0){
                 Toast.makeText(mainActivity, "Enter Comment", Toast.LENGTH_SHORT).show()
-            }else if (pathFromUri.equals("")){
-                Toast.makeText(mainActivity, "Upload any Document", Toast.LENGTH_SHORT).show()
             }else{
 
-                applyleave(fragmentApplyleaveBinding.llMarkoutattendance.etComment.text.toString(), pathFromUri.toString(), it)
+                if (pathFromUri.equals("")){
+
+                    applyleavewithoutdoc(fragmentApplyleaveBinding.llMarkoutattendance.etComment.text.toString(), it)
+
+
+                }else{
+                    applyleave(fragmentApplyleaveBinding.llMarkoutattendance.etComment.text.toString(), pathFromUri.toString(), it)
+
+                }
             }
 
 
@@ -304,14 +372,16 @@ class ApplyleaveFragment : Fragment() {
     private fun applyleave(comment:String, pathFromUri: String, view: View){
 
         val file = File(pathFromUri)
-        val imageZipperFile: File = ImageZipper(mainActivity)
-            .setQuality(50)
-            .setMaxWidth(500)
-            .setMaxHeight(500)
-            .compressToFile(file)
 
-        val fileReqBody = RequestBody.create("image/jpg".toMediaTypeOrNull(), imageZipperFile)
-        val part: MultipartBody.Part = MultipartBody.Part.createFormData("attachment", imageZipperFile.name, fileReqBody)
+        var id:String? = ""
+        if (leaveid?.length!! >0){
+            id = leaveid
+        }else {
+            id = "0"
+        }
+
+        val fileReqBody = RequestBody.create("image/jpg".toMediaTypeOrNull(), file)
+        val part: MultipartBody.Part = MultipartBody.Part.createFormData("attachment", file.name, fileReqBody)
         val leave_type_id: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), selectedleavetypeid.toString())
         val leave_date_from: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), selectedfromdate!!)
         val leave_date_to: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), selectedtodate!!)
@@ -320,6 +390,7 @@ class ApplyleaveFragment : Fragment() {
         leaveTypeViewModel.leaveapply(
             authtoken = "Bearer " + sessionManager?.getToken(),
             leave_type_id,
+            id = id!!,
             leave_date_from,
             leave_date_to,
             commentvalue,
@@ -358,6 +429,62 @@ class ApplyleaveFragment : Fragment() {
 
 
     }
+
+    private fun applyleavewithoutdoc(comment:String, view: View){
+
+        var id:String? = ""
+        if (leaveid?.length!! >0){
+            id = leaveid
+        }else {
+            id = "0"
+        }
+        val leave_type_id: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), selectedleavetypeid.toString())
+        val leave_date_from: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), selectedfromdate!!)
+        val leave_date_to: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), selectedtodate!!)
+        val commentvalue: RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), comment)
+
+        leaveTypeViewModel.leaveapplywithoutdoc(
+            authtoken = "Bearer " + sessionManager?.getToken(),
+            leave_type_id,
+            id = id!!,
+            leave_date_from,
+            leave_date_to,
+            commentvalue).observe(mainActivity) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        hideProgressDialog()
+                        Toast.makeText(mainActivity, resource.data?.message, Toast.LENGTH_SHORT).show()
+                        val navController = Navigation.findNavController(view)
+                        navController.navigate(R.id.nav_leavefragment)
+                    }
+                    Status.ERROR -> {
+                        hideProgressDialog()
+                        val builder = AlertDialog.Builder(mainActivity)
+                        builder.setMessage(it.message)
+                        builder.setPositiveButton(
+                            "Ok"
+                        ) { dialog, which ->
+
+                            dialog.cancel()
+
+                        }
+                        val alert = builder.create()
+                        alert.show()
+                    }
+
+                    Status.LOADING -> {
+                        showProgressDialog()
+                    }
+
+                }
+
+            }
+        }
+
+
+    }
+
 
 
     @SuppressLint("SetTextI18n")

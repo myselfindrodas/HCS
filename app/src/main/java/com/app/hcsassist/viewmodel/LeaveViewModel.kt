@@ -23,6 +23,7 @@ class LeaveViewModel(private val mainRepository: MainRepository) : ViewModel() {
     fun leaveapply(
         authtoken: String,
         leave_type_id: RequestBody,
+        id: String,
         leave_date_from: RequestBody,
         leave_date_to:RequestBody,
         comment:RequestBody,
@@ -32,6 +33,7 @@ class LeaveViewModel(private val mainRepository: MainRepository) : ViewModel() {
         try {
             emit(Resource.success(data = mainRepository.leaveapply(authtoken,
                 leave_type_id,
+                id,
                 leave_date_from,
                 leave_date_to,
                 comment,
@@ -40,5 +42,28 @@ class LeaveViewModel(private val mainRepository: MainRepository) : ViewModel() {
             emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
         }
     }
+
+
+    fun leaveapplywithoutdoc(
+        authtoken: String,
+        leave_type_id: RequestBody,
+        id: String,
+        leave_date_from: RequestBody,
+        leave_date_to:RequestBody,
+        comment:RequestBody) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+
+        try {
+            emit(Resource.success(data = mainRepository.leaveapplywithoutdoc(authtoken,
+                leave_type_id,
+                id,
+                leave_date_from,
+                leave_date_to,
+                comment)))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
+        }
+    }
+
 
 }

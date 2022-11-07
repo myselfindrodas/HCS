@@ -2,34 +2,35 @@ package com.app.hcsassist.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.app.hcsassist.apimodel.CancelLeaveRequest
+import com.app.hcsassist.apimodel.ChangePasswordRequest
+import com.app.hcsassist.apimodel.LeaveApprovalRequest
+import com.app.hcsassist.apimodel.LoginRequest
 import com.app.hcsassist.retrofit.Resource
 import com.example.wemu.repository.MainRepository
 import kotlinx.coroutines.Dispatchers
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 
-class LeaveListViewModel(private val mainRepository: MainRepository) : ViewModel() {
+class RequestedLeavelistViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    fun leavelist(authtoken: String) = liveData(Dispatchers.IO) {
+    fun requestedleavelist(authtoken: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
 
         try {
-            emit(Resource.success(data = mainRepository.leavelist(authtoken)))
+            emit(Resource.success(data = mainRepository.requestedleavelist(authtoken)))
+        } catch (e: Exception) {
+            emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
+        }
+    }
+
+    fun approveleave(authtoken: String, requestBody: LeaveApprovalRequest) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+
+        try {
+            emit(Resource.success(data = mainRepository.approveleave(authtoken, requestBody)))
         } catch (e: Exception) {
             emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
         }
     }
 
 
-    fun leavecancel(authtoken: String, requestBody: CancelLeaveRequest) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-
-        try {
-            emit(Resource.success(data = mainRepository.leavecancel(authtoken, requestBody)))
-        } catch (e: Exception) {
-            emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
-        }
-    }
 
 }

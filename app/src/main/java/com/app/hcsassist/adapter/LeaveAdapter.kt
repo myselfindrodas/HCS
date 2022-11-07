@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.hcsassist.MainActivity
 import com.app.hcsassist.R
 import com.app.hcsassist.fragment.MssFragment
+import com.app.hcsassist.model.RequestedLeaveModel
 import com.app.hcsassist.model.ShiftChangeListModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
@@ -20,11 +21,11 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class LeaveAdapter(
     ctx: MainActivity,
-    shiftchangelistModelArrayList: ArrayList<ShiftChangeListModel>,
+    requestedleaveModelArrayList: ArrayList<RequestedLeaveModel>,
     val mFragment : Fragment) :
     RecyclerView.Adapter<LeaveAdapter.MyViewHolder>() {
     private val inflater: LayoutInflater
-    private val shiftchangelistModelArrayList: ArrayList<ShiftChangeListModel>
+    private val requestedleaveModelArrayList: ArrayList<RequestedLeaveModel>
     var ctx: Context
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,24 +36,60 @@ class LeaveAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvUsername.text = shiftchangelistModelArrayList[position].name
+        holder.tvUsername.text = requestedleaveModelArrayList[position].name
+        holder.tvFromdate.text = requestedleaveModelArrayList[position].leave_date_from
+        holder.tvTodate.text = requestedleaveModelArrayList[position].leave_date_to
+        Glide.with(ctx)
+            .load(requestedleaveModelArrayList[position].image)
+            .transform(CenterInside(),RoundedCorners(100))
+            .into(holder.PrfImg)
 
         holder.btnAccepetleave.setOnClickListener {
 
 
+            val builder = AlertDialog.Builder(ctx)
+            builder.setMessage("Do you really want to approved leave?")
+            builder.setPositiveButton(
+                "yes"
+            ) { dialog, which ->
 
+                (mFragment as MssFragment).acceptleave(requestedleaveModelArrayList.get(position))
+
+            }
+            builder.setNegativeButton(
+                "No"
+            ) { dialog, which -> dialog.cancel() }
+
+            val alert = builder.create()
+            alert.show()
 
         }
 
+
+
         holder.btnRejectleave.setOnClickListener {
 
+
+            val builder = AlertDialog.Builder(ctx)
+            builder.setMessage("Do you really want to reject leave?")
+            builder.setPositiveButton(
+                "yes"
+            ) { dialog, which ->
+                (mFragment as MssFragment).rejectleave(requestedleaveModelArrayList.get(position))
+            }
+            builder.setNegativeButton(
+                "No"
+            ) { dialog, which -> dialog.cancel() }
+
+            val alert = builder.create()
+            alert.show()
 
 
         }
     }
 
     override fun getItemCount(): Int {
-        return shiftchangelistModelArrayList.size
+        return requestedleaveModelArrayList.size
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -77,7 +114,7 @@ class LeaveAdapter(
 
     init {
         inflater = LayoutInflater.from(ctx)
-        this.shiftchangelistModelArrayList = shiftchangelistModelArrayList
+        this.requestedleaveModelArrayList = requestedleaveModelArrayList
         this.ctx = ctx
     }
 }

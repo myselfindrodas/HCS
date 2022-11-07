@@ -43,6 +43,12 @@ data class dataclass(
     @field:SerializedName("phone")
     val phone: String? = null,
 
+    @field:SerializedName("profile_image")
+    val profile_image: String? = null,
+
+    @field:SerializedName("snapshot")
+    val snapshot: String? = null,
+
     @field:SerializedName("user_type_id")
     val user_type_id: String? = null,
 

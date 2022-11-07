@@ -145,226 +145,267 @@
 
 
 
-            <GridLayout
+            <LinearLayout
                 android:id="@+id/gridlayout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_button"
-                android:layout_centerInParent="true"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:columnCount="2"
-                android:orientation="horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:useDefaultMargins="true">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/btnAttendance"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_120sdp"
-                    android:layout_margin="@dimen/_7sdp"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="@dimen/_10sdp">
-
-                    <LinearLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btnAttendance"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_margin="@dimen/_7sdp"
+                        app:cardElevation="0dp"
+                        app:cardCornerRadius="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
 
-                        <ImageView
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:src="@drawable/ic_attendance" />
+                            <ImageView
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:src="@drawable/ic_attendance" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/interregular"
-                            android:text="Attendance"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/interregular"
+                                android:text="Attendance"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/btnLeave"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_120sdp"
-                    android:layout_margin="@dimen/_7sdp"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="@dimen/_10sdp">
-
-                    <LinearLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btnLeave"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_margin="@dimen/_7sdp"
+                        app:cardElevation="0dp"
+                        app:cardCornerRadius="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
 
-                        <ImageView
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:src="@drawable/ic_leave" />
+                            <ImageView
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:src="@drawable/ic_leave" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/interregular"
-                            android:text="Leave"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/interregular"
+                                android:text="Leave"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/btnEvent"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_120sdp"
-                    android:layout_margin="@dimen/_7sdp"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="@dimen/_10sdp">
+                </LinearLayout>
 
-                    <LinearLayout
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btnAdminhr"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_margin="@dimen/_7sdp"
+                        app:cardElevation="0dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
 
-                        <ImageView
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:src="@drawable/ic_calendar2" />
+                            <ImageView
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:src="@drawable/ic_adminhr" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/interregular"
-                            android:text="Calendar"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/interregular"
+                                android:text="Admin / HR"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/btnMessage"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_120sdp"
-                    android:layout_margin="@dimen/_7sdp"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="@dimen/_10sdp">
-
-                    <LinearLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btnMss"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_margin="@dimen/_7sdp"
+                        app:cardElevation="0dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
 
-                        <ImageView
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:src="@drawable/ic_msg" />
+                            <ImageView
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:src="@drawable/ic_mss" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/interregular"
-                            android:text="Message"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/interregular"
+                                android:text="MSS"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/btnAdminhr"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_120sdp"
-                    android:layout_margin="@dimen/_7sdp"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="@dimen/_10sdp">
+                </LinearLayout>
 
-                    <LinearLayout
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btnEvent"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_margin="@dimen/_7sdp"
+                        app:cardElevation="0dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
 
-                        <ImageView
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:src="@drawable/ic_adminhr" />
+                            <ImageView
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:src="@drawable/ic_calendar2" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/interregular"
-                            android:text="Admin / HR"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/interregular"
+                                android:text="Calendar"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
 
 
-                    </LinearLayout>
+                        </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/btnMss"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_120sdp"
-                    android:layout_margin="@dimen/_7sdp"
-                    app:cardElevation="0dp"
-                    app:cardCornerRadius="@dimen/_10sdp">
-
-                    <LinearLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btnMessage"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_margin="@dimen/_7sdp"
+                        app:cardElevation="0dp"
+                        android:visibility="gone"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="@dimen/_10sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
 
-                        <ImageView
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:src="@drawable/ic_mss" />
+                            <ImageView
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:src="@drawable/ic_msg" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:fontFamily="@font/interregular"
-                            android:text="MSS"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp" />
-
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:fontFamily="@font/interregular"
+                                android:text="Message"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
 
 
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
 
 
-            </GridLayout>
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
 
 
             <LinearLayout
@@ -418,6 +459,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     app:cardElevation="0dp"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:cardCornerRadius="@dimen/_5sdp">
 
@@ -452,6 +494,7 @@
                     android:id="@+id/btnFeedback"
                     android:layout_width="match_parent"
                     app:cardElevation="0dp"
+                    android:visibility="gone"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:cardCornerRadius="@dimen/_5sdp">

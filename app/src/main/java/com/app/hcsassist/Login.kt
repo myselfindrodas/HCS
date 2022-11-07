@@ -96,10 +96,18 @@ class Login : AppCompatActivity() {
                             builder.setPositiveButton(
                                 "Ok"
                             ) { dialog, which ->
-                                val intent = Intent(this@Login, MainActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                                dialog.cancel()
+                                if (resource.data.data?.snapshot==null){
+                                    val intent = Intent(this@Login, Snapshotcapture::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                    dialog.cancel()
+                                }else{
+                                    val intent = Intent(this@Login, MainActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                    dialog.cancel()
+                                }
+
 
                             }
                             val alert = builder.create()

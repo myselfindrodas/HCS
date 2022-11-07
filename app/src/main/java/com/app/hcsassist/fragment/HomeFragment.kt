@@ -109,17 +109,30 @@ class HomeFragment : Fragment() {
 
 
 
-        if (sessionManager?.getuserid().equals("1") || sessionManager?.getuserid().equals("2")){
 
-            fragmentHomeBinding.btnAdminhr.visibility = View.VISIBLE
-            fragmentHomeBinding.btnMss.visibility = View.VISIBLE
+        if (sessionManager?.getuserid().equals("3")){
+
             fragmentHomeBinding.btnShiftchange.visibility = View.VISIBLE
-
-        }else{
-
+            fragmentHomeBinding.btnAttendance.visibility = View.VISIBLE
+            fragmentHomeBinding.btnEvent.visibility = View.VISIBLE
             fragmentHomeBinding.btnAdminhr.visibility = View.GONE
             fragmentHomeBinding.btnMss.visibility = View.GONE
+        }else if (sessionManager?.getuserid().equals("1")){
+
             fragmentHomeBinding.btnShiftchange.visibility = View.VISIBLE
+            fragmentHomeBinding.btnAttendance.visibility = View.VISIBLE
+            fragmentHomeBinding.btnEvent.visibility = View.VISIBLE
+            fragmentHomeBinding.btnAdminhr.visibility = View.VISIBLE
+            fragmentHomeBinding.btnMss.visibility = View.VISIBLE
+
+        }else if (sessionManager?.getuserid().equals("2")){
+
+            fragmentHomeBinding.btnShiftchange.visibility = View.VISIBLE
+            fragmentHomeBinding.btnAttendance.visibility = View.VISIBLE
+            fragmentHomeBinding.btnEvent.visibility = View.VISIBLE
+            fragmentHomeBinding.btnAdminhr.visibility = View.GONE
+            fragmentHomeBinding.btnMss.visibility = View.VISIBLE
+
         }
 
         fragmentHomeBinding.btMarkattendance.setOnClickListener {
@@ -141,11 +154,11 @@ class HomeFragment : Fragment() {
             navController.navigate(R.id.nav_attendancefragment)
         }
 
-        fragmentHomeBinding.btnMessage.setOnClickListener {
-
-            val navController = Navigation.findNavController(it)
-            navController.navigate(R.id.nav_chatlistfragment)
-        }
+//        fragmentHomeBinding.btnMessage.setOnClickListener {
+//
+//            val navController = Navigation.findNavController(it)
+//            navController.navigate(R.id.nav_chatlistfragment)
+//        }
 
         fragmentHomeBinding.btnEvent.setOnClickListener {
 
@@ -317,14 +330,14 @@ class HomeFragment : Fragment() {
     private fun picuploadToServer(pathFromUri: String) {
 
         val file = File(pathFromUri)
-        val imageZipperFile: File = ImageZipper(mainActivity)
-            .setQuality(50)
-            .setMaxWidth(300)
-            .setMaxHeight(300)
-            .compressToFile(file)
+//        val imageZipperFile: File = ImageZipper(mainActivity)
+//            .setQuality(50)
+//            .setMaxWidth(300)
+//            .setMaxHeight(300)
+//            .compressToFile(file)
 
-        val fileReqBody = RequestBody.create("image/jpg".toMediaTypeOrNull(), imageZipperFile)
-        val part: MultipartBody.Part = MultipartBody.Part.createFormData("image", imageZipperFile.name, fileReqBody)
+        val fileReqBody = RequestBody.create("image/jpg".toMediaTypeOrNull(), file)
+        val part: MultipartBody.Part = MultipartBody.Part.createFormData("image", file.name, fileReqBody)
 
         picuploadviewModel.picupload(authtoken ="Bearer "+sessionManager?.getToken(), part = part).observe(mainActivity) {
             it?.let { resource ->

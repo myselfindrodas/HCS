@@ -27,12 +27,21 @@
                     android:orientation="horizontal"
                     android:background="#EBEBEB">
 
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="All"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:fontFamily="@font/intermedium"
+                        android:textSize="@dimen/_10sdp"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:text="Name"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.8"
                         android:textSize="@dimen/_11sdp"
                         android:fontFamily="@font/intermedium"/>
 

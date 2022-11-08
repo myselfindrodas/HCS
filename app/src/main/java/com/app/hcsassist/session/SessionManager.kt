@@ -72,6 +72,64 @@ class SessionManager(  // Context
         return  pref.getString("email", "")
     }
 
+    fun setempname(empname: String?){
+        pref.edit().putString("name", empname).commit()
+    }
+
+    fun getempname(): String?{
+        return  pref.getString("name", "")
+    }
+
+
+    fun setempemail(empemail: String?){
+        pref.edit().putString("empemail", empemail).commit()
+    }
+
+    fun getempemail(): String?{
+        return  pref.getString("empemail", "")
+    }
+
+
+    fun setempcode(empcode: String?){
+        pref.edit().putString("empcode", empcode).commit()
+    }
+
+    fun getempcode(): String?{
+        return  pref.getString("empcode", "")
+    }
+
+
+    fun setmanager(manager: String?){
+        pref.edit().putString("manager", manager).commit()
+    }
+
+    fun getmanager(): String?{
+        return  pref.getString("manager", "")
+    }
+
+    fun setphnumber(phnumber: String?){
+        pref.edit().putString("phnumber", phnumber).commit()
+    }
+
+    fun getphnumber(): String?{
+        return  pref.getString("phnumber", "")
+    }
+
+    fun setempaddress(empaddress: String?){
+        pref.edit().putString("empaddress", empaddress).commit()
+    }
+
+    fun getempaddress(): String?{
+        return  pref.getString("empaddress", "")
+    }
+
+    fun setprofimage(profimage: String?){
+        pref.edit().putString("profimage", profimage).commit()
+    }
+
+    fun getprofimage(): String?{
+        return  pref.getString("profimage", "")
+    }
 
     fun setuserid(userid: String?){
         pref.edit().putString("userid", userid).commit()

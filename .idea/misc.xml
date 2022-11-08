@@ -13,6 +13,8 @@
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/border9.xml" value="0.166" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/button10.xml" value="0.166" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/button_bg.xml" value="0.166" />
+        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/button_green_bg.xml" value="0.1565" />
+        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/button_red_bg.xml" value="0.1565" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/card_bg.xml" value="0.166" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/card_bg1.xml" value="0.166" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/drawable/color_cursor.xml" value="0.166" />
@@ -48,6 +50,7 @@
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_markattendance.xml" value="0.2" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_markpunchout.xml" value="0.1921875" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_mss.xml" value="0.25" />
+        <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_profiledetails.xml" value="0.22" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_requestshiftchange.xml" value="0.25" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/fragment_viewprofile.xml" value="0.1921875" />
         <entry key="..\:/Users/indrajit.das1/AndroidStudioProjects/HCSAssist/app/src/main/res/layout/layout_applyleave.xml" value="0.22" />

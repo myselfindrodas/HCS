@@ -92,6 +92,7 @@
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnViewprofile"
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_26sdp"
                     android:layout_gravity="center"

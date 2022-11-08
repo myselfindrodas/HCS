@@ -141,6 +141,11 @@ class HomeFragment : Fragment() {
             navController.navigate(R.id.nav_markattendance)
         }
 
+        fragmentHomeBinding.llDetails.btnViewprofile.setOnClickListener {
+
+            val navController = Navigation.findNavController(it)
+            navController.navigate(R.id.nav_profdetails)
+        }
 
         fragmentHomeBinding.btMarkattendanceout.setOnClickListener {
 
@@ -406,34 +411,46 @@ class HomeFragment : Fragment() {
                         if (resource.data?.status==true){
 
                             fragmentHomeBinding.llDetails.tvUsername.text = resource.data.data?.name
+                            sessionManager?.setempname(resource.data.data?.name)
                             fragmentHomeBinding.llDetails.tvEmail.text = resource.data.data?.email
+                            sessionManager?.setempemail(resource.data.data?.email)
                             fragmentHomeBinding.llDetails.tvEmpcode.text = resource.data.data?.usercode
+                            sessionManager?.setempcode(resource.data.data?.usercode)
                             if (resource.data.data?.reporting_manager?.user?.name==null ||
                                 resource.data.data?.reporting_manager?.user?.last_name==null){
 
                                 fragmentHomeBinding.llDetails.tvReporterhead.text = ""
+                                sessionManager?.setmanager("")
 
                             }else{
 
                                 fragmentHomeBinding.llDetails.tvReporterhead.text = resource.data.data?.reporting_manager?.user?.name + " "+
                                         resource.data.data?.reporting_manager?.user?.last_name
+                                sessionManager?.setmanager(resource.data.data?.reporting_manager?.user?.name + " "+
+                                        resource.data.data?.reporting_manager?.user?.last_name)
                             }
 
                             phonenumber = resource.data.data?.phone.toString()
+                            sessionManager?.setphnumber(resource.data.data?.phone.toString())
                             if (resource.data.data?.reporting_manager?.user?.full_address.equals("null")){
                                 fragmentHomeBinding.llDetails.tvLocation.text = ""
+                                sessionManager?.setempaddress("")
                             }else{
                                 fragmentHomeBinding.llDetails.tvLocation.text = resource.data.data?.reporting_manager?.user?.full_address
+                                sessionManager?.setempaddress(resource.data.data?.reporting_manager?.user?.full_address)
+
                             }
 
                             if (!resource.data.data?.profile_image.equals("null")) {
                                 fragmentHomeBinding.llDetails.tvNameinit.visibility = View.GONE
                                 fragmentHomeBinding.llDetails.PrfImg.visibility = View.VISIBLE
+                                sessionManager?.setprofimage(resource.data.data?.profile_image)
                                 Glide.with(mainActivity)
                                     .load(resource.data.data?.profile_image)
                                     .into(fragmentHomeBinding.llDetails.PrfImg)
 
                             } else {
+                                sessionManager?.setprofimage("")
                                 fragmentHomeBinding.llDetails.tvNameinit.visibility = View.VISIBLE
                                 fragmentHomeBinding.llDetails.PrfImg.visibility = View.GONE
                                 fragmentHomeBinding.llDetails.tvNameinit.text = resource.data.data?.name?.substring(0,1)?.capitalize()

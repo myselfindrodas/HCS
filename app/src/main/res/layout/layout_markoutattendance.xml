@@ -18,7 +18,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
+                <TextClock
+                    android:id="@+id/tvCurrentTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
@@ -29,6 +30,7 @@
                     android:textSize="@dimen/_32sdp" />
 
                 <TextView
+                    android:id="@+id/tvcurrentDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/intermedium"
@@ -115,6 +117,7 @@
 
 
                 <TextView
+                    android:id="@+id/tvPunchinaddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_15sdp"
@@ -137,6 +140,7 @@
 
 
                 <TextView
+                    android:id="@+id/tvCurrentAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_15sdp"
@@ -180,6 +184,7 @@
                             android:src="@drawable/ic_punchin" />
 
                         <TextView
+                            android:id="@+id/tvPunchintime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_4sdp"
@@ -212,7 +217,8 @@
                             android:rotation="145"
                             android:src="@drawable/ic_punchin" />
 
-                        <TextView
+                        <TextClock
+                            android:id="@+id/tvCurrentoutTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_4sdp"
@@ -250,7 +256,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_4sdp"
                             android:fontFamily="@font/interbold"
-                            android:text="09h 03m"
+                            android:text="-"
                             android:textColor="@color/textcolor"
                             android:textSize="@dimen/_14sdp" />
 

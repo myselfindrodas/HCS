@@ -276,6 +276,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_20sdp"
                         android:orientation="horizontal">
 
                         <EditText
@@ -291,6 +292,7 @@
 
 
                         <ImageView
+                            android:id="@+id/btnPasswordchange"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
                             android:layout_weight="0.6"
@@ -311,6 +313,7 @@
                         android:layout_marginTop="@dimen/_30sdp"
                         android:layout_marginBottom="@dimen/_30sdp"
                         android:textAllCaps="false"
+                        android:visibility="gone"
                         android:background="@drawable/button_bg"
                         android:fontFamily="@font/intermedium"
                         android:text="Update Profile"

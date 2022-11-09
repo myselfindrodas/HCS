@@ -13,19 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.hcsassist.MainActivity
 import com.app.hcsassist.R
 import com.app.hcsassist.fragment.MssFragment
-import com.app.hcsassist.model.RequestedLeaveModel
-import com.app.hcsassist.model.ShiftChangeListModel
+import com.app.hcsassist.apimodel.RequestedLeaveModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class LeaveAdapter(
     ctx: MainActivity,
-    requestedleaveModelArrayList: ArrayList<RequestedLeaveModel>,
     val mFragment : Fragment) :
     RecyclerView.Adapter<LeaveAdapter.MyViewHolder>() {
     private val inflater: LayoutInflater
-    private val requestedleaveModelArrayList: ArrayList<RequestedLeaveModel>
+    private var requestedleaveModelArrayList= ArrayList<RequestedLeaveModel>()
     var ctx: Context
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -39,6 +37,38 @@ class LeaveAdapter(
         holder.tvUsername.text = requestedleaveModelArrayList[position].name
         holder.tvFromdate.text = requestedleaveModelArrayList[position].leave_date_from
         holder.tvTodate.text = requestedleaveModelArrayList[position].leave_date_to
+        holder.CbCheck.isChecked = requestedleaveModelArrayList[position].isChecked == true
+        val count=ArrayList<Boolean>()
+        holder.CbCheck.setOnCheckedChangeListener { compoundButton, b ->
+            requestedleaveModelArrayList[position].isChecked = b
+
+
+            try {
+                count.clear()
+                requestedleaveModelArrayList.forEach {
+                    if (it.isChecked!!)
+                        count.add(it.isChecked!!)
+                    /*if (it.isChecked == false){
+                        count-1
+                      //  (mFragment as MssFragment).showMultiSelect(false)
+
+                        //return@forEach
+                    }else{
+
+                        count+1
+                        *//*(mFragment as MssFragment).showMultiSelect(true)
+                    return@forEach*//*
+                }*/
+                }
+            }finally {
+                if (count.size>1){
+                    (mFragment as MssFragment).showMultiSelect(true)
+                }else{
+                    (mFragment as MssFragment).showMultiSelect(false)
+
+                }
+            }
+        }
         Glide.with(ctx)
             .load(requestedleaveModelArrayList[position].image)
             .transform(CenterInside(),RoundedCorners(100))
@@ -46,14 +76,13 @@ class LeaveAdapter(
 
         holder.btnAccepetleave.setOnClickListener {
 
-
             val builder = AlertDialog.Builder(ctx)
             builder.setMessage("Do you really want to approved leave?")
             builder.setPositiveButton(
                 "yes"
             ) { dialog, which ->
 
-                (mFragment as MssFragment).acceptleave(requestedleaveModelArrayList.get(position))
+                (mFragment as MssFragment).acceptleave(requestedleaveModelArrayList[position].id!!)
 
             }
             builder.setNegativeButton(
@@ -65,8 +94,6 @@ class LeaveAdapter(
 
         }
 
-
-
         holder.btnRejectleave.setOnClickListener {
 
 
@@ -75,7 +102,7 @@ class LeaveAdapter(
             builder.setPositiveButton(
                 "yes"
             ) { dialog, which ->
-                (mFragment as MssFragment).rejectleave(requestedleaveModelArrayList.get(position))
+                (mFragment as MssFragment).rejectleave(requestedleaveModelArrayList[position].id!!)
             }
             builder.setNegativeButton(
                 "No"
@@ -88,6 +115,14 @@ class LeaveAdapter(
         }
     }
 
+    fun getList():ArrayList<RequestedLeaveModel>{
+        return requestedleaveModelArrayList
+    }
+
+    fun updateData(list : ArrayList<RequestedLeaveModel>){
+        requestedleaveModelArrayList=list
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int {
         return requestedleaveModelArrayList.size
     }

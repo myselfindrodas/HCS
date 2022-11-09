@@ -432,12 +432,12 @@ class HomeFragment : Fragment() {
 
                             phonenumber = resource.data.data?.phone.toString()
                             sessionManager?.setphnumber(resource.data.data?.phone.toString())
-                            if (resource.data.data?.reporting_manager?.user?.full_address.equals("null")){
+                            if (resource.data.data?.full_address?.present?.address_line_1.equals("null")){
                                 fragmentHomeBinding.llDetails.tvLocation.text = ""
                                 sessionManager?.setempaddress("")
                             }else{
-                                fragmentHomeBinding.llDetails.tvLocation.text = resource.data.data?.reporting_manager?.user?.full_address
-                                sessionManager?.setempaddress(resource.data.data?.reporting_manager?.user?.full_address)
+                                fragmentHomeBinding.llDetails.tvLocation.text = resource.data.data?.full_address?.present?.address_line_1
+                                sessionManager?.setempaddress(resource.data.data?.full_address?.present?.address_line_1)
 
                             }
 

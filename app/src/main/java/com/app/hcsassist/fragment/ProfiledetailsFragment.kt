@@ -71,7 +71,7 @@ class ProfiledetailsFragment : Fragment() {
         fragmentProfiledetailsBinding.etReportingOfficer.setText(sessionManager?.getmanager())
 
 
-        fragmentProfiledetailsBinding.etPassword.setOnClickListener {
+        fragmentProfiledetailsBinding.btnPasswordchange.setOnClickListener {
 
             val intent = Intent(mainActivity, Changepassword::class.java)
             startActivity(intent)

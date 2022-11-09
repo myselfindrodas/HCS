@@ -1,6 +1,7 @@
 package com.app.hcsassist.retrofit
 
 import com.app.hcsassist.apimodel.*
+import com.app.hcsassist.apimodel.myattendance.MyAttendanceRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -69,7 +70,9 @@ class ApiHelper(private val apiInterface: ApiInterface) {
     suspend fun approveleave(authtoken: String, requestBody: LeaveApprovalRequest) =
         apiInterface.approveleave(authtoken, requestBody)
 
-    suspend fun uploadfrs(authtoken: String, part: MultipartBody.Part) = apiInterface.uploadfrs(authtoken, part)
+    suspend fun uploadfrs(authtoken: String, requestBody: FRSuploadRequest) = apiInterface.uploadfrs(authtoken, requestBody)
     suspend fun leavecancel(authtoken: String, requestBody: CancelLeaveRequest) = apiInterface.leavecancel(authtoken, requestBody)
-
+    suspend fun myAttendance(authtoken: String, requestBody: MyAttendanceRequest) = apiInterface.myAttendance(authtoken,requestBody)
+    suspend fun punchin(authtoken: String, requestBody: PunchinRequest) = apiInterface.punchin(authtoken,requestBody)
+    suspend fun punchout(authtoken: String, requestBody: PunchoutRequest, id: String) = apiInterface.punchout(authtoken,requestBody, id)
 }

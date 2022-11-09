@@ -80,6 +80,40 @@ class SessionManager(  // Context
         return  pref.getString("name", "")
     }
 
+    fun setpunchinLocation(punchinLocation: String?){
+        pref.edit().putString("punchinLocation", punchinLocation).commit()
+    }
+
+    fun getpunchinLocation(): String?{
+        return  pref.getString("punchinLocation", "")
+    }
+
+
+    fun setpunchinId(punchinId: String?){
+        pref.edit().putString("punchinId", punchinId).commit()
+    }
+
+    fun getpunchinId(): String?{
+        return  pref.getString("punchinId", "")
+    }
+
+
+    fun setinputName(inputName: String?){
+        pref.edit().putString("inputName", inputName).commit()
+    }
+
+    fun getinputName(): String?{
+        return  pref.getString("inputName", "")
+    }
+
+    fun setpunchIntime(punchIntime: String?){
+        pref.edit().putString("punchIntime", punchIntime).commit()
+    }
+
+    fun getpunchIntime(): String?{
+        return  pref.getString("punchIntime", "")
+    }
+
 
     fun setempemail(empemail: String?){
         pref.edit().putString("empemail", empemail).commit()

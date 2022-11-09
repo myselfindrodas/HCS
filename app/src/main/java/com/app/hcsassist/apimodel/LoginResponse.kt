@@ -35,7 +35,7 @@ data class dataclass(
     val usercode: String? = null,
 
     @field:SerializedName("full_address")
-    val full_address: String? = null,
+    val full_address: full_address? = null,
 
     @field:SerializedName("company_id")
     val company_id: String? = null,
@@ -58,4 +58,41 @@ data class dataclass(
     @field:SerializedName("token")
     val token: String? = null,
 
+)
+
+data class full_address(
+    @field:SerializedName("present")
+    val present: present? = null,
+
+    @field:SerializedName("permanent")
+    val permanent: permanent? = null,
+)
+
+data class present(
+    @field:SerializedName("address_line_1")
+    val address_line_1: String? = null,
+
+    @field:SerializedName("address_line_2")
+    val address_line_2: String? = null,
+
+    @field:SerializedName("city")
+    val city: String? = null,
+
+    @field:SerializedName("postal_code")
+    val postal_code: String? = null,
+)
+
+
+data class permanent(
+    @field:SerializedName("address_line_1")
+    val address_line_1: String? = null,
+
+    @field:SerializedName("address_line_2")
+    val address_line_2: String? = null,
+
+    @field:SerializedName("city")
+    val city: String? = null,
+
+    @field:SerializedName("postal_code")
+    val postal_code: String? = null,
 )

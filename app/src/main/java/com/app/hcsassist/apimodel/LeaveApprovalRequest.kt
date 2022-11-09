@@ -8,4 +8,7 @@ data class LeaveApprovalRequest(
 
     @field:SerializedName("status")
     val status: String? = "",
+
+    @field:SerializedName("comment_cancel_reject")
+    val commentCancelReject: String? = "",
 )

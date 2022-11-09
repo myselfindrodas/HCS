@@ -42,8 +42,9 @@ class Login : AppCompatActivity() {
 
             if (activityLoginBinding.etUsername.text.length==0){
                 Toast.makeText(this, "Enter Username", Toast.LENGTH_SHORT).show()
-            }else if (activityLoginBinding.etPassword.text.length<=7){
-                Toast.makeText(this, "The password must be at least 8 characters.", Toast.LENGTH_SHORT).show()
+            }else if (activityLoginBinding.etPassword.text.length==0){
+//                Toast.makeText(this, "The password must be at least 8 characters.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show()
             } else {
                 login(
                     activityLoginBinding.etUsername.text.toString(),
@@ -79,7 +80,7 @@ class Login : AppCompatActivity() {
                             sessionManager?.setUsername(resource.data.data?.name)
                             sessionManager?.setid(resource.data.data?.id)
                             sessionManager?.setusercode(resource.data.data?.usercode)
-                            sessionManager?.setaddress(resource.data.data?.full_address)
+                            sessionManager?.setaddress(resource.data.data?.full_address?.present?.address_line_1)
                             sessionManager?.setphone(resource.data.data?.phone)
                             sessionManager?.setemail(resource.data.data?.email)
                             sessionManager?.setuserid(resource.data.data?.user_type_id)
@@ -96,17 +97,22 @@ class Login : AppCompatActivity() {
                             builder.setPositiveButton(
                                 "Ok"
                             ) { dialog, which ->
-                                if (resource.data.data?.snapshot==null){
-                                    val intent = Intent(this@Login, Snapshotcapture::class.java)
-                                    startActivity(intent)
-                                    finish()
-                                    dialog.cancel()
-                                }else{
-                                    val intent = Intent(this@Login, MainActivity::class.java)
-                                    startActivity(intent)
-                                    finish()
-                                    dialog.cancel()
-                                }
+//                                if (resource.data.data?.snapshot==null){
+//                                    val intent = Intent(this@Login, Snapshotcapture::class.java)
+//                                    startActivity(intent)
+//                                    finish()
+//                                    dialog.cancel()
+//                                }else{
+//                                    val intent = Intent(this@Login, MainActivity::class.java)
+//                                    startActivity(intent)
+//                                    finish()
+//                                    dialog.cancel()
+//                                }
+
+                                val intent = Intent(this@Login, Snapshotcapture::class.java)
+                                startActivity(intent)
+                                finish()
+                                dialog.cancel()
 
 
                             }

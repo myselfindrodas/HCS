@@ -2,4 +2,6 @@
     <string name="app_name">HCS Assist</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="api_key">AIzaSyCGRQavtVfIlnBuSkELe98R2MFjXQdnLRc</string>
+
 </resources>

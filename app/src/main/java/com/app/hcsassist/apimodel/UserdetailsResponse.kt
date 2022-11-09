@@ -30,7 +30,7 @@ data class data(
     val usercode: String? = null,
 
     @field:SerializedName("full_address")
-    val full_address: String? = null,
+    val full_address: fulladdress? = null,
 
     @field:SerializedName("company_id")
     val company_id: String? = null,
@@ -48,7 +48,63 @@ data class data(
     val updated_at: String? = null,
 
     @field:SerializedName("reporting_manager")
-    val reporting_manager: reporting_manager? = null
+    val reporting_manager: reporting_manager? = null,
+
+    @field:SerializedName("user_type")
+    val user_type: user_type? = null,
+)
+
+data class fulladdress(
+    @field:SerializedName("present")
+    val present: present_address? = null,
+
+    @field:SerializedName("permanent")
+    val permanent: permanent_address? = null,
+)
+
+data class user_type(
+
+    @field:SerializedName("id")
+    val id: String? = null,
+
+    @field:SerializedName("user_type_name")
+    val user_type_name: String? = null,
+
+    @field:SerializedName("company_id")
+    val company_id: String? = null,
+
+    @field:SerializedName("status")
+    val status: String? = null,
+)
+
+
+data class present_address(
+    @field:SerializedName("address_line_1")
+    val address_line_1: String? = null,
+
+    @field:SerializedName("address_line_2")
+    val address_line_2: String? = null,
+
+    @field:SerializedName("city")
+    val city: String? = null,
+
+    @field:SerializedName("postal_code")
+    val postal_code: String? = null,
+)
+
+
+data class permanent_address(
+    @field:SerializedName("address_line_1")
+    val address_line_1: String? = null,
+
+    @field:SerializedName("address_line_2")
+    val address_line_2: String? = null,
+
+    @field:SerializedName("city")
+    val city: String? = null,
+
+    @field:SerializedName("postal_code")
+    val postal_code: String? = null,
 )
 
 data class reporting_manager(

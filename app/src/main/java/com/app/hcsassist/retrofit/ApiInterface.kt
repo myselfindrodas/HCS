@@ -1,6 +1,8 @@
 package com.app.hcsassist.retrofit
 
 import com.app.hcsassist.apimodel.*
+import com.app.hcsassist.apimodel.myattendance.MyAttendanceRequest
+import com.app.hcsassist.apimodel.myattendance.MyAttendanceResponseModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -128,11 +130,32 @@ interface ApiInterface {
     ): LeaveCancelResponse
 
 
-    @Multipart
     @POST("upload-frs")
     suspend fun uploadfrs(
         @Header("Authorization") Authorization: String?,
-        @Part file: MultipartBody.Part
+        @Body requestBody: FRSuploadRequest
     ): FRSResponse
+
+
+    @POST("my-attendance-list")
+    suspend fun myAttendance(
+        @Header("Authorization") Authorization: String,
+        @Body requestBody: MyAttendanceRequest
+    ): MyAttendanceResponseModel
+
+
+    @POST("punch-in")
+    suspend fun punchin(
+        @Header("Authorization") Authorization: String,
+        @Body requestBody: PunchinRequest
+    ): PunchinResponse
+
+
+    @POST("punch-out/{id}")
+    suspend fun punchout(
+        @Header("Authorization") Authorization: String?,
+        @Body requestBody: PunchoutRequest,
+        @Path("id") id:String,
+    ): PunchoutResponse
 
 }

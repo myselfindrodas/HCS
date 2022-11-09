@@ -1,6 +1,7 @@
 package com.example.wemu.repository
 
 import com.app.hcsassist.apimodel.*
+import com.app.hcsassist.apimodel.myattendance.MyAttendanceRequest
 import com.app.hcsassist.retrofit.ApiHelper
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -69,8 +70,12 @@ class MainRepository(private val apiHelper: ApiHelper) {
     suspend fun approveleave(authtoken: String, requestBody: LeaveApprovalRequest) =
         apiHelper.approveleave(authtoken, requestBody)
 
-    suspend fun uploadfrs(authtoken: String, part: MultipartBody.Part) = apiHelper.uploadfrs(authtoken, part)
+    suspend fun uploadfrs(authtoken: String, requestBody: FRSuploadRequest) = apiHelper.uploadfrs(authtoken, requestBody)
     suspend fun leavecancel(authtoken: String, requestBody: CancelLeaveRequest) = apiHelper.leavecancel(authtoken, requestBody)
+    suspend fun myAttendanceList(authtoken: String, requestBody: MyAttendanceRequest) = apiHelper.myAttendance(authtoken,requestBody)
+    suspend fun punchin(authtoken: String, requestBody: PunchinRequest) = apiHelper.punchin(authtoken,requestBody)
+    suspend fun punchout(authtoken: String, requestBody: PunchoutRequest, id: String) = apiHelper.punchout(authtoken,requestBody, id)
+
 
 
 }

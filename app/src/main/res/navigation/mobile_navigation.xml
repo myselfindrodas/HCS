@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.app.hcsassist.fragment.HomeFragment"
+        android:label="Home Fragment"
+        tools:layout="@layout/fragment_home"/>
+
+
+    <fragment
+        android:id="@+id/nav_markattendance"
+        android:name="com.app.hcsassist.fragment.MarkattendanceFragment"
+        android:label="Mark Attendance Fragment"
+        tools:layout="@layout/fragment_markattendance"/>
+
+
+    <fragment
+        android:id="@+id/nav_facerecognination"
+        android:name="com.app.hcsassist.fragment.FacerecogFragment"
+        android:label="Facerecog Fragment"
+        tools:layout="@layout/fragment_facerecog"/>
+
+
+    <fragment
+        android:id="@+id/nav_markoutattendance"
+        android:name="com.app.hcsassist.fragment.MarkpunchoutFragment"
+        android:label="Mark Attendance Out Fragment"
+        tools:layout="@layout/fragment_markpunchout"/>
+
+
+    <fragment
+        android:id="@+id/nav_applyleavefragment"
+        android:name="com.app.hcsassist.fragment.ApplyleaveFragment"
+        android:label="Apply Leave Fragment"
+        tools:layout="@layout/fragment_applyleave"/>
+
+
+    <fragment
+        android:id="@+id/nav_appmanualfragment"
+        android:name="com.app.hcsassist.fragment.AppmanualFragment"
+        android:label="App Manual Fragment"
+        tools:layout="@layout/fragment_appmanual"/>
+
+
+    <fragment
+        android:id="@+id/nav_attendancefragment"
+        android:name="com.app.hcsassist.fragment.AttandanceFragment"
+        android:label="Attendance Fragment"
+        tools:layout="@layout/fragment_attandance"/>
+
+
+    <fragment
+        android:id="@+id/nav_leavefragment"
+        android:name="com.app.hcsassist.fragment.LeaveFragment"
+        android:label="Leave Fragment"
+        tools:layout="@layout/fragment_leave"/>
+
+
+    <fragment
+        android:id="@+id/nav_chatlistfragment"
+        android:name="com.app.hcsassist.fragment.ChatlistFragment"
+        android:label="Chat Fragment"
+        tools:layout="@layout/fragment_chatlist"/>
+
+
+    <fragment
+        android:id="@+id/nav_chatdetails"
+        android:name="com.app.hcsassist.fragment.ChatdetailsFragment"
+        android:label="Chat Details Fragment"
+        tools:layout="@layout/fragment_chatdetails"/>
+
+
+    <fragment
+        android:id="@+id/nav_calendar"
+        android:name="com.app.hcsassist.fragment.CalenderFragment"
+        android:label="Event Fragment"
+        tools:layout="@layout/fragment_calender"/>
+
+
+    <fragment
+        android:id="@+id/nav_feedback"
+        android:name="com.app.hcsassist.fragment.FeedbackFragment"
+        android:label="Feedback Fragment"
+        tools:layout="@layout/fragment_feedback"/>
+
+
+    <fragment
+        android:id="@+id/nav_feedbacksubmit"
+        android:name="com.app.hcsassist.fragment.FeedbacksubmitFragment"
+        android:label="Feedback Submit Fragment"
+        tools:layout="@layout/fragment_feedbacksubmit"/>
+
+
+    <fragment
+        android:id="@+id/nav_adminhr"
+        android:name="com.app.hcsassist.fragment.AdminhrFragment"
+        android:label="Admin Hr Fragment"
+        tools:layout="@layout/fragment_adminhr"/>
+
+
+    <fragment
+        android:id="@+id/nav_mss"
+        android:name="com.app.hcsassist.fragment.MssFragment"
+        android:label="MSS Fragment"
+        tools:layout="@layout/fragment_mss"/>
+
+
+    <fragment
+        android:id="@+id/nav_shiftchange"
+        android:name="com.app.hcsassist.fragment.RequestshiftchangeFragment"
+        android:label="MSS Fragment"
+        tools:layout="@layout/fragment_requestshiftchange"/>
+
+
+    <fragment
+        android:id="@+id/nav_profdetails"
+        android:name="com.app.hcsassist.fragment.ProfiledetailsFragment"
+        android:label="Profile Details Fragment"
+        tools:layout="@layout/fragment_profiledetails"/>
+
+
+    <fragment
+        android:id="@+id/nav_changeshiftlist"
+        android:name="com.app.hcsassist.fragment.ShiftchangeListFragment"
+        android:label="Profile Details Fragment"
+        tools:layout="@layout/fragment_shiftchange_list"/>
+
+
+</navigation>

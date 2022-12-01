@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/ll_leave">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/bgbackground">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rlTop">
+
+                    <LinearLayout
+                        android:id="@+id/ll_subtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:background="#EBEBEB">
+
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="All"
+                            android:id="@+id/cbCheckAll"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/_3sdp"
+                            android:fontFamily="@font/intermedium"
+                            android:textSize="@dimen/_10sdp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:text="Name"
+                            android:layout_weight="0.8"
+                            android:textSize="@dimen/_11sdp"
+                            android:fontFamily="@font/intermedium"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Date"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/_11sdp"
+                            android:fontFamily="@font/intermedium"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Approved/Reject"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/_11sdp"
+                            android:fontFamily="@font/intermedium"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvleave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/rlTop" />
+                <!-- <RelativeLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:orientation="vertical"
+                     android:id="@+id/llRecycler"
+                     app:layout_constraintTop_toBottomOf="@+id/rlTop">
+     -->
+                <!--            </RelativeLayout>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/llAccept"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/_30sdp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAcceptList"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/button_green_bg"
+                android:fontFamily="@font/intermedium"
+                android:text="Accept"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:visibility="visible" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRejectList"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_weight="1"
+                android:background="@drawable/button_red_bg"
+                android:fontFamily="@font/intermedium"
+                android:text="Reject"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:visibility="visible" />
+        </LinearLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

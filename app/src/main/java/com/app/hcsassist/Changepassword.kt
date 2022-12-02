@@ -86,7 +86,7 @@ class Changepassword : AppCompatActivity() {
                             }else{
 
                                 val builder = AlertDialog.Builder(this)
-                                builder.setMessage(resource.data?.message)
+                                builder.setMessage(resource.data?.errors)
                                 builder.setPositiveButton(
                                     "Ok"
                                 ) { dialog, which ->

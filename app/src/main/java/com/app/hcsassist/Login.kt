@@ -77,9 +77,9 @@ class Login : AppCompatActivity() {
 
         activityLoginBinding.btnLogin.setOnClickListener {
 
-            if (activityLoginBinding.etUsername.text.length==0){
-                Toast.makeText(this, "Enter Username", Toast.LENGTH_SHORT).show()
-            }else if (activityLoginBinding.etPassword.text.length==0){
+            if (activityLoginBinding.etUsername.text.toString().length==0){
+                Toast.makeText(this, "Enter Employee Id / Phone", Toast.LENGTH_SHORT).show()
+            }else if (activityLoginBinding.etPassword.text.toString().length==0){
 //                Toast.makeText(this, "The password must be at least 8 characters.", Toast.LENGTH_SHORT).show()
                 Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show()
             } else {
@@ -222,7 +222,7 @@ class Login : AppCompatActivity() {
                             }else{
 
                                 val builder = AlertDialog.Builder(this@Login)
-                                builder.setMessage("Invalid Username / Password")
+                                builder.setMessage(it.data?.errors)
                                 builder.setPositiveButton(
                                     "Ok"
                                 ) { dialog, which ->
@@ -239,9 +239,10 @@ class Login : AppCompatActivity() {
                         }
                         Status.ERROR -> {
                             hideProgressDialog()
+                            Log.d(TAG, "print-->"+ resource.data?.status)
                             if (it.message!!.contains("401",true)) {
                                 val builder = AlertDialog.Builder(this@Login)
-                                builder.setMessage("Invalid Username / Password")
+                                builder.setMessage("Invalid Employee Id / Password")
                                 builder.setPositiveButton(
                                     "Ok"
                                 ) { dialog, which ->

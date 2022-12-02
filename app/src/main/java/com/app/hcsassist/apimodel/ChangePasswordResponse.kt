@@ -9,4 +9,7 @@ data class ChangePasswordResponse(
     @field:SerializedName("message")
     val message: String? = null,
 
+    @field:SerializedName("errors")
+    val errors: String? = null,
+
 )

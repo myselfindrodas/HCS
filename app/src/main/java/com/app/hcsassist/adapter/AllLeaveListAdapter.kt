@@ -132,7 +132,7 @@ class AllLeaveListAdapter(
 
             }
 
-            if (leaveModelArrayList[position].attachment.equals("https://hcsassist.com/public/uploads/photos/")){
+            if (leaveModelArrayList[position].attachment.equals("")){
                 lldoc.visibility = View.GONE
                 tvdoc.visibility = View.GONE
 
@@ -170,9 +170,12 @@ class AllLeaveListAdapter(
                 btnChange.visibility= View.GONE
             }
 
-            tvApprovedby.text =
-                leaveModelArrayList[position].approvedname + " " + leaveModelArrayList[position].approvedlastname
-            tvLeaveComments.text = leaveModelArrayList[position].commnent
+            tvApprovedby.text = leaveModelArrayList[position].approvedname + " " + leaveModelArrayList[position].approvedlastname
+            if (leaveModelArrayList[position].commnent.equals("null")){
+                tvLeaveComments.text = ""
+            }else{
+                tvLeaveComments.text = leaveModelArrayList[position].commnent
+            }
 
             btnChange.setOnClickListener {
 

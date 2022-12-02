@@ -126,7 +126,20 @@ class AttandanceFragment : Fragment() {
                         }
                         Status.ERROR -> {
                             hideProgressDialog()
-                            Toast.makeText(mainActivity, it.message, Toast.LENGTH_SHORT).show()
+                            if (it.message!!.contains("400",true)) {
+                                val builder = AlertDialog.Builder(mainActivity)
+                                builder.setMessage("Date can not be greater than current month!")
+                                builder.setPositiveButton(
+                                    "Ok"
+                                ) { dialog, which ->
+
+                                    dialog.cancel()
+
+                                }
+                                val alert = builder.create()
+                                alert.show()
+                            }
+//                            Toast.makeText(mainActivity, it.message, Toast.LENGTH_SHORT).show()
 
                         }
 

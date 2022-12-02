@@ -72,7 +72,7 @@ class AttandanceAdapter(
                 }else{
                     ivPunchOut.visibility=View.VISIBLE
                 }*/
-                if (modelItem.currentShift==null ||modelItem.currentShift!!.shiftTitle==null ||modelItem.currentShift!!.shiftTitle.isNullOrEmpty()){
+                if (modelItem.currentShift==null ||modelItem.currentShift!!.shiftTitle.isNullOrEmpty()){
                     sift_time_txt.visibility=View.GONE
                 }else{
                     sift_time_txt.visibility=View.VISIBLE

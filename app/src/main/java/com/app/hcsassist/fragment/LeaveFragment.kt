@@ -275,6 +275,9 @@ class LeaveFragment : Fragment() {
                                 Toast.makeText(mainActivity, resource.data?.message, Toast.LENGTH_SHORT).show()
                                 allLeave()
                                 changetitle("All Leave Info")
+                                shortcodeListAdapter.changebuttoncolor()
+                                fragmentLeaveBinding.btnAllleave.setBackgroundResource(R.drawable.grey_box3)
+                                fragmentLeaveBinding.tvshortcode.setTextColor(ContextCompat.getColor(mainActivity, R.color.white))
                             }
                             Status.ERROR -> {
                                 hideProgressDialog()

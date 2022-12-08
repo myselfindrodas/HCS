@@ -77,12 +77,12 @@ class MarkpunchoutFragment : Fragment() {
             PunchinModelFactory(ApiHelper(ApiClient.apiService))
         }
         punchingViewModel = vm
-
-
-        if (!Places.isInitialized()) {
-            Places.initialize(mainActivity, getString(R.string.api_key))
-        }
-        placesClient = Places.createClient(mainActivity)
+//
+//
+//        if (!Places.isInitialized()) {
+//            Places.initialize(mainActivity, getString(R.string.api_key))
+//        }
+//        placesClient = Places.createClient(mainActivity)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mainActivity)
         if (ActivityCompat.checkSelfPermission(
                 mainActivity,

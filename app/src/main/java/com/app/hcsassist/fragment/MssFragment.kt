@@ -411,6 +411,9 @@ class MssFragment : Fragment() {
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
 
+            showMultiSelect(false)
+            fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
+
             shiftChangeListViewModel.shiftchangelist(authtoken = "Bearer " + sessionManager?.getToken())
                 .observe(mainActivity) {
                     it?.let { resource ->
@@ -441,6 +444,13 @@ class MssFragment : Fragment() {
                                         false
                                     )
                                 )
+
+                                if (shiftChangeList.size>1){
+                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility = View.VISIBLE
+                                }else{
+                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility = View.GONE
+
+                                }
 
                             }
                             Status.ERROR -> {
@@ -480,6 +490,9 @@ class MssFragment : Fragment() {
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
 
+            showMultiSelect(false)
+            fragmentMssBinding.includeLeave.cbCheckAll.isChecked = false
+
             requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken())
                 .observe(mainActivity) {
                     it?.let { resource ->
@@ -505,6 +518,13 @@ class MssFragment : Fragment() {
                                     leavelist.add(RequestedLeaveModel)
                                 }
                                 leaveAdapter.updateData(leavelist)
+
+                                if (leavelist.size>1){
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.VISIBLE
+                                }else{
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.GONE
+
+                                }
 
                             }
                             Status.ERROR -> {

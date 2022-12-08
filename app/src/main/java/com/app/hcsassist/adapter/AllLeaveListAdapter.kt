@@ -123,6 +123,7 @@ class AllLeaveListAdapter(
                 Glide.with(ctx)
                     .load(leaveModelArrayList[position].attachment)
                     .fitCenter()
+                    .error(R.drawable.selecteddoc)
                     .into(imgfullDoc)
 
                 btnzoomPopupclose.setOnClickListener {

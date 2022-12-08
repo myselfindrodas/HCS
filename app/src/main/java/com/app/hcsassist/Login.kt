@@ -56,12 +56,12 @@ class Login : AppCompatActivity() {
         viewModel = vm
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-
-
-        if (!Places.isInitialized()) {
-            Places.initialize(this, getString(R.string.api_key))
-        }
-        placesClient = Places.createClient(this)
+//
+//
+//        if (!Places.isInitialized()) {
+//            Places.initialize(this, getString(R.string.api_key))
+//        }
+//        placesClient = Places.createClient(this)
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         if (!locationManager!!.isProviderEnabled(LocationManager.NETWORK_PROVIDER)

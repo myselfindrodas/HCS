@@ -162,11 +162,11 @@ class FacerecogFragment : Fragment() {
             shiftid = ""
         }
 
-
-        if (!Places.isInitialized()) {
-            Places.initialize(mainActivity, getString(R.string.api_key))
-        }
-        placesClient = Places.createClient(mainActivity)
+//
+//        if (!Places.isInitialized()) {
+//            Places.initialize(mainActivity, getString(R.string.api_key))
+//        }
+//        placesClient = Places.createClient(mainActivity)
         locationManager =
             mainActivity.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mainActivity)

@@ -1,11 +1,15 @@
 package com.app.hcsassist.fragment
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.app.ProgressDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,6 +25,7 @@ import com.app.hcsassist.retrofit.ApiClient
 import com.app.hcsassist.retrofit.ApiHelper
 import com.app.hcsassist.utils.Status
 import com.app.hcsassist.viewmodel.ShiftchangeRequestAllListViewModel
+import com.bumptech.glide.Glide
 import com.example.hllapplication.Adapter.ShiftChangeAllListAdapter
 import com.example.wemu.internet.CheckConnectivity
 import com.example.wemu.session.SessionManager
@@ -92,6 +97,7 @@ class ShiftchangeListFragment : Fragment() {
                                     ShiftChangeAllListModel.comment = i?.comment
                                     ShiftChangeAllListModel.company_name = i?.company_name
                                     ShiftChangeAllListModel.reporting_manager_name = i?.reporting_manager_name
+                                    ShiftChangeAllListModel.created_at = i?.created_at
                                     shiftChangeAllList.add(ShiftChangeAllListModel)
                                 }
                                 shiftChangeAllListAdapter = ShiftChangeAllListAdapter(mainActivity, this, shiftChangeAllList)
@@ -135,6 +141,35 @@ class ShiftchangeListFragment : Fragment() {
             Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+    fun commentpopup(shiftChangeAllListModel: ShiftChangeAllListModel){
+
+        val btnPopupclose: TextView
+        val tvComment: TextView
+        val dialog = Dialog(mainActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val params = WindowManager.LayoutParams()
+        dialog.setContentView(R.layout.layout_shiftcomment)
+        params.copyFrom(dialog.getWindow()?.getAttributes())
+        params.height = WindowManager.LayoutParams.MATCH_PARENT
+        params.width = WindowManager.LayoutParams.MATCH_PARENT
+        params.gravity = Gravity.CENTER
+        dialog.getWindow()?.setAttributes(params)
+        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        btnPopupclose = dialog.findViewById(R.id.btnPopupclose)
+        tvComment = dialog.findViewById(R.id.tvComment)
+
+        tvComment.text = shiftChangeAllListModel.comment
+
+        btnPopupclose.setOnClickListener {
+
+            dialog.dismiss()
+        }
+    }
+
+
 
 
 

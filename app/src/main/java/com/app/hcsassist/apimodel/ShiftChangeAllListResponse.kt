@@ -30,5 +30,8 @@ data class Listarray(
     @field:SerializedName("shift_title")
     val shift_title: String? = null,
 
+    @field:SerializedName("created_at")
+    val created_at: String? = null,
+
 
     )

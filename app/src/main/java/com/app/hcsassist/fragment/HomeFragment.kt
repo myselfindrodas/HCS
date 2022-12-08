@@ -131,10 +131,10 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
         picuploadviewModel = piciuploadvm
         logoutViewModel = logoutdvm
         shiftlistviewmodel = shiftlistvm
-        if (!Places.isInitialized()) {
-            Places.initialize(mainActivity, getString(R.string.api_key))
-        }
-        placesClient = Places.createClient(mainActivity)
+//        if (!Places.isInitialized()) {
+//            Places.initialize(mainActivity, getString(R.string.api_key))
+//        }
+//        placesClient = Places.createClient(mainActivity)
         locationManager =
             mainActivity.getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mainActivity)
@@ -318,11 +318,29 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
             if (sessionManager?.getisHoliday().equals("1")) {
 
-                Toast.makeText(mainActivity, "Today is your Holiday!", Toast.LENGTH_SHORT).show()
+                val builder = AlertDialog.Builder(mainActivity)
+                builder.setMessage("Today you are on Holiday!")
+                builder.setPositiveButton(
+                    "Ok"
+                ) { dialog, which ->
+                    dialog.cancel()
+
+                }
+                val alert = builder.create()
+                alert.show()
 
             } else if (sessionManager?.getisonLeave().equals("1")) {
 
-                Toast.makeText(mainActivity, "Today is your on Leave!", Toast.LENGTH_SHORT).show()
+                val builder = AlertDialog.Builder(mainActivity)
+                builder.setMessage("Today you are on Leave!")
+                builder.setPositiveButton(
+                    "Ok"
+                ) { dialog, which ->
+                    dialog.cancel()
+
+                }
+                val alert = builder.create()
+                alert.show()
 
 
             } else {

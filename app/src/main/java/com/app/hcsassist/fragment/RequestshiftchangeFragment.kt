@@ -158,7 +158,7 @@ class RequestshiftchangeFragment : Fragment() {
                             if (resource.data?.status==true){
                                 Toast.makeText(mainActivity, resource.data.message, Toast.LENGTH_SHORT).show()
                                 val navController = Navigation.findNavController(requireView())
-                                navController.popBackStack(R.id.nav_home, false)
+                                navController.popBackStack(R.id.nav_changeshiftlist, false)
 
                             }else{
 

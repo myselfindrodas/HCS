@@ -9,11 +9,9 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -36,8 +34,6 @@ import com.app.hcsassist.utils.GetRealPathFromUri
 import com.app.hcsassist.utils.Status
 import com.app.hcsassist.viewmodel.LeaveViewModel
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterInside
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.wemu.internet.CheckConnectivity
 import com.example.wemu.session.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -62,7 +58,7 @@ class ApplyleaveFragment : Fragment() {
     val myCalendartodate = Calendar.getInstance()
     var simpleDateFormat = SimpleDateFormat("dd/M/yyyy")
     var date1: Date? = null
-    var date2: Date? = null
+    var date3: Date? = null
     var sessionManager: SessionManager? = null
     private lateinit var leaveTypeViewModel: LeaveViewModel
     private var list: ArrayList<LeaveTypeModel> = ArrayList()
@@ -115,6 +111,8 @@ class ApplyleaveFragment : Fragment() {
             val dateFormat2 = SimpleDateFormat("d")
             val selecteddate = dateFormat2.format(date)
             val selecteddate2 = dateFormat3.format(date2)
+            date1 = date
+            date3 = date2
             myCalendarfromdate.time = date
             selectedfromdate = leavefromdate
             fragmentApplyleaveBinding.llMarkoutattendance.tvSelectedfromdate.text = selecteddate
@@ -129,6 +127,7 @@ class ApplyleaveFragment : Fragment() {
             val currentDate2 = sdf2.format(Date())
             val currentDate3 = dateFormat.format(Date())
             date1 = Date()
+            date3 = Date()
             selectedfromdate = currentDate3
             fragmentApplyleaveBinding.llMarkoutattendance.tvFromdate.text = currentDate2
             fragmentApplyleaveBinding.llMarkoutattendance.tvSelectedfromdate.text = currentDate
@@ -467,9 +466,9 @@ class ApplyleaveFragment : Fragment() {
         val sdf2 = SimpleDateFormat(dateFormat, Locale.US)
         val sdf3 = SimpleDateFormat(format, Locale.US)
         val sdf4 = SimpleDateFormat(selecteddateformat, Locale.US)
-        date2 = simpleDateFormat.parse(sdf3.format(calendar.time))
+        date3 = simpleDateFormat.parse(sdf3.format(calendar.time))
         selectedtodate = sdf4.format(calendar.time)
-        printDifference(date1!!, date2!!)
+        printDifference(date1!!, date3!!)
         fragmentApplyleaveBinding.llMarkoutattendance.tvTodate.setText(sdf.format(calendar.time))
         fragmentApplyleaveBinding.llMarkoutattendance.tvselectedTodate.setText(
             sdf2.format(calendar.time)

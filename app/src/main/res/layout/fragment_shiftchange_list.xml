@@ -80,9 +80,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:fontFamily="@font/intermedium"
-                android:text="Manager Name"
+                android:text=" Shift Change Date"
                 android:textSize="@dimen/_10sdp" />
 
             <TextView
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/intermedium"
-                android:text="Company"
+                android:text="RO Officer"
                 android:textAlignment="center"
                 android:textSize="@dimen/_10sdp" />
 
@@ -99,19 +99,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/intermedium"
-                android:text="Shift"
+                android:text="Shift Name "
                 android:textAlignment="center"
                 android:textSize="@dimen/_10sdp" />
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/intermedium"
-                android:text="Comment"
-                android:textAlignment="center"
-                android:textSize="@dimen/_10sdp" />
 
 
         </LinearLayout>

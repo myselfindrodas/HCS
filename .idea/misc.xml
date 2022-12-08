@@ -3,11 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/drawable/ic_more.xml" value="0.1775" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/activity_changepassword.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/activity_login.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/attandancelayout.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_applyleave.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_attandance.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_mss.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_profiledetails.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_shiftchange_list.xml" value="0.25" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_approvedleave.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_doczoom.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_leave.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_shiftcomment.xml" value="0.25" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/leaves_layout.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/rv_shiftchangealllist.xml" value="0.25" />
       </map>
     </option>

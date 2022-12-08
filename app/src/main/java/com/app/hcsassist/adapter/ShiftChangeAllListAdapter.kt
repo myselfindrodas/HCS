@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.widget.ImageViewCompat
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.hcsassist.MainActivity
 import com.app.hcsassist.R
 import com.app.hcsassist.apimodel.myattendance.Data
+import com.app.hcsassist.fragment.LeaveFragment
+import com.app.hcsassist.fragment.ShiftchangeListFragment
 import com.app.hcsassist.model.LeaveModel
 import com.app.hcsassist.model.ShiftChangeAllListModel
 
@@ -38,9 +41,17 @@ class ShiftChangeAllListAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         holder.tvShift.text = shiftChangeAllListModel[position].shift_title
-        holder.tvCommnet.text = shiftChangeAllListModel[position].comment?.capitalize()
-        holder.tvCompany.text = shiftChangeAllListModel[position].company_name
+//        holder.tvCommnet.text = shiftChangeAllListModel[position].comment?.capitalize()
+//        holder.tvCompany.text = shiftChangeAllListModel[position].company_name
         holder.tvManagername.text = shiftChangeAllListModel[position].reporting_manager_name
+        holder.tvDate.text = shiftChangeAllListModel[position].created_at
+
+        holder.llbtn.setOnClickListener {
+
+            (mFragment as ShiftchangeListFragment).commentpopup(shiftChangeAllListModel[position])
+
+
+        }
 
     }
 
@@ -52,15 +63,15 @@ class ShiftChangeAllListAdapter(
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var tvManagername: TextView
-        var tvCompany: TextView
+        var tvDate: TextView
         var tvShift: TextView
-        var tvCommnet: TextView
+        var llbtn: LinearLayout
 
         init {
             tvManagername = view.findViewById(R.id.tvManagername)
-            tvCompany = view.findViewById(R.id.tvCompany)
+            tvDate = view.findViewById(R.id.tvDate)
             tvShift = view.findViewById(R.id.tvShift)
-            tvCommnet = view.findViewById(R.id.tvCommnet)
+            llbtn = view.findViewById(R.id.llbtn)
         }
     }
 

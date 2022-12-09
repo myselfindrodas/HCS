@@ -8,5 +8,8 @@ class RequestedLeaveModel {
     var leave_type:String?=null
     var name:String?=null
     var id:String?=null
+    var comment:String?=null
+    var attachment:String?=null
+    var comment_cancel_reject:String?=null
     var isChecked:Boolean?=false
 }

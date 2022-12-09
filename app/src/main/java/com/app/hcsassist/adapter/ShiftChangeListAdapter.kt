@@ -42,14 +42,14 @@ class ShiftChangeListAdapter(
         }
         holder.CbCheck.isChecked = shiftchangelistModelArrayList[position].isChecked == true
         val count=ArrayList<Boolean>()
-        val params =
-            LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        if (shiftchangelistModelArrayList.size-1==position) {
-            params.setMargins(0, 0, 0, 250)
-        }else{
-            params.setMargins(0, 0, 0, 0)
-        }
-        holder.llMain.layoutParams=params
+//        val params =
+//            LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+//        if (shiftchangelistModelArrayList.size-1==position) {
+//            params.setMargins(0, 0, 0, 250)
+//        }else{
+//            params.setMargins(0, 0, 0, 0)
+//        }
+//        holder.llMain.layoutParams=params
 
         holder.CbCheck.setOnCheckedChangeListener { compoundButton, b ->
             shiftchangelistModelArrayList[position].isChecked = b
@@ -123,6 +123,14 @@ class ShiftChangeListAdapter(
 
             val alert = builder.create()
             alert.show()
+
+
+        }
+
+
+        holder.llMain.setOnClickListener {
+
+            (mFragment as MssFragment).shiftChangereasonpopup(shiftchangelistModelArrayList[position])
 
 
         }

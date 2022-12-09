@@ -2,16 +2,16 @@ package com.app.hcsassist.fragment
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
+import android.view.*
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -39,6 +39,7 @@ import com.app.hcsassist.viewmodel.MssAttendanceListViewModel
 import com.app.hcsassist.viewmodel.RequestedLeavelistViewModel
 import com.app.hcsassist.viewmodel.ShiftChangeListViewModel
 import com.app.hcsassist.viewmodel.ShiftchangeApprovalViewModel
+import com.bumptech.glide.Glide
 import com.example.wemu.internet.CheckConnectivity
 import com.example.wemu.session.SessionManager
 import java.text.SimpleDateFormat
@@ -340,7 +341,7 @@ class MssFragment : Fragment() {
 
                 if (fragmentMssBinding.includeLeave.llLeave.isVisible) {
                     alert1.show()
-                }else{
+                } else {
                     val list = ArrayList<String>()
                     shiftChangeListAdapter.getList().forEach {
                         if (it.isChecked == true)
@@ -394,15 +395,14 @@ class MssFragment : Fragment() {
             "yyyy-MM-dd",
             Locale.getDefault()
         ).format(myCalendarfromdate.time)
-        Log.d(TAG, "selecteddate-->"+selecteddate)
+        Log.d(TAG, "selecteddate-->" + selecteddate)
 
         mssAttendanceList(selecteddate)
 
     }
 
 
-
-        fun showMultiSelect(isVisible: Boolean) {
+    fun showMultiSelect(isVisible: Boolean) {
         fragmentMssBinding.llAccept.visibility = if (isVisible) View.VISIBLE else View.GONE
 
     }
@@ -425,9 +425,9 @@ class MssFragment : Fragment() {
                                     val shiftChangeListModel = ShiftChangeListModel()
                                     shiftChangeListModel.name = i?.user?.name + " " + i?.user?.last_name
                                     shiftChangeListModel.shift_title = i?.shift?.shift_title
-                                    shiftChangeListModel.full_profile_image =
-                                        i?.user?.full_profile_image
+                                    shiftChangeListModel.full_profile_image = i?.user?.full_profile_image
                                     shiftChangeListModel.current_shift = i?.currentShift?.shift_title
+                                    shiftChangeListModel.comment = i?.comment
                                     shiftChangeListModel.id = i?.id
                                     shiftChangeList.add(shiftChangeListModel)
                                 }
@@ -445,10 +445,12 @@ class MssFragment : Fragment() {
                                     )
                                 )
 
-                                if (shiftChangeList.size>1){
-                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility = View.VISIBLE
-                                }else{
-                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility = View.GONE
+                                if (shiftChangeList.size > 0) {
+                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility =
+                                        View.VISIBLE
+                                } else {
+                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility =
+                                        View.GONE
 
                                 }
 
@@ -477,11 +479,10 @@ class MssFragment : Fragment() {
                     }
                 }
 
-        }else{
-            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
         }
-
-
 
 
     }
@@ -510,19 +511,26 @@ class MssFragment : Fragment() {
                                 fragmentMssBinding.includeLeave.rvleave.adapter = leaveAdapter
                                 for (i in it.data?.result!!) {
                                     val RequestedLeaveModel = RequestedLeaveModel()
-                                    RequestedLeaveModel.name = i?.data?.name + " " + i?.data?.last_name
+                                    RequestedLeaveModel.name =
+                                        i?.data?.name + " " + i?.data?.last_name
                                     RequestedLeaveModel.leave_date_from = i?.leave_date_from
                                     RequestedLeaveModel.leave_date_to = i?.leave_date_to
                                     RequestedLeaveModel.image = i?.data?.full_profile_image
+                                    RequestedLeaveModel.comment = i?.comment
+                                    RequestedLeaveModel.comment_cancel_reject =
+                                        i?.comment_cancel_reject
+                                    RequestedLeaveModel.attachment = i?.attachment
                                     RequestedLeaveModel.id = i?.id
                                     leavelist.add(RequestedLeaveModel)
                                 }
                                 leaveAdapter.updateData(leavelist)
 
-                                if (leavelist.size>1){
-                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.VISIBLE
-                                }else{
-                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.GONE
+                                if (leavelist.size > 0) {
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+                                        View.VISIBLE
+                                } else {
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+                                        View.GONE
 
                                 }
 
@@ -551,8 +559,9 @@ class MssFragment : Fragment() {
                     }
                 }
 
-        }else{
-            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
         }
 
 
@@ -620,8 +629,9 @@ class MssFragment : Fragment() {
                 }
 
 
-        }else{
-            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
         }
 
 
@@ -644,7 +654,8 @@ class MssFragment : Fragment() {
                                 fragmentMssBinding.llAccept.visibility = View.GONE
                             fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
                             shiftchangelist()
-                            Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT)
+                                .show()
 
                         }
                         Status.ERROR -> {
@@ -671,10 +682,10 @@ class MssFragment : Fragment() {
                 }
             }
 
-        }else{
-            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
         }
-
 
 
     }
@@ -743,7 +754,8 @@ class MssFragment : Fragment() {
                                 fragmentMssBinding.llAccept.visibility = View.GONE
 
                             fragmentMssBinding.includeLeave.cbCheckAll.isChecked = false
-                            Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT)
+                                .show()
 
                         }
                         Status.ERROR -> {
@@ -770,10 +782,10 @@ class MssFragment : Fragment() {
                 }
             }
 
-        }else{
-            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
         }
-
 
 
     }
@@ -785,14 +797,19 @@ class MssFragment : Fragment() {
 
             requestedLeavelistViewModel.approveleave(
                 authtoken = "Bearer " + sessionManager?.getToken(),
-                LeaveApprovalRequest(request_id = requestedLeaveId, status = "3", commentCancelReject = comment)
+                LeaveApprovalRequest(
+                    request_id = requestedLeaveId,
+                    status = "3",
+                    commentCancelReject = comment
+                )
             ).observe(mainActivity) {
                 it?.let { resource ->
                     when (resource.status) {
                         Status.SUCCESS -> {
                             hideProgressDialog()
                             leavelist()
-                            Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT)
+                                .show()
 
                             if (fragmentMssBinding.llAccept.isVisible)
                                 fragmentMssBinding.llAccept.visibility = View.GONE
@@ -823,11 +840,88 @@ class MssFragment : Fragment() {
                 }
             }
 
-        }else{
-            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
         }
 
 
+    }
+
+
+    fun leaveDetailspopup(requestedLeaveModel: RequestedLeaveModel) {
+
+        val btnPopupclose: TextView
+        val tvComment: TextView
+        val tvdoc: TextView
+        val lldoc: LinearLayout
+        val imgDoc: ImageView
+        val dialog = Dialog(mainActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val params = WindowManager.LayoutParams()
+        dialog.setContentView(R.layout.layout_leavecomment)
+        params.copyFrom(dialog.getWindow()?.getAttributes())
+        params.height = WindowManager.LayoutParams.MATCH_PARENT
+        params.width = WindowManager.LayoutParams.MATCH_PARENT
+        params.gravity = Gravity.CENTER
+        dialog.getWindow()?.setAttributes(params)
+        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        btnPopupclose = dialog.findViewById(R.id.btnPopupclose)
+        tvComment = dialog.findViewById(R.id.tvComment)
+        imgDoc = dialog.findViewById(R.id.imgDoc)
+        lldoc = dialog.findViewById(R.id.lldoc)
+        tvdoc = dialog.findViewById(R.id.tvdoc)
+
+        if (requestedLeaveModel.attachment.equals("")) {
+            lldoc.visibility = View.GONE
+            tvdoc.visibility = View.GONE
+
+        } else {
+            lldoc.visibility = View.VISIBLE
+            tvdoc.visibility = View.VISIBLE
+            Glide.with(mainActivity)
+                .load(requestedLeaveModel.attachment)
+                .into(imgDoc)
+        }
+
+        tvComment.text = requestedLeaveModel.comment
+
+
+        btnPopupclose.setOnClickListener {
+
+            dialog.dismiss()
+        }
+
+
+    }
+
+    fun shiftChangereasonpopup(shiftChangeListModel: ShiftChangeListModel){
+
+
+        val btnPopupclose: TextView
+        val tvReason: TextView
+        val dialog = Dialog(mainActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val params = WindowManager.LayoutParams()
+        dialog.setContentView(R.layout.layout_shiftreason)
+        params.copyFrom(dialog.getWindow()?.getAttributes())
+        params.height = WindowManager.LayoutParams.MATCH_PARENT
+        params.width = WindowManager.LayoutParams.MATCH_PARENT
+        params.gravity = Gravity.CENTER
+        dialog.getWindow()?.setAttributes(params)
+        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        btnPopupclose = dialog.findViewById(R.id.btnPopupclose)
+        tvReason = dialog.findViewById(R.id.tvReason)
+
+        tvReason.text = shiftChangeListModel.comment
+
+
+        btnPopupclose.setOnClickListener {
+
+            dialog.dismiss()
+        }
 
     }
 

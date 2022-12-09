@@ -40,6 +40,7 @@ data class data2(
     @field:SerializedName("applied_on")
     val applied_on: String? = null,
 
+    //reason
     @field:SerializedName("comment")
     val comment: String? = null,
 
@@ -48,6 +49,10 @@ data class data2(
 
     @field:SerializedName("app_reject_on")
     val app_reject_on: String? = null,
+
+    //cancelreason
+    @field:SerializedName("comment_cancel_reject")
+    val comment_cancel_reject: String? = null,
 
 
     @field:SerializedName("user")
@@ -69,36 +74,36 @@ data class userclass(
     @field:SerializedName("last_name")
     val last_name: String? = null,
 
-    @field:SerializedName("nick_name")
-    val nick_name: String? = null,
+//    @field:SerializedName("nick_name")
+//    val nick_name: String? = null,
 
     @field:SerializedName("email")
     val email: String? = null,
 
-    @field:SerializedName("email_verified_at")
-    val email_verified_at: String? = null,
+//    @field:SerializedName("email_verified_at")
+//    val email_verified_at: String? = null,
 
     @field:SerializedName("usercode")
     val usercode: String? = null,
 
-    @field:SerializedName("full_address")
-    val full_address: full_address? = null,
+//    @field:SerializedName("full_address")
+//    val full_address: full_address? = null,
 
-    @field:SerializedName("company_id")
-    val company_id: String? = null,
+//    @field:SerializedName("company_id")
+//    val company_id: String? = null,
 
-
-    @field:SerializedName("phone")
-    val phone: String? = null,
+//
+//    @field:SerializedName("phone")
+//    val phone: String? = null,
 
     @field:SerializedName("profile_image")
     val profile_image: String? = null,
 
-    @field:SerializedName("user_type_id")
-    val user_type_id: String? = null,
+//    @field:SerializedName("user_type_id")
+//    val user_type_id: String? = null,
 
-    @field:SerializedName("emp_type_id")
-    val emp_type_id: String? = null,
+//    @field:SerializedName("emp_type_id")
+//    val emp_type_id: String? = null,
 
     @field:SerializedName("full_profile_image")
     val full_profile_image: String? = null,

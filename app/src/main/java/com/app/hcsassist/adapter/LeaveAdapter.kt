@@ -37,15 +37,15 @@ class LeaveAdapter(
         holder.tvFromdate.text = requestedleaveModelArrayList[position].leave_date_from
         holder.tvTodate.text = requestedleaveModelArrayList[position].leave_date_to
         holder.CbCheck.isChecked = requestedleaveModelArrayList[position].isChecked == true
-        val params =
-            RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
-        if (requestedleaveModelArrayList.size-1==position) {
-            params.setMargins(0, 0, 0, 250)
-        }else{
-            params.setMargins(0, 0, 0, 0)
-        }
-
-        holder.rlMain.layoutParams=params
+//        val params =
+//            RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
+//        if (requestedleaveModelArrayList.size-1==position) {
+//            params.setMargins(0, 0, 0, 250)
+//        }else{
+//            params.setMargins(0, 0, 0, 0)
+//        }
+//
+//        holder.rlMain.layoutParams=params
         val count=ArrayList<Boolean>()
         holder.CbCheck.setOnCheckedChangeListener { compoundButton, b ->
             requestedleaveModelArrayList[position].isChecked = b
@@ -133,6 +133,14 @@ class LeaveAdapter(
             val alert = builder.create()
             alert.show()
 
+
+        }
+
+
+
+        holder.rlMain.setOnClickListener {
+
+            (mFragment as MssFragment).leaveDetailspopup(requestedleaveModelArrayList[position])
 
         }
     }

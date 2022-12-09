@@ -47,6 +47,7 @@ class MssAttendaceAdapter(
 
         Glide.with(ctx)
             .load(mssAttandanceModelArrayList[position].profileImage)
+            .error(R.drawable.user)
             .circleCrop()
             .into(holder.PrfImg)
 

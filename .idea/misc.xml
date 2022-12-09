@@ -13,10 +13,17 @@
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_profiledetails.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_shiftchange_list.xml" value="0.25" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_approvedleave.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_attendance.xml" value="0.1875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_doczoom.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_leave.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_leavecomment.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_leavedetails.xml" value="0.1875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_shiftchange.xml" value="0.1875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_shiftcomment.xml" value="0.25" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_shiftreason.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/leaves_layout.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/reject_leave_dialog.xml" value="0.1875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/rv_leave.xml" value="0.1875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/rv_shiftchangealllist.xml" value="0.25" />
       </map>
     </option>

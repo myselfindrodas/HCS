@@ -97,7 +97,7 @@ class ShiftchangeListFragment : Fragment() {
                                     ShiftChangeAllListModel.comment = i?.comment
                                     ShiftChangeAllListModel.company_name = i?.company_name
                                     ShiftChangeAllListModel.reporting_manager_name = i?.reporting_manager_name
-                                    ShiftChangeAllListModel.created_at = i?.created_at
+                                    ShiftChangeAllListModel.created_at = i?.date_from
                                     shiftChangeAllList.add(ShiftChangeAllListModel)
                                 }
                                 shiftChangeAllListAdapter = ShiftChangeAllListAdapter(mainActivity, this, shiftChangeAllList)

@@ -231,7 +231,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Designation"
+                        android:text="Role"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/interbold"
                         android:textColor="#36455A"
@@ -240,6 +240,26 @@
 
                     <EditText
                         android:id="@+id/etDesignation"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:focusable="false"
+                        android:textSize="@dimen/_12sdp"
+                        android:fontFamily="@font/intermedium"/>
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Designation"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/interbold"
+                        android:textColor="#36455A"
+                        android:textSize="@dimen/_14sdp"/>
+
+
+                    <EditText
+                        android:id="@+id/etNewDesignation"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp"
                         android:focusable="false"

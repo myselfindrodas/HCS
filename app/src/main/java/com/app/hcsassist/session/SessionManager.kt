@@ -233,6 +233,16 @@ class SessionManager(  // Context
     }
 
 
+    fun setUsertypename(Usertypename: String?){
+        pref.edit().putString("Usertypename", Usertypename).commit()
+    }
+
+    fun getUsertypename(): String?{
+        return  pref.getString("Usertypename", "")
+    }
+
+
+
     fun setmanager(manager: String?){
         pref.edit().putString("manager", manager).commit()
     }

@@ -310,6 +310,14 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             fragmentHomeBinding.btnAdminhr.visibility = View.GONE
             fragmentHomeBinding.btnMss.visibility = View.VISIBLE
 
+        }else if (sessionManager?.getuserid().equals("4")){
+
+            fragmentHomeBinding.btnShiftchange.visibility = View.VISIBLE
+            fragmentHomeBinding.btnAttendance.visibility = View.VISIBLE
+            fragmentHomeBinding.btnEvent.visibility = View.VISIBLE
+            fragmentHomeBinding.btnAdminhr.visibility = View.GONE
+            fragmentHomeBinding.btnMss.visibility = View.VISIBLE
+
         }
 
 
@@ -503,7 +511,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     it?.let { resource ->
                         when (resource.status) {
                             Status.SUCCESS -> {
-                                hideProgressDialog()
+//                                hideProgressDialog()
                                 if (resource.data?.status == true) {
                                     shiftname.clear()
                                     shiftname1.clear()
@@ -580,7 +588,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             }
 
                             Status.LOADING -> {
-                                showProgressDialog()
+//                                showProgressDialog()
                             }
 
                         }
@@ -870,6 +878,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                     fragmentHomeBinding.llDetails.tvEmpcode.text =
                                         resource.data.data?.usercode
                                     sessionManager?.setempcode(resource.data.data?.usercode)
+                                    sessionManager?.setUsertypename(resource.data.data?.user_type?.user_type_name)
                                     sessionManager?.setpunchinId(resource.data.data?.punch_in_id.toString())
                                     if (resource.data.data?.attendance_status == 1) {
                                         sessionManager?.setPunchin("punchin")
@@ -949,36 +958,55 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
                                         } else {
-
                                             fragmentHomeBinding.btMarkattendance.isClickable = false
                                             fragmentHomeBinding.btMarkattendance.isEnabled = false
                                             fragmentHomeBinding.btMarkattendance.background =
-                                                mainActivity.resources.getDrawable(
-                                                    R.drawable.button_bg2,
-                                                    mainActivity.resources.newTheme()
-                                                )
-
+                                                mainActivity.resources.getDrawable(R.drawable.button_bg2,
+                                                    mainActivity.resources.newTheme())
                                         }
                                     }
 
 
-                                    if (resource.data.data?.reporting_manager?.user?.name == null ||
-                                        resource.data.data?.reporting_manager?.user?.last_name == null
-                                    ) {
+                                    if (resource.data.data?.reporting_manager?.user?.name == null &&
+                                        resource.data.data?.reporting_manager?.user?.last_name != null){
+
+                                        fragmentHomeBinding.llDetails.tvReporterhead.text = ""+resource.data.data?.reporting_manager?.user?.last_name
+                                        sessionManager?.setmanager(""+resource.data.data.reporting_manager.user.last_name)
+
+                                    }else if (resource.data.data?.reporting_manager?.user?.name != null &&
+                                        resource.data.data.reporting_manager.user.last_name == null){
+
+                                        fragmentHomeBinding.llDetails.tvReporterhead.text = resource.data.data.reporting_manager.user.name + ""
+                                        sessionManager?.setmanager(resource.data.data.reporting_manager.user.name + "")
+
+                                    }else if (resource.data.data?.reporting_manager?.user?.name == null &&
+                                        resource.data.data?.reporting_manager?.user?.last_name == null){
 
                                         fragmentHomeBinding.llDetails.tvReporterhead.text = ""
                                         sessionManager?.setmanager("")
 
-                                    } else {
+                                    }else{
 
-                                        fragmentHomeBinding.llDetails.tvReporterhead.text =
-                                            resource.data.data?.reporting_manager?.user?.name + " " +
-                                                    resource.data.data?.reporting_manager?.user?.last_name
-                                        sessionManager?.setmanager(
-                                            resource.data.data?.reporting_manager?.user?.name + " " +
-                                                    resource.data.data?.reporting_manager?.user?.last_name
-                                        )
+                                        fragmentHomeBinding.llDetails.tvReporterhead.text = resource.data.data.reporting_manager.user.name+" "+resource.data.data.reporting_manager.user.last_name
+                                        sessionManager?.setmanager(resource.data.data.reporting_manager.user.name+" "+resource.data.data.reporting_manager.user.last_name)
+
                                     }
+
+
+//                                    if (resource.data.data?.reporting_manager?.user?.name == null &&
+//                                        resource.data.data?.reporting_manager?.user?.last_name == null) {
+//
+//                                        fragmentHomeBinding.llDetails.tvReporterhead.text = ""
+//                                        sessionManager?.setmanager("")
+//
+//                                    } else {
+//
+//                                        fragmentHomeBinding.llDetails.tvReporterhead.text =
+//                                            resource.data.data.reporting_manager.user.name + " " +
+//                                                    resource.data.data.reporting_manager.user.last_name
+//                                        sessionManager?.setmanager(resource.data.data.reporting_manager.user.name + " " +
+//                                                    resource.data.data.reporting_manager.user.last_name)
+//                                    }
 
                                     phonenumber = resource.data.data?.phone.toString()
                                     sessionManager?.setphnumber(resource.data.data?.phone.toString())

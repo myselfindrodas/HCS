@@ -33,5 +33,7 @@ data class Listarray(
     @field:SerializedName("created_at")
     val created_at: String? = null,
 
+    @field:SerializedName("date_from")
+    val date_from: String? = null,
 
     )

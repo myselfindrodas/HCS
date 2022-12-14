@@ -61,11 +61,12 @@ class ProfiledetailsFragment : Fragment() {
 
         Glide.with(mainActivity)
             .load(sessionManager?.getprofimage())
+            .error(R.drawable.user)
             .into(fragmentProfiledetailsBinding.PrfImg)
 
         fragmentProfiledetailsBinding.etName.setText(sessionManager?.getempname())
         fragmentProfiledetailsBinding.etEmail.setText(sessionManager?.getempemail())
-        fragmentProfiledetailsBinding.etDesignation.setText("General Coordinator")
+        fragmentProfiledetailsBinding.etDesignation.setText(sessionManager?.getUsertypename())
         fragmentProfiledetailsBinding.etEmpcode.setText(sessionManager?.getempcode())
         fragmentProfiledetailsBinding.etLocation.setText(sessionManager?.getempaddress())
         fragmentProfiledetailsBinding.etPhone.setText(sessionManager?.getphnumber())

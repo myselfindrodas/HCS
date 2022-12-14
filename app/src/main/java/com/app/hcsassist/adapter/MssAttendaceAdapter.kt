@@ -84,7 +84,6 @@ class MssAttendaceAdapter(
 
     init {
         inflater = LayoutInflater.from(ctx)
-        //this.mssAttandanceModelArrayList = mssAttandanceModelArrayList
         this.ctx = ctx
     }
 }

@@ -89,7 +89,11 @@ class AttandanceAdapter(
                     if (modelItem.type.equals("absent",true)){
                         timeRange.visibility=View.VISIBLE
                         timeRange.text= modelItem.reason
-                    } else timeRange.visibility=View.INVISIBLE
+                        sift_time_txt.visibility=View.GONE
+                    } else {
+                        timeRange.visibility=View.INVISIBLE
+                        sift_time_txt.visibility=View.VISIBLE
+                    }
 
                 }else{
                     timeRange.visibility=View.VISIBLE

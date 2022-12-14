@@ -20,8 +20,9 @@ import com.app.hcsassist.R
 import com.app.hcsassist.fragment.LeaveFragment
 import com.app.hcsassist.model.LeaveModel
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterInside
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AllLeaveListAdapter(
     ctx: MainActivity,
@@ -31,6 +32,8 @@ class AllLeaveListAdapter(
     private val inflater: LayoutInflater
     private var leaveModelArrayList: ArrayList<LeaveModel> = ArrayList()
     var ctx: Context
+    var d: Date? = null
+    var todate: Date? = null
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -40,8 +43,21 @@ class AllLeaveListAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvfromDate.text = leaveModelArrayList[position].leave_date_from
-        holder.tvtoDate.text = leaveModelArrayList[position].leave_date_to
+
+
+        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val outputFormat: DateFormat = SimpleDateFormat("dd MMM yyyy")
+        val inputDateStr = leaveModelArrayList[position].leave_date_from
+        val inputDateStr2 = leaveModelArrayList[position].leave_date_to
+        val date: Date = inputFormat.parse(inputDateStr)
+        val date2: Date = inputFormat.parse(inputDateStr2)
+        val outputDateStr: String = outputFormat.format(date)
+        val outputDateStr2: String = outputFormat.format(date2)
+
+        holder.tvfromDate.text = outputDateStr
+        holder.tvtoDate.text = outputDateStr2
+
+
         holder.tvtotlaLeave.text = leaveModelArrayList[position].noofdays
 
 
@@ -133,48 +149,68 @@ class AllLeaveListAdapter(
 
             }
 
-            if (leaveModelArrayList[position].attachment.equals("")){
+            if (leaveModelArrayList[position].attachment.equals("")) {
                 lldoc.visibility = View.GONE
                 tvdoc.visibility = View.GONE
 
-            }else{
+            } else {
                 lldoc.visibility = View.VISIBLE
                 tvdoc.visibility = View.VISIBLE
             }
 
 
-            tvLeaveDates.text =
-                leaveModelArrayList[position].leave_date_from + " to " + leaveModelArrayList[position].leave_date_to
+            val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val outputFormat: DateFormat = SimpleDateFormat("dd MMM yyyy")
+            val inputDateStr = leaveModelArrayList[position].leave_date_from
+            val inputDateStr2 = leaveModelArrayList[position].leave_date_to
+            val date: Date = inputFormat.parse(inputDateStr)
+            val date2: Date = inputFormat.parse(inputDateStr2)
+            val outputDateStr: String = outputFormat.format(date)
+            val outputDateStr2: String = outputFormat.format(date2)
+
+
+            tvLeaveDates.text = outputDateStr + " to " + outputDateStr2
             tvNoofdays.text = leaveModelArrayList[position].noofdays
             tvLeavetype.text = leaveModelArrayList[position].leave_type
 
             if (leaveModelArrayList[position].approved_status.equals("0")) {
                 tvStatus.text = "Cancelled"
                 tvStatus.setTextColor(ctx.getResources().getColor(R.color.red))
-                btnCancel.visibility= View.GONE
-                btnChange.visibility= View.GONE
+                btnCancel.visibility = View.GONE
+                btnChange.visibility = View.GONE
             } else if (leaveModelArrayList[position].approved_status.equals("1")) {
                 tvStatus.text = "Pending"
                 tvStatus.setTextColor(ctx.getResources().getColor(R.color.yellow))
-                btnCancel.visibility= View.VISIBLE
-                btnChange.visibility= View.VISIBLE
+                btnCancel.visibility = View.VISIBLE
+                btnChange.visibility = View.VISIBLE
             } else if (leaveModelArrayList[position].approved_status.equals("2")) {
                 tvStatus.text = "Approved"
                 tvStatus.setTextColor(ctx.getResources().getColor(R.color.teal_200))
-                btnCancel.visibility= View.VISIBLE
-                btnChange.visibility= View.VISIBLE
+                btnCancel.visibility = View.VISIBLE
+                btnChange.visibility = View.VISIBLE
             } else if (leaveModelArrayList[position].approved_status.equals("3")) {
                 tvStatus.text = "Rejected"
                 tvStatus.setTextColor(ctx.getResources().getColor(R.color.red))
 
-                btnCancel.visibility= View.GONE
-                btnChange.visibility= View.GONE
+                btnCancel.visibility = View.GONE
+                btnChange.visibility = View.GONE
             }
 
-            tvApprovedby.text = leaveModelArrayList[position].approvedname + " " + leaveModelArrayList[position].approvedlastname
-            if (leaveModelArrayList[position].commnent.equals("null")){
+
+            if (leaveModelArrayList[position].approvedname == null && leaveModelArrayList[position].approvedlastname != null) {
+                tvApprovedby.text = leaveModelArrayList[position].approvedlastname
+            } else if (leaveModelArrayList[position].approvedname != null && leaveModelArrayList[position].approvedlastname == null) {
+                tvApprovedby.text = leaveModelArrayList[position].approvedname
+            } else if (leaveModelArrayList[position].approvedname == null && leaveModelArrayList[position].approvedlastname == null) {
+                tvApprovedby.text = ""
+            } else {
+                leaveModelArrayList[position].approvedname + " " + leaveModelArrayList[position].approvedlastname
+            }
+
+//            tvApprovedby.text = leaveModelArrayList[position].approvedname + " " + leaveModelArrayList[position].approvedlastname
+            if (leaveModelArrayList[position].commnent.equals("null")) {
                 tvLeaveComments.text = ""
-            }else{
+            } else {
                 tvLeaveComments.text = leaveModelArrayList[position].commnent
             }
 
@@ -183,7 +219,10 @@ class AllLeaveListAdapter(
                 val bundle = Bundle()
                 bundle.putString("leavefromdate", leaveModelArrayList[position].leave_date_from)
                 bundle.putString("leavetodate", leaveModelArrayList[position].leave_date_to)
-                bundle.putString("comment", if (leaveModelArrayList[position].commnent.isNullOrEmpty()) "" else leaveModelArrayList[position].commnent)
+                bundle.putString(
+                    "comment",
+                    if (leaveModelArrayList[position].commnent.isNullOrEmpty()) "" else leaveModelArrayList[position].commnent
+                )
                 bundle.putString("noofdays", leaveModelArrayList[position].noofdays)
                 bundle.putString("id", leaveModelArrayList[position].id)
                 bundle.putString("shortcode", leaveModelArrayList[position].short_code)

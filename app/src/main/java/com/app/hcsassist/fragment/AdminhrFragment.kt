@@ -179,8 +179,7 @@ class AdminhrFragment : Fragment() {
 
 
             viewModel.getAdminHr(authtoken = "Bearer " + sessionManager?.getToken()!!,
-                AdminHrListRequest(date = date, location_id = locationId))
-                .observe(mainActivity) {
+                AdminHrListRequest(date = date, location_id = locationId)).observe(mainActivity) {
                     it?.let { resource ->
 
                         when (resource.status) {

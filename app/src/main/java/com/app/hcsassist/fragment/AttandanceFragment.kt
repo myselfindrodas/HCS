@@ -3,6 +3,7 @@ package com.app.hcsassist.fragment
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.app.hcsassist.viewmodel.MyAttendanceViewModel
 import com.example.hllapplication.Adapter.AttandanceAdapter
 import com.example.wemu.internet.CheckConnectivity
 import com.example.wemu.session.SessionManager
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,6 +38,7 @@ class AttandanceFragment : Fragment() {
     lateinit var attandanceAdapter:AttandanceAdapter
     var sessionManager: SessionManager? = null
     private lateinit var viewModel: MyAttendanceViewModel
+    var currentmonth:String?=""
 
     //var arrayList :ArrayList<String> = ArrayList()
 
@@ -68,9 +71,19 @@ class AttandanceFragment : Fragment() {
             mainActivity.onBackPressed()
         }
         val c: Calendar = Calendar.getInstance()
-
         c.set(Calendar.DAY_OF_MONTH, 1);
+        val dateFormat: DateFormat = SimpleDateFormat("MMMM")
+        val date = Date()
+        currentmonth = dateFormat.format(date)
+        Log.d("Month", dateFormat.format(date))
         fragmentAttandanceBinding.calenderTXT.text=SimpleDateFormat("MMMM", Locale.getDefault()).format(c.time)
+
+        if (currentmonth.equals(fragmentAttandanceBinding.calenderTXT.text.toString())){
+            fragmentAttandanceBinding.ivNext.visibility = View.INVISIBLE
+        }else{
+            fragmentAttandanceBinding.ivNext.visibility = View.VISIBLE
+
+        }
 
         fragmentAttandanceBinding.ivNext.setOnClickListener {
 
@@ -78,6 +91,12 @@ class AttandanceFragment : Fragment() {
             c.add(Calendar.MONTH, 1)
             fragmentAttandanceBinding.calenderTXT.text=SimpleDateFormat("MMMM", Locale.getDefault()).format(c.time)
             getAttenceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time))
+            if (currentmonth.equals(fragmentAttandanceBinding.calenderTXT.text.toString())){
+                fragmentAttandanceBinding.ivNext.visibility = View.INVISIBLE
+            }else{
+                fragmentAttandanceBinding.ivNext.visibility = View.VISIBLE
+            }
+
         }
         fragmentAttandanceBinding.ivPrev.setOnClickListener {
 
@@ -85,6 +104,12 @@ class AttandanceFragment : Fragment() {
             c.add(Calendar.MONTH, -1)
             fragmentAttandanceBinding.calenderTXT.text=SimpleDateFormat("MMMM", Locale.getDefault()).format(c.time)
             getAttenceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time))
+            if (currentmonth.equals(fragmentAttandanceBinding.calenderTXT.text.toString())){
+                fragmentAttandanceBinding.ivNext.visibility = View.INVISIBLE
+            }else{
+                fragmentAttandanceBinding.ivNext.visibility = View.VISIBLE
+            }
+
         }
         getAttenceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time))
         //println(SimpleDateFormat("MMMM").format(c.getTime()));

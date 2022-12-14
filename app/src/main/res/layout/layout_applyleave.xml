@@ -46,6 +46,7 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/intermedium"
                             android:text="0 Days"
+                            android:visibility="gone"
                             android:textColor="@color/red"
                             android:textSize="@dimen/_12sdp" />
 

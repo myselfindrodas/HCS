@@ -58,8 +58,10 @@ import com.example.wemu.internet.CheckConnectivity
 import com.example.wemu.session.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.location.*
-import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -149,8 +151,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             getLocation()
         }
 
-
-
         return root
     }
 
@@ -160,7 +160,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         init()
         getDetails()
-
 
     }
 
@@ -178,17 +177,14 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         sessionManager?.getfencingLat()!!.toDouble(),
                         sessionManager?.getfencingLong()!!.toDouble(),
                         latitude?.toDouble()!!,
-                        longitude?.toDouble()!!
-                    ) < 100
-                ) {
+                        longitude?.toDouble()!!) < 100) {
 
                     fragmentHomeBinding.btMarkattendance.isClickable = true
                     fragmentHomeBinding.btMarkattendance.isEnabled = true
                     fragmentHomeBinding.btMarkattendance.background =
                         mainActivity.resources.getDrawable(
                             R.drawable.button_bg,
-                            mainActivity.resources.newTheme()
-                        )
+                            mainActivity.resources.newTheme())
 
                 } else {
 

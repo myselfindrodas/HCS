@@ -80,6 +80,7 @@ class LeaveAdapter(
         Glide.with(ctx)
             .load(requestedleaveModelArrayList[position].image)
             .circleCrop()
+            .error(R.drawable.user)
             .into(holder.PrfImg)
 
         holder.btnAccepetleave.setOnClickListener {

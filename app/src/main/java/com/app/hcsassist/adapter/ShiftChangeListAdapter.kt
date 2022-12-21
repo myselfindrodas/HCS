@@ -84,6 +84,7 @@ class ShiftChangeListAdapter(
         Glide.with(ctx)
             .load(shiftchangelistModelArrayList[position].full_profile_image)
             .circleCrop()
+            .error(R.drawable.user)
             .into(holder.imgDp)
 
         holder.btnAccepet.setOnClickListener {

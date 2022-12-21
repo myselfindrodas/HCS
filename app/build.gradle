@@ -12,15 +12,16 @@ android {
         applicationId "com.app.hcsassist"
         minSdk 23
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 7
+        versionName "1.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -57,10 +58,14 @@ dependencies {
 
 //    implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
+    implementation 'org.jsoup:jsoup:1.15.3'
 
 
     implementation 'com.github.amanjeetsingh150:ImageZipper:1.3'
     implementation 'com.karumi:dexter:4.2.0'
+    implementation 'com.nabinbhandari.android:permissions:3.8'
+    implementation 'com.google.android.play:core:1.7.0'
+    implementation 'com.github.prongbang:inapp-update:1.0.1'
 
 
 //    //ML Kit (To detect faces)

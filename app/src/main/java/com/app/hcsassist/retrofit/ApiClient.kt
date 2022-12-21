@@ -26,13 +26,19 @@ object ApiClient {
 
 
     private fun getRetrofit(): Retrofit {
-        val httpClient =
-            OkHttpClient.Builder()
+        val httpClient = OkHttpClient.Builder()
+        //Timeout
+        httpClient.readTimeout(ApiConfig.READ_TIMEOUT, TimeUnit.SECONDS)
+        httpClient.connectTimeout(ApiConfig.CONNECT_TIMEOUT, TimeUnit.SECONDS)
+        httpClient.writeTimeout(ApiConfig.WRITE_TIMEOUT, TimeUnit.SECONDS)
+
+
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         httpClient.addInterceptor(interceptor)
         return Retrofit.Builder()
-            .baseUrl(BASE_URL).client(httpClient.build())
+            .baseUrl(BASE_URL)
+            .client(httpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build() //Doesn't require the adapter
     }

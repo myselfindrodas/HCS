@@ -425,6 +425,7 @@ class FacerecogFragment : Fragment() {
                                     if (resource.data?.verified==true){
 
                                         fragmentFacerecogBinding.tvSuccessfully.visibility = View.VISIBLE
+                                        fragmentFacerecogBinding.btnAddface.visibility = View.GONE
                                         fragmentFacerecogBinding.tvSuccessfully.text = "Verification Successful"
                                         fragmentFacerecogBinding.textView.text = name
                                         fragmentFacerecogBinding.tvSuccessfully.setTextColor(resources.getColor(R.color.green,resources.newTheme()))

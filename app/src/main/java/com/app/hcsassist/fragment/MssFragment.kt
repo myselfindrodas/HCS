@@ -585,11 +585,7 @@ class MssFragment : Fragment() {
                                 leavelist = ArrayList<RequestedLeaveModel>()
                                 attendanceAdapter = MssAttendaceAdapter(mainActivity, this)
                                 fragmentMssBinding.includeAttendance.rvAttendance.layoutManager =
-                                    LinearLayoutManager(
-                                        mainActivity,
-                                        LinearLayoutManager.VERTICAL,
-                                        false
-                                    )
+                                    LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false)
                                 fragmentMssBinding.includeAttendance.rvAttendance.adapter =
                                     attendanceAdapter
                                 /* for (i in it.data?.data!!) {

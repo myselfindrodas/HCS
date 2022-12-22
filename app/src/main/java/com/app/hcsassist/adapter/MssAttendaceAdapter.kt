@@ -58,10 +58,19 @@ class MssAttendaceAdapter(
     }
 
     fun updateData(list: List<Data?>?){
+        mssAttandanceModelArrayList.clear()
         list?.forEach {
             mssAttandanceModelArrayList.add(it!!)
         }
         notifyDataSetChanged()
+    }
+
+    fun addData(list: List<Data?>?){
+        val lastIndex: Int = mssAttandanceModelArrayList.size
+        list?.forEach {
+        mssAttandanceModelArrayList.add(it!!)
+    }
+        notifyItemRangeInserted(lastIndex, mssAttandanceModelArrayList.size)
     }
     override fun getItemCount(): Int {
         return mssAttandanceModelArrayList.size

@@ -146,8 +146,14 @@ class ShiftChangeListAdapter(
     }
 
     fun updateData(list : ArrayList<ShiftChangeListModel>){
+        shiftchangelistModelArrayList.clear()
         shiftchangelistModelArrayList=list
         notifyDataSetChanged()
+    }
+    fun addData(list : ArrayList<ShiftChangeListModel>){
+        val lastIndex: Int = shiftchangelistModelArrayList.size
+        shiftchangelistModelArrayList.addAll(list)
+        notifyItemRangeInserted(lastIndex, shiftchangelistModelArrayList.size)
     }
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var llMain: LinearLayout

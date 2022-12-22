@@ -151,8 +151,15 @@ class LeaveAdapter(
     }
 
     fun updateData(list : ArrayList<RequestedLeaveModel>){
+        requestedleaveModelArrayList.clear()
         requestedleaveModelArrayList=list
         notifyDataSetChanged()
+    }
+
+    fun addData(list : ArrayList<RequestedLeaveModel>){
+        val lastIndex: Int = requestedleaveModelArrayList.size
+        requestedleaveModelArrayList.addAll(list)
+        notifyItemRangeInserted(lastIndex, requestedleaveModelArrayList.size)
     }
     override fun getItemCount(): Int {
         return requestedleaveModelArrayList.size

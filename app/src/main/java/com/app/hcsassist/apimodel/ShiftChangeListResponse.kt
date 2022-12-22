@@ -12,6 +12,9 @@ data class ShiftChangeListResponse(
     @field:SerializedName("data")
     val result: List<DataArray?>? = null,
 
+    @field:SerializedName("pagination")
+    val pagination: pagination? = null,
+
     )
 
 data class DataArray(
@@ -144,4 +147,15 @@ data class shift(
     @field:SerializedName("status")
     val status: String? = null,
 
+)
+
+data class pagination(
+    @field:SerializedName("current_page")
+    val current_page: String? = null,
+
+    @field:SerializedName("next_page")
+    val next_page: String? = null,
+
+    @field:SerializedName("total_pages")
+    val total_pages: String? = null,
 )

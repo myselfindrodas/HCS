@@ -9,6 +9,8 @@ data class LeaveResponse(
     @field:SerializedName("message")
     val message: String? = null,
 
+    @field:SerializedName("pagination")
+    val leavepagination: leavepagination? = null,
 
     @field:SerializedName("data")
     val result: List<data2?>? = null,
@@ -137,4 +139,16 @@ data class leavetype(
 
     @field:SerializedName("status")
     val status: String? = null,
+)
+
+
+data class leavepagination(
+    @field:SerializedName("current_page")
+    val current_page: String? = null,
+
+    @field:SerializedName("next_page")
+    val next_page: String? = null,
+
+    @field:SerializedName("total_pages")
+    val total_pages: String? = null,
 )

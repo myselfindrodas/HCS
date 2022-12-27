@@ -249,6 +249,31 @@ class MssFragment : Fragment() {
         }
 
 
+        fragmentMssBinding.includeLeave.btnPending.setOnClickListener {
+
+
+            leavelist(true)
+
+
+        }
+
+
+        fragmentMssBinding.includeLeave.btnApproved.setOnClickListener {
+
+
+            approvedleavelist(true)
+
+        }
+
+
+        fragmentMssBinding.includeLeave.btnCancelreject.setOnClickListener {
+
+
+            cancelrejectleavelist(true)
+
+        }
+
+
         fragmentMssBinding.includeLeave.cbCheckAll.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 leavelist.forEach {
@@ -325,6 +350,7 @@ class MssFragment : Fragment() {
             alert.show()
 
         }
+
         fragmentMssBinding.btnRejectList.setOnClickListener {
 
 
@@ -396,7 +422,6 @@ class MssFragment : Fragment() {
 
 
         }
-
 
         fragmentMssBinding.tvShiftchange.setOnClickListener {
 
@@ -640,8 +665,19 @@ class MssFragment : Fragment() {
 
     private fun leavelist(isFirstPage: Boolean) {
 
+        mIsLoading = false
+        mIsLastPage = false
+        mCurrentPage = 0
+        fragmentMssBinding.includeLeave.btnPending.setTextColor(resources.getColor(R.color.selectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.btnApproved.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.btnCancelreject.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.viewpending.visibility = View.VISIBLE
+        fragmentMssBinding.includeLeave.viewapproved.visibility = View.INVISIBLE
+        fragmentMssBinding.includeLeave.viewcancel.visibility = View.INVISIBLE
+
         mIsLoading = true
         mCurrentPage += 1
+        leavelist.clear()
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
 
@@ -656,18 +692,19 @@ class MssFragment : Fragment() {
                                 hideProgressDialog()
                                 leavelist = ArrayList<RequestedLeaveModel>()
                                 for (i in it.data?.result!!) {
-                                    val RequestedLeaveModel = RequestedLeaveModel()
-                                    RequestedLeaveModel.name =
-                                        i?.data?.name + " " + i?.data?.last_name
-                                    RequestedLeaveModel.leave_date_from = i?.leave_date_from
-                                    RequestedLeaveModel.leave_date_to = i?.leave_date_to
-                                    RequestedLeaveModel.image = i?.data?.full_profile_image
-                                    RequestedLeaveModel.comment = i?.comment
-                                    RequestedLeaveModel.comment_cancel_reject =
-                                        i?.comment_cancel_reject
-                                    RequestedLeaveModel.attachment = i?.attachment
-                                    RequestedLeaveModel.id = i?.id
-                                    leavelist.add(RequestedLeaveModel)
+                                    if (i?.approved_status.equals("1")) {
+                                        val RequestedLeaveModel = RequestedLeaveModel()
+                                        RequestedLeaveModel.approved_status = i?.approved_status
+                                        RequestedLeaveModel.name = i?.data?.name + " " + i?.data?.last_name
+                                        RequestedLeaveModel.leave_date_from = i?.leave_date_from
+                                        RequestedLeaveModel.leave_date_to = i?.leave_date_to
+                                        RequestedLeaveModel.image = i?.data?.full_profile_image
+                                        RequestedLeaveModel.comment = i?.comment
+                                        RequestedLeaveModel.comment_cancel_reject = i?.comment_cancel_reject
+                                        RequestedLeaveModel.attachment = i?.attachment
+                                        RequestedLeaveModel.id = i?.id
+                                        leavelist.add(RequestedLeaveModel)
+                                    }
                                 }
 
                                 if (isFirstPage) leaveAdapter.updateData(leavelist) else
@@ -718,6 +755,195 @@ class MssFragment : Fragment() {
 
 
     }
+
+    private fun approvedleavelist(isFirstPage: Boolean) {
+
+        mIsLoading = false
+        mIsLastPage = false
+        mCurrentPage = 0
+        fragmentMssBinding.includeLeave.btnPending.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.btnApproved.setTextColor(resources.getColor(R.color.selectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.btnCancelreject.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.viewpending.visibility = View.INVISIBLE
+        fragmentMssBinding.includeLeave.viewapproved.visibility = View.VISIBLE
+        fragmentMssBinding.includeLeave.viewcancel.visibility = View.INVISIBLE
+
+        mIsLoading = true
+        mCurrentPage += 1
+        leavelist.clear()
+
+        if (CheckConnectivity.getInstance(mainActivity).isOnline) {
+
+            showMultiSelect(false)
+            fragmentMssBinding.includeLeave.cbCheckAll.isChecked = false
+
+            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken(), page = mCurrentPage.toString())
+                .observe(mainActivity) {
+                    it?.let { resource ->
+                        when (resource.status) {
+                            Status.SUCCESS -> {
+                                hideProgressDialog()
+                                leavelist = ArrayList<RequestedLeaveModel>()
+                                for (i in it.data?.result!!) {
+                                    if (i?.approved_status.equals("2")) {
+                                        val RequestedLeaveModel = RequestedLeaveModel()
+                                        RequestedLeaveModel.approved_status = i?.approved_status
+                                        RequestedLeaveModel.name = i?.data?.name + " " + i?.data?.last_name
+                                        RequestedLeaveModel.leave_date_from = i?.leave_date_from
+                                        RequestedLeaveModel.leave_date_to = i?.leave_date_to
+                                        RequestedLeaveModel.image = i?.data?.full_profile_image
+                                        RequestedLeaveModel.comment = i?.comment
+                                        RequestedLeaveModel.comment_cancel_reject = i?.comment_cancel_reject
+                                        RequestedLeaveModel.attachment = i?.attachment
+                                        RequestedLeaveModel.id = i?.id
+                                        leavelist.add(RequestedLeaveModel)
+                                    }
+                                }
+
+                                if (isFirstPage) leaveAdapter.updateData(leavelist) else
+                                    leaveAdapter.addData(leavelist)
+                                mIsLoading = false
+                                mIsLastPage = mCurrentPage == resource.data?.leavepagination?.next_page!!.toInt()
+
+//                                leaveAdapter.updateData(leavelist)
+
+                                if (leavelist.size > 0) {
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+                                        View.VISIBLE
+                                } else {
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+                                        View.GONE
+
+                                }
+
+                            }
+                            Status.ERROR -> {
+                                hideProgressDialog()
+                                val builder = AlertDialog.Builder(mainActivity)
+                                builder.setMessage(it.message)
+                                builder.setPositiveButton(
+                                    "Ok"
+                                ) { dialog, which ->
+
+                                    dialog.cancel()
+
+                                }
+                                val alert = builder.create()
+                                alert.show()
+                            }
+
+                            Status.LOADING -> {
+                                showProgressDialog()
+                            }
+
+                        }
+
+                    }
+                }
+
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+
+    }
+
+    private fun cancelrejectleavelist(isFirstPage: Boolean) {
+
+        mIsLoading = false
+        mIsLastPage = false
+        mCurrentPage = 0
+        fragmentMssBinding.includeLeave.btnPending.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.btnApproved.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.btnCancelreject.setTextColor(resources.getColor(R.color.selectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.viewpending.visibility = View.INVISIBLE
+        fragmentMssBinding.includeLeave.viewapproved.visibility = View.INVISIBLE
+        fragmentMssBinding.includeLeave.viewcancel.visibility = View.VISIBLE
+
+        mIsLoading = true
+        mCurrentPage += 1
+        leavelist.clear()
+
+        if (CheckConnectivity.getInstance(mainActivity).isOnline) {
+
+            showMultiSelect(false)
+            fragmentMssBinding.includeLeave.cbCheckAll.isChecked = false
+
+            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken(), page = mCurrentPage.toString())
+                .observe(mainActivity) {
+                    it?.let { resource ->
+                        when (resource.status) {
+                            Status.SUCCESS -> {
+                                hideProgressDialog()
+                                leavelist = ArrayList<RequestedLeaveModel>()
+                                for (i in it.data?.result!!) {
+                                    if (i?.approved_status.equals("3") ||
+                                        i?.approved_status.equals("0")) {
+                                        val RequestedLeaveModel = RequestedLeaveModel()
+                                        RequestedLeaveModel.approved_status = i?.approved_status
+                                        RequestedLeaveModel.name = i?.data?.name + " " + i?.data?.last_name
+                                        RequestedLeaveModel.leave_date_from = i?.leave_date_from
+                                        RequestedLeaveModel.leave_date_to = i?.leave_date_to
+                                        RequestedLeaveModel.image = i?.data?.full_profile_image
+                                        RequestedLeaveModel.comment = i?.comment
+                                        RequestedLeaveModel.comment_cancel_reject = i?.comment_cancel_reject
+                                        RequestedLeaveModel.attachment = i?.attachment
+                                        RequestedLeaveModel.id = i?.id
+                                        leavelist.add(RequestedLeaveModel)
+                                    }
+                                }
+
+                                if (isFirstPage) leaveAdapter.updateData(leavelist) else
+                                    leaveAdapter.addData(leavelist)
+                                mIsLoading = false
+                                mIsLastPage = mCurrentPage == resource.data?.leavepagination?.next_page!!.toInt()
+
+//                                leaveAdapter.updateData(leavelist)
+
+                                if (leavelist.size > 0) {
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+                                        View.VISIBLE
+                                } else {
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+                                        View.GONE
+
+                                }
+
+                            }
+                            Status.ERROR -> {
+                                hideProgressDialog()
+                                val builder = AlertDialog.Builder(mainActivity)
+                                builder.setMessage(it.message)
+                                builder.setPositiveButton(
+                                    "Ok"
+                                ) { dialog, which ->
+
+                                    dialog.cancel()
+
+                                }
+                                val alert = builder.create()
+                                alert.show()
+                            }
+
+                            Status.LOADING -> {
+                                showProgressDialog()
+                            }
+
+                        }
+
+                    }
+                }
+
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+
+    }
+
+
 
 
 

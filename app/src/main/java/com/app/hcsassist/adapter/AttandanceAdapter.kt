@@ -76,19 +76,19 @@ class AttandanceAdapter(
                     sift_time_txt.visibility=View.GONE
                 }else{
                     sift_time_txt.visibility=View.VISIBLE
-                    sift_time_txt.text= modelItem.currentShift!!.shiftTitle
+                    sift_time_txt.text= modelItem.currentShift!!.shiftTitle?: ""
                 }
                 if (modelItem.totalDutarion.isNullOrEmpty()){
                     tvWorkHour.visibility=View.INVISIBLE
                 }else{
                     tvWorkHour.visibility=View.VISIBLE
-                    tvWorkHour.text=modelItem.totalDutarion
+                    tvWorkHour.text=modelItem.totalDutarion?: ""
                 }
                 if (modelItem.punchInTime!!.isNullOrEmpty() && modelItem.punchOutTime!!.isNullOrEmpty()){
 
                     if (modelItem.type.equals("absent",true)){
                         timeRange.visibility=View.VISIBLE
-                        timeRange.text= modelItem.reason
+                        timeRange.text= modelItem.reason?: ""
                         sift_time_txt.visibility=View.GONE
                     } else {
                         timeRange.visibility=View.INVISIBLE

@@ -161,8 +161,8 @@ class ApplyleaveFragment : Fragment() {
             val selecteddate2 = dateFormat3.format(date2)
             myCalendartodate.time = date
             selectedtodate = leavetodate
-            fragmentApplyleaveBinding.llMarkoutattendance.tvselectedTodate.text = selecteddate
-            fragmentApplyleaveBinding.llMarkoutattendance.tvTodate.text = selecteddate2
+            fragmentApplyleaveBinding.llMarkoutattendance.tvselectedTodate.text = selecteddate?: ""
+            fragmentApplyleaveBinding.llMarkoutattendance.tvTodate.text = selecteddate2?: ""
 
 
         } else {

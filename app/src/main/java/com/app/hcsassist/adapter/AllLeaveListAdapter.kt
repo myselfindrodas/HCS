@@ -51,14 +51,14 @@ class AllLeaveListAdapter(
         val inputDateStr2 = leaveModelArrayList[position].leave_date_to
         val date: Date = inputFormat.parse(inputDateStr)
         val date2: Date = inputFormat.parse(inputDateStr2)
-        val outputDateStr: String = outputFormat.format(date)
-        val outputDateStr2: String = outputFormat.format(date2)
+        val outputDateStr: String = outputFormat.format(date)?: ""
+        val outputDateStr2: String = outputFormat.format(date2)?: ""
 
         holder.tvfromDate.text = outputDateStr
         holder.tvtoDate.text = outputDateStr2
 
 
-        holder.tvtotlaLeave.text = leaveModelArrayList[position].noofdays
+        holder.tvtotlaLeave.text = leaveModelArrayList[position].noofdays?: ""
 
 
         if (leaveModelArrayList[position].approved_status.equals("0")) {

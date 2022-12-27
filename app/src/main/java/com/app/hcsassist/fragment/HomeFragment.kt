@@ -906,7 +906,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                 if (resource.data?.status == true) {
 
                                     fragmentHomeBinding.llDetails.tvUsername.text =
-                                        resource.data.data?.name + " " + resource.data.data?.last_name
+                                        resource.data.data?.name?: "" + " " + resource.data.data?.last_name?: ""
                                     sessionManager?.setempname(resource.data.data?.name)
                                     sessionManager?.setsnapShot(resource.data.data?.snapshot)
                                     sessionManager?.setpunchinLocation(resource.data.data?.punch_in_loc)
@@ -920,11 +920,13 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                         .load(resource.data.data?.profile_image)
                                         .error(R.drawable.user)
                                         .into(fragmentHomeBinding.llDetails.PrfImg)
-                                    fragmentHomeBinding.llDetails.tvEmail.text =
-                                        resource.data.data?.email
+                                    if (resource.data.data?.email==null){
+                                        fragmentHomeBinding.llDetails.tvEmail.text = ""
+                                    }else{
+                                        fragmentHomeBinding.llDetails.tvEmail.text = resource.data.data?.email
+                                    }
                                     sessionManager?.setempemail(resource.data.data?.email)
-                                    fragmentHomeBinding.llDetails.tvEmpcode.text =
-                                        resource.data.data?.usercode
+                                    fragmentHomeBinding.llDetails.tvEmpcode.text = resource.data.data?.usercode?: ""
                                     sessionManager?.setempcode(resource.data.data?.usercode)
                                     sessionManager?.setUsertypename(resource.data.data?.user_type?.user_type_name)
                                     sessionManager?.setpunchinId(resource.data.data?.punch_in_id.toString())
@@ -935,13 +937,10 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                     }
                                     if (sessionManager?.getPunchin().equals("punchin")) {
 
-                                        fragmentHomeBinding.btMarkattendanceout.visibility =
-                                            View.VISIBLE
+                                        fragmentHomeBinding.btMarkattendanceout.visibility = View.VISIBLE
                                         fragmentHomeBinding.btMarkattendance.visibility = View.GONE
                                         fragmentHomeBinding.imgOnOff.setColorFilter(
-                                            ContextCompat.getColor(
-                                                mainActivity,
-                                                R.color.successtextcolor
+                                            ContextCompat.getColor(mainActivity, R.color.successtextcolor
                                             ), android.graphics.PorterDuff.Mode.MULTIPLY
                                         )
                                         fragmentHomeBinding.tvPunchinOut.text = "Punch In"
@@ -951,8 +950,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                                 sessionManager?.getfencingLong()!!.toDouble(),
                                                 latitude?.toDouble()!!,
                                                 longitude?.toDouble()!!
-                                            ) < 100
-                                        ) {
+                                            ) < 100) {
 
                                             fragmentHomeBinding.btMarkattendance.isClickable = true
                                             fragmentHomeBinding.btMarkattendance.isEnabled = true
@@ -976,10 +974,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                                     } else {
 
-                                        fragmentHomeBinding.btMarkattendanceout.visibility =
-                                            View.GONE
-                                        fragmentHomeBinding.btMarkattendance.visibility =
-                                            View.VISIBLE
+                                        fragmentHomeBinding.btMarkattendanceout.visibility = View.GONE
+                                        fragmentHomeBinding.btMarkattendance.visibility = View.VISIBLE
                                         fragmentHomeBinding.imgOnOff.setColorFilter(
                                             ContextCompat.getColor(
                                                 mainActivity,
@@ -993,8 +989,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                                 sessionManager?.getfencingLong()!!.toDouble(),
                                                 latitude?.toDouble()!!,
                                                 longitude?.toDouble()!!
-                                            ) < 100
-                                        ) {
+                                            ) < 100) {
 
                                             fragmentHomeBinding.btMarkattendance.isClickable = true
                                             fragmentHomeBinding.btMarkattendance.isEnabled = true
@@ -1056,7 +1051,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 //                                                    resource.data.data.reporting_manager.user.last_name)
 //                                    }
 
-                                    phonenumber = resource.data.data?.phone.toString()
+                                    phonenumber = resource.data.data?.phone.toString()?: ""
                                     sessionManager?.setphnumber(resource.data.data?.phone.toString())
                                     if (resource.data.data?.locations.isNullOrEmpty()) {
                                         fragmentHomeBinding.llDetails.tvLocation.text = ""

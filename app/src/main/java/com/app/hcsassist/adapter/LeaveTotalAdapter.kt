@@ -38,21 +38,22 @@ class LeaveTotalAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvLeaveName.text = leaveModelArrayList[position].leave_type
+        holder.tvLeaveName.text = leaveModelArrayList[position].leave_type?: ""
         if (leaveModelArrayList[position].no_of_leave.equals("0")){
-            holder.tvTotalLeave.text = leaveModelArrayList[position].count
+            holder.tvTotalLeave.text = leaveModelArrayList[position].count?: ""
         }else{
-            holder.tvTotalLeave.text = leaveModelArrayList[position].count+"/"+leaveModelArrayList[position].no_of_leave
+            holder.tvTotalLeave.text = leaveModelArrayList[position].count+"/"+leaveModelArrayList[position].no_of_leave?: ""
         }
-        if (leaveModelArrayList[position].short_code.equals("CL")){
+        val shortcode = leaveModelArrayList[position].short_code?: ""
+        if (shortcode.equals("CL")){
             holder.rl_leave.background = ctx.resources.getDrawable(R.drawable.leavetype, ctx.resources.newTheme())
-        }else if (leaveModelArrayList[position].short_code.equals("SL")){
+        }else if (shortcode.equals("SL")){
             holder.rl_leave.background = ctx.resources.getDrawable(R.drawable.leavetypegreen, ctx.resources.newTheme())
-        }else if (leaveModelArrayList[position].short_code.equals("EL")){
+        }else if (shortcode.equals("EL")){
             holder.rl_leave.background = ctx.resources.getDrawable(R.drawable.leavetypepink, ctx.resources.newTheme())
-        }else if (leaveModelArrayList[position].short_code.equals("OOD")){
+        }else if (shortcode.equals("OOD")){
             holder.rl_leave.background = ctx.resources.getDrawable(R.drawable.leavetypeyellow, ctx.resources.newTheme())
-        }else if (leaveModelArrayList[position].short_code.equals("OOT")){
+        }else if (shortcode.equals("OOT")){
             holder.rl_leave.background = ctx.resources.getDrawable(R.drawable.leavetypegreen, ctx.resources.newTheme())
         }else {
             holder.rl_leave.background = ctx.resources.getDrawable(R.drawable.leavetype, ctx.resources.newTheme())

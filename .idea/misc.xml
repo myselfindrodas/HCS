@@ -10,6 +10,7 @@
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/calender_list_event_adapter.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_applyleave.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_attandance.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_calender.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_facerecog.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_home.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/fragment_mss.xml" value="0.1921875" />
@@ -19,6 +20,7 @@
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_approvedleave.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_attendance.xml" value="0.1875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_doczoom.xml" value="0.1921875" />
+        <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_eventdetails.xml" value="0.25" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_leave.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_leavecomment.xml" value="0.1921875" />
         <entry key="..\:/Android Projects/HLL December Final/HCSAssist/app/src/main/res/layout/layout_leavedetails.xml" value="0.1875" />

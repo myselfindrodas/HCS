@@ -10,6 +10,7 @@ class RequestedLeaveModel {
     var id:String?=null
     var comment:String?=null
     var attachment:String?=null
+    var approved_status:String?=null
     var comment_cancel_reject:String?=null
     var isChecked:Boolean?=false
 }

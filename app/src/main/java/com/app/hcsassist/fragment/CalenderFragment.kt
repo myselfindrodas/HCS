@@ -1,19 +1,19 @@
 package com.app.hcsassist.fragment
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.app.ProgressDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -39,13 +39,13 @@ import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
 import com.kizitonwose.calendar.view.ViewContainer
+import com.kyleduo.blurpopupwindow.library.BlurPopupWindow
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 data class EventCalender(val id: String, val text: String, val date: LocalDate)
@@ -228,13 +228,12 @@ class CalenderFragment : Fragment() {
                                             responseDate.add(startDate)
                                             responseDate.add(endDate)
 
-                                            val itemView: View = layoutInflater
-                                                .inflate(R.layout.calender_list_event_adapter, null, false)
+                                            val itemView: View = layoutInflater.inflate(R.layout.calender_list_event_adapter, null, false)
 
                                             val ivEventColor = itemView.findViewById<ImageView>(R.id.ivEventColor)
                                             val tvEventName = itemView.findViewById<TextView>(R.id.tvEventName)
                                             val tvEventTime = itemView.findViewById<TextView>(R.id.tvEventTime)
-
+                                            val btnCalenderdetails = itemView.findViewById<ConstraintLayout>(R.id.btnCalenderdetails)
                                             tvEventName.text= eventList!![i].event
                                             tvEventTime.text= eventList!![i].startDate+" to "+eventList!![i].endDate
                                             ivEventColor.setColorFilter(
@@ -243,6 +242,12 @@ class CalenderFragment : Fragment() {
                                                     R.color.red
                                                 ), android.graphics.PorterDuff.Mode.MULTIPLY
                                             )
+
+                                            btnCalenderdetails.setOnClickListener {
+
+                                                detailspopup(tvEventName.text.toString(), tvEventTime.text.toString())
+
+                                            }
 
                                             llEventContainer.addView(itemView)
 
@@ -259,12 +264,13 @@ class CalenderFragment : Fragment() {
                                             responseDate.add(startDate)
                                             responseDate.add(endDate)
 
-                                            val itemView: View = layoutInflater
-                                                .inflate(R.layout.calender_list_event_adapter, null, false)
+                                            val itemView: View = layoutInflater.inflate(R.layout.calender_list_event_adapter, null, false)
 
                                             val ivEventColor = itemView.findViewById<ImageView>(R.id.ivEventColor)
                                             val tvEventName = itemView.findViewById<TextView>(R.id.tvEventName)
                                             val tvEventTime = itemView.findViewById<TextView>(R.id.tvEventTime)
+                                            val btnCalenderdetails = itemView.findViewById<ConstraintLayout>(R.id.btnCalenderdetails)
+
 
                                             tvEventName.text= holidayList!![i].holiday
                                             tvEventTime.text= holidayList!![i].startDate+" to "+holidayList!![i].endDate
@@ -274,6 +280,12 @@ class CalenderFragment : Fragment() {
                                                     R.color.yellow
                                                 ), android.graphics.PorterDuff.Mode.MULTIPLY
                                             )
+
+                                            btnCalenderdetails.setOnClickListener {
+
+                                                detailspopup(tvEventName.text.toString(), tvEventTime.text.toString())
+
+                                            }
 
                                             llEventContainer.addView(itemView)
 
@@ -328,6 +340,35 @@ class CalenderFragment : Fragment() {
             }
         }else{
             Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun detailspopup(eventname:String, eventtime:String){
+        val btnPopupclose: TextView
+        val tveventName: TextView
+        val tvEventTime: TextView
+        val dialog = Dialog(mainActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val params = WindowManager.LayoutParams()
+        dialog.setContentView(R.layout.layout_eventdetails)
+        params.copyFrom(dialog.getWindow()?.getAttributes())
+        params.height = WindowManager.LayoutParams.MATCH_PARENT
+        params.width = WindowManager.LayoutParams.MATCH_PARENT
+        params.gravity = Gravity.CENTER
+        dialog.getWindow()?.setAttributes(params)
+        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        btnPopupclose = dialog.findViewById(R.id.btnPopupclose)
+        tveventName = dialog.findViewById(R.id.tveventName)
+        tvEventTime = dialog.findViewById(R.id.tvEventTime)
+
+        tveventName.text = eventname
+        tvEventTime.text = eventtime
+
+        btnPopupclose.setOnClickListener {
+
+            dialog.dismiss()
         }
 
     }

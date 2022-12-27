@@ -14,7 +14,8 @@ android {
         targetSdk 33
         versionCode 12
         versionName "2.1"
-
+        renderscriptTargetApi 25
+        renderscriptSupportModeEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
     }
@@ -74,6 +75,8 @@ dependencies {
 
     //GSON (Conversion of String to Map & Vice-Versa)
     implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.kyleduo.blurpopupwindow:blurpopupwindow:1.0.9'
+
 
 //    // CameraX View class (For camera preview)
 //    implementation "androidx.camera:camera-core:1.2.0-alpha04"

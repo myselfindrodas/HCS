@@ -26,14 +26,106 @@ class Splash : AppCompatActivity() {
     }
 
 
+//    private fun requestAllPermission() {
+//        val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
+//            Manifest.permission.READ_EXTERNAL_STORAGE,
+//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//            Manifest.permission.CAMERA,
+//            Manifest.permission.CALL_PHONE,
+//            Manifest.permission.ACCESS_COARSE_LOCATION,
+//            Manifest.permission.READ_PHONE_STATE)
+//        val rationale = "This app needs permission to use app feature. You need to grant them for using the application."
+//        val options: Permissions.Options = Permissions.Options()
+//            .setRationaleDialogTitle("Info")
+//            .setSettingsDialogTitle("Warning")
+//
+//        Permissions.check(this, permissions, rationale, options,
+//            object : PermissionHandler() {
+//                override fun onGranted() {
+//
+//                    Toast.makeText(applicationContext, "All permissions are granted!", Toast.LENGTH_SHORT).show()
+//                    val secondsDelayed = 1
+//                    Handler().postDelayed({
+//                        if (sessionManager!!.isLoggedIn) {
+//                            val intent = Intent(this@Splash, MainActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
+//                        } else {
+//                            val intent = Intent(this@Splash, Login::class.java)
+//                            startActivity(intent)
+//                            finish()
+//                        }
+//                    }, (secondsDelayed * 3000).toLong())
+//                }
+//
+//                override fun onDenied(context: Context?, deniedPermissions: ArrayList<String?>?) {
+//
+//                    finishAndRemoveTask()
+//                }
+//            })
+//
+////        Dexter.withActivity(this)
+////            .withPermissions(
+////                Manifest.permission.READ_EXTERNAL_STORAGE,
+////                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+////                Manifest.permission.ACCESS_FINE_LOCATION,
+////                Manifest.permission.CAMERA,
+////                Manifest.permission.CALL_PHONE,
+////                Manifest.permission.ACCESS_COARSE_LOCATION,
+////                Manifest.permission.READ_PHONE_STATE
+////            ).withListener(object : MultiplePermissionsListener {
+////                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+////                    // check if all permissions are granted
+////                    if (report.areAllPermissionsGranted()) {
+////                        Toast.makeText(applicationContext, "All permissions are granted!", Toast.LENGTH_SHORT).show()
+////
+////                        val secondsDelayed = 1
+////                        Handler().postDelayed({
+////                            if (sessionManager!!.isLoggedIn) {
+////                                val intent = Intent(this@Splash, MainActivity::class.java)
+////                                startActivity(intent)
+////                                finish()
+////                            } else {
+////                                val intent = Intent(this@Splash, Login::class.java)
+////                                startActivity(intent)
+////                                finish()
+////                            }
+////                        }, (secondsDelayed * 3000).toLong())
+////
+////                    }else{
+////                        finishAffinity()
+////                        onDestroy()
+////
+////                    }
+////                   /* if (report.isAnyPermissionPermanentlyDenied) {
+////                        finishAffinity()
+////                        onDestroy()
+////
+////                    }*/
+////                }
+////
+////                override fun onPermissionRationaleShouldBeShown(
+////                    permissions: List<PermissionRequest>,
+////                    token: PermissionToken
+////                ) {
+////                    token.continuePermissionRequest()
+////                }
+////            }).withErrorListener {
+////                Toast.makeText(
+////                    applicationContext,
+////                    "Error occurred! ",
+////                    Toast.LENGTH_SHORT
+////                ).show()
+////            }
+////            .onSameThread()
+////            .check()
+//    }
+
+
     private fun requestAllPermission() {
         val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
-            Manifest.permission.CALL_PHONE,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.READ_PHONE_STATE)
+            Manifest.permission.ACCESS_COARSE_LOCATION)
         val rationale = "This app needs permission to use app feature. You need to grant them for using the application."
         val options: Permissions.Options = Permissions.Options()
             .setRationaleDialogTitle("Info")
@@ -120,6 +212,7 @@ class Splash : AppCompatActivity() {
 //            .onSameThread()
 //            .check()
     }
+
 
     override fun onResume() {
         super.onResume()

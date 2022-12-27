@@ -25,7 +25,7 @@ class ApiHelper(private val apiInterface: ApiInterface) {
     suspend fun shiftchangerequest(authtoken: String, requestBody: ShiftChangeRequest) =
         apiInterface.shiftchangerequest(authtoken, requestBody)
 
-    suspend fun shiftchangelist(authtoken: String, page: String) = apiInterface.shiftchangelist(authtoken, page)
+    suspend fun shiftchangelist(authtoken: String) = apiInterface.shiftchangelist(authtoken)
     suspend fun shiftchangeapproval(authtoken: String, requestBody: ShiftApprovalRequest) =
         apiInterface.shiftchangeapproval(authtoken, requestBody)
 
@@ -69,7 +69,7 @@ class ApiHelper(private val apiInterface: ApiInterface) {
 
 
     suspend fun leavelist(authtoken: String) = apiInterface.myleave(authtoken)
-    suspend fun requestedleavelist(authtoken: String, page: String) = apiInterface.requestedleavelist(authtoken, page)
+    suspend fun requestedleavelist(authtoken: String) = apiInterface.requestedleavelist(authtoken)
     suspend fun approveleave(authtoken: String, requestBody: LeaveApprovalRequest) =
         apiInterface.approveleave(authtoken, requestBody)
 

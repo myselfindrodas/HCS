@@ -151,7 +151,7 @@ class LeaveAdapter(
     }
 
     fun updateData(list : ArrayList<RequestedLeaveModel>){
-        requestedleaveModelArrayList.clear()
+        //requestedleaveModelArrayList.clear()
         requestedleaveModelArrayList=list
         notifyDataSetChanged()
     }

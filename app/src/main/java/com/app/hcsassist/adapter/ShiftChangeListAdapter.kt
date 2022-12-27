@@ -146,7 +146,7 @@ class ShiftChangeListAdapter(
     }
 
     fun updateData(list : ArrayList<ShiftChangeListModel>){
-        shiftchangelistModelArrayList.clear()
+//        shiftchangelistModelArrayList.clear()
         shiftchangelistModelArrayList=list
         notifyDataSetChanged()
     }

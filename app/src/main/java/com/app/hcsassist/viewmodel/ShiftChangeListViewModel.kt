@@ -10,11 +10,11 @@ import kotlinx.coroutines.Dispatchers
 
 class ShiftChangeListViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    fun shiftchangelist(authtoken: String, page: String) = liveData(Dispatchers.IO) {
+    fun shiftchangelist(authtoken: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
 
         try {
-            emit(Resource.success(data = mainRepository.shiftchangelist(authtoken, page)))
+            emit(Resource.success(data = mainRepository.shiftchangelist(authtoken)))
         } catch (e: Exception) {
             emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
         }

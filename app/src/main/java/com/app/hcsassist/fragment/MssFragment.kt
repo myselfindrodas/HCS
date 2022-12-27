@@ -16,10 +16,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.app.hcsassist.MainActivity
 import com.app.hcsassist.R
 import com.app.hcsassist.adapter.LeaveAdapter
@@ -64,13 +61,7 @@ class MssFragment : Fragment() {
     lateinit var requestedLeavelistViewModel: RequestedLeavelistViewModel
     lateinit var mssAttendancelistViewModel: MssAttendanceListViewModel
     var myCalendarfromdate = Calendar.getInstance()
-    // initialise loading state
-    var mIsLoading = false;
-    var mIsLastPage = false;
-    var mCurrentPage = 0;
 
-    // amount of items you want to load per page
-    final var pageSize = 10;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,51 +98,21 @@ class MssFragment : Fragment() {
         requestedLeavelistViewModel = requestedleavelistvm
         mssAttendancelistViewModel = mssAttendanceViewModel
 
-        shiftChangeListAdapter = ShiftChangeListAdapter(mainActivity, this)
-        attendanceAdapter = MssAttendaceAdapter(mainActivity, this)
-        leaveAdapter = LeaveAdapter(mainActivity, this)
-
 
         fragmentMssBinding.btnBack.setOnClickListener {
 
             mainActivity.onBackPressedDispatcher.onBackPressed()
         }
-
-
-        //attendance adapter layout set
-        val mLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(mainActivity, 1)
-        fragmentMssBinding.includeAttendance.rvAttendance.layoutManager = mLayoutManager
-        fragmentMssBinding.includeAttendance.rvAttendance.addOnScrollListener(recyclerattendanceOnScroll)
-        fragmentMssBinding.includeAttendance.rvAttendance.itemAnimator = DefaultItemAnimator()
-        fragmentMssBinding.includeAttendance.rvAttendance.adapter = attendanceAdapter
-
-        // ShiftChange adapter layout set
-        val mLayoutManagerShiftchange: RecyclerView.LayoutManager = GridLayoutManager(mainActivity, 1)
-        fragmentMssBinding.includeShiftchange.rvShiftchangelist.layoutManager = mLayoutManagerShiftchange
-        fragmentMssBinding.includeShiftchange.rvShiftchangelist.addOnScrollListener(recyclerOnScroll)
-        fragmentMssBinding.includeShiftchange.rvShiftchangelist.itemAnimator = DefaultItemAnimator()
-        fragmentMssBinding.includeShiftchange.rvShiftchangelist.adapter = shiftChangeListAdapter
-
-        //leave adapter layout set
-        val mLayoutManagerLeave: RecyclerView.LayoutManager = GridLayoutManager(mainActivity, 1)
-        fragmentMssBinding.includeLeave.rvleave.layoutManager = mLayoutManagerLeave
-        fragmentMssBinding.includeLeave.rvleave.addOnScrollListener(recyclerleaveOnScroll)
-        fragmentMssBinding.includeLeave.rvleave.itemAnimator = DefaultItemAnimator()
-        fragmentMssBinding.includeLeave.rvleave.adapter = leaveAdapter
-
-
-
-
         val c: Calendar = Calendar.getInstance()
+
         c.set(Calendar.DAY_OF_MONTH, 1);
         c.add(Calendar.MONTH, 0)
-        mssAttendanceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time), true)
+        mssAttendanceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time))
 
         fragmentMssBinding.tvAttendance.setOnClickListener {
 
-            mIsLoading = false
-            mIsLastPage = false
-            mCurrentPage = 0
+            c.set(Calendar.DAY_OF_MONTH, 1);
+            c.add(Calendar.MONTH, 0)
             fragmentMssBinding.tvAttendance.setTextColor(getResources().getColor(R.color.selectedtextcolor))
             fragmentMssBinding.tvLeave.setTextColor(getResources().getColor(R.color.diselectedtextcolor))
             fragmentMssBinding.tvShiftchange.setTextColor(getResources().getColor(R.color.diselectedtextcolor))
@@ -162,10 +123,7 @@ class MssFragment : Fragment() {
             fragmentMssBinding.includeLeave.llLeave.visibility = View.GONE
             fragmentMssBinding.llAccept.visibility = View.GONE
             fragmentMssBinding.includeShiftchange.llShiftchange.visibility = View.GONE
-            val c: Calendar = Calendar.getInstance()
-            c.set(Calendar.DAY_OF_MONTH, 1);
-            c.add(Calendar.MONTH, 0)
-            mssAttendanceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time), true)
+            mssAttendanceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time))
 
         }
 
@@ -187,7 +145,7 @@ class MssFragment : Fragment() {
                     SimpleDateFormat(
                         "yyyy-MM-dd",
                         Locale.getDefault()
-                    ).format(c.time), true
+                    ).format(c.time)
                 )
             }
             ivPrev.setOnClickListener {
@@ -200,7 +158,7 @@ class MssFragment : Fragment() {
                     SimpleDateFormat(
                         "yyyy-MM-dd",
                         Locale.getDefault()
-                    ).format(c.time), true
+                    ).format(c.time)
                 )
             }
 
@@ -231,12 +189,24 @@ class MssFragment : Fragment() {
 
         fragmentMssBinding.tvLeave.setOnClickListener {
 
-            mIsLoading = false
-            mIsLastPage = false
-            mCurrentPage = 0
-            fragmentMssBinding.tvAttendance.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
-            fragmentMssBinding.tvLeave.setTextColor(resources.getColor(R.color.selectedtextcolor, resources.newTheme()))
-            fragmentMssBinding.tvShiftchange.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+            fragmentMssBinding.tvAttendance.setTextColor(
+                resources.getColor(
+                    R.color.diselectedtextcolor,
+                    resources.newTheme()
+                )
+            )
+            fragmentMssBinding.tvLeave.setTextColor(
+                resources.getColor(
+                    R.color.selectedtextcolor,
+                    resources.newTheme()
+                )
+            )
+            fragmentMssBinding.tvShiftchange.setTextColor(
+                resources.getColor(
+                    R.color.diselectedtextcolor,
+                    resources.newTheme()
+                )
+            )
             fragmentMssBinding.viewattendance.visibility = View.INVISIBLE
             fragmentMssBinding.viewleave.visibility = View.VISIBLE
             fragmentMssBinding.viewshiftchange.visibility = View.INVISIBLE
@@ -244,7 +214,7 @@ class MssFragment : Fragment() {
             fragmentMssBinding.includeLeave.llLeave.visibility = View.VISIBLE
             //fragmentMssBinding.includeLeave.llAccept.visibility = View.GONE
             fragmentMssBinding.includeShiftchange.llShiftchange.visibility = View.GONE
-            leavelist(true)
+            leavelist()
 
         }
 
@@ -396,13 +366,8 @@ class MssFragment : Fragment() {
 
 
         }
-
-
         fragmentMssBinding.tvShiftchange.setOnClickListener {
 
-            mIsLoading = false
-            mIsLastPage = false
-            mCurrentPage = 0
             fragmentMssBinding.tvAttendance.setTextColor(getResources().getColor(R.color.diselectedtextcolor))
             fragmentMssBinding.tvLeave.setTextColor(getResources().getColor(R.color.diselectedtextcolor))
             fragmentMssBinding.tvShiftchange.setTextColor(getResources().getColor(R.color.selectedtextcolor))
@@ -413,8 +378,7 @@ class MssFragment : Fragment() {
             fragmentMssBinding.includeLeave.llLeave.visibility = View.GONE
             //fragmentMssBinding.llAccept.visibility = View.GONE
             fragmentMssBinding.includeShiftchange.llShiftchange.visibility = View.VISIBLE
-            shiftchangelist(true)
-
+            shiftchangelist()
 
         }
 
@@ -433,7 +397,7 @@ class MssFragment : Fragment() {
         ).format(myCalendarfromdate.time)
         Log.d(TAG, "selecteddate-->" + selecteddate)
 
-        mssAttendanceList(selecteddate, true)
+        mssAttendanceList(selecteddate)
 
     }
 
@@ -443,17 +407,14 @@ class MssFragment : Fragment() {
 
     }
 
-    private fun shiftchangelist(isFirstPage: Boolean) {
-
-        mIsLoading = true
-        mCurrentPage += 1
+    private fun shiftchangelist() {
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
 
             showMultiSelect(false)
             fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
 
-            shiftChangeListViewModel.shiftchangelist(authtoken = "Bearer " + sessionManager?.getToken(), page = mCurrentPage.toString())
+            shiftChangeListViewModel.shiftchangelist(authtoken = "Bearer " + sessionManager?.getToken())
                 .observe(mainActivity) {
                     it?.let { resource ->
                         when (resource.status) {
@@ -470,25 +431,19 @@ class MssFragment : Fragment() {
                                     shiftChangeListModel.id = i?.id
                                     shiftChangeList.add(shiftChangeListModel)
                                 }
-
-
-                                if (isFirstPage) shiftChangeListAdapter.updateData(shiftChangeList) else
-                                    shiftChangeListAdapter.addData(shiftChangeList)
-                                mIsLoading = false
-                                mIsLastPage = mCurrentPage == resource.data?.pagination?.next_page!!.toInt()
-
-
-//                                shiftChangeListAdapter.updateData(shiftChangeList)
-//                                fragmentMssBinding.includeShiftchange.rvShiftchangelist.setAdapter(
-//                                    shiftChangeListAdapter
-//                                )
-//                                fragmentMssBinding.includeShiftchange.rvShiftchangelist.setLayoutManager(
-//                                    LinearLayoutManager(
-//                                        mainActivity,
-//                                        LinearLayoutManager.VERTICAL,
-//                                        false
-//                                    )
-//                                )
+                                shiftChangeListAdapter =
+                                    ShiftChangeListAdapter(mainActivity, this)
+                                shiftChangeListAdapter.updateData(shiftChangeList)
+                                fragmentMssBinding.includeShiftchange.rvShiftchangelist.setAdapter(
+                                    shiftChangeListAdapter
+                                )
+                                fragmentMssBinding.includeShiftchange.rvShiftchangelist.setLayoutManager(
+                                    LinearLayoutManager(
+                                        mainActivity,
+                                        LinearLayoutManager.VERTICAL,
+                                        false
+                                    )
+                                )
 
                                 if (shiftChangeList.size > 0) {
                                     fragmentMssBinding.includeShiftchange.cbCheckAll.visibility =
@@ -532,129 +487,28 @@ class MssFragment : Fragment() {
 
     }
 
-
-    val recyclerOnScroll = object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-        }
-
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
-
-            // number of visible items
-            val visibleItemCount = recyclerView.layoutManager?.childCount;
-            // number of items in layout
-            val totalItemCount = recyclerView.layoutManager?.itemCount;
-            // the position of first visible item
-            val firstVisibleItemPosition =
-                (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
-
-            val isNotLoadingAndNotLastPage = !mIsLoading && !mIsLastPage;
-            // flag if number of visible items is at the last
-            val isAtLastItem = firstVisibleItemPosition + visibleItemCount!! >= totalItemCount!!;
-            // validate non negative values
-            val isValidFirstItem = firstVisibleItemPosition >= 0;
-            // validate total items are more than possible visible items
-            val totalIsMoreThanVisible = totalItemCount >= pageSize;
-            // flag to know whether to load more
-            val shouldLoadMore =
-                isValidFirstItem && isAtLastItem && totalIsMoreThanVisible && isNotLoadingAndNotLastPage
-
-            if (shouldLoadMore)
-                shiftchangelist(false)
-        }
-    }
-
-    val recyclerattendanceOnScroll = object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-        }
-
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
-
-            // number of visible items
-            val visibleItemCount = recyclerView.layoutManager?.childCount;
-            // number of items in layout
-            val totalItemCount = recyclerView.layoutManager?.itemCount;
-            // the position of first visible item
-            val firstVisibleItemPosition =
-                (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
-
-            val isNotLoadingAndNotLastPage = !mIsLoading && !mIsLastPage;
-            // flag if number of visible items is at the last
-            val isAtLastItem = firstVisibleItemPosition + visibleItemCount!! >= totalItemCount!!;
-            // validate non negative values
-            val isValidFirstItem = firstVisibleItemPosition >= 0;
-            // validate total items are more than possible visible items
-            val totalIsMoreThanVisible = totalItemCount >= pageSize;
-            // flag to know whether to load more
-            val shouldLoadMore =
-                isValidFirstItem && isAtLastItem && totalIsMoreThanVisible && isNotLoadingAndNotLastPage
-
-            if (shouldLoadMore){
-                val c: Calendar = Calendar.getInstance()
-                c.set(Calendar.DAY_OF_MONTH, 1);
-                c.add(Calendar.MONTH, 0)
-                mssAttendanceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time), false)
-
-            }
-        }
-    }
-
-    val recyclerleaveOnScroll = object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-        }
-
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
-
-            // number of visible items
-            val visibleItemCount = recyclerView.layoutManager?.childCount;
-            // number of items in layout
-            val totalItemCount = recyclerView.layoutManager?.itemCount;
-            // the position of first visible item
-            val firstVisibleItemPosition =
-                (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
-
-            val isNotLoadingAndNotLastPage = !mIsLoading && !mIsLastPage;
-            // flag if number of visible items is at the last
-            val isAtLastItem = firstVisibleItemPosition + visibleItemCount!! >= totalItemCount!!;
-            // validate non negative values
-            val isValidFirstItem = firstVisibleItemPosition >= 0;
-            // validate total items are more than possible visible items
-            val totalIsMoreThanVisible = totalItemCount >= pageSize;
-            // flag to know whether to load more
-            val shouldLoadMore =
-                isValidFirstItem && isAtLastItem && totalIsMoreThanVisible && isNotLoadingAndNotLastPage
-
-            if (shouldLoadMore)
-                leavelist(false)
-        }
-    }
-
-
-
-
-
-    private fun leavelist(isFirstPage: Boolean) {
-
-        mIsLoading = true
-        mCurrentPage += 1
+    private fun leavelist() {
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
 
             showMultiSelect(false)
             fragmentMssBinding.includeLeave.cbCheckAll.isChecked = false
 
-            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken(), page = mCurrentPage.toString())
+            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken())
                 .observe(mainActivity) {
                     it?.let { resource ->
                         when (resource.status) {
                             Status.SUCCESS -> {
                                 hideProgressDialog()
                                 leavelist = ArrayList<RequestedLeaveModel>()
+                                leaveAdapter = LeaveAdapter(mainActivity, this)
+                                fragmentMssBinding.includeLeave.rvleave.layoutManager =
+                                    LinearLayoutManager(
+                                        mainActivity,
+                                        LinearLayoutManager.VERTICAL,
+                                        false
+                                    )
+                                fragmentMssBinding.includeLeave.rvleave.adapter = leaveAdapter
                                 for (i in it.data?.result!!) {
                                     val RequestedLeaveModel = RequestedLeaveModel()
                                     RequestedLeaveModel.name =
@@ -669,13 +523,7 @@ class MssFragment : Fragment() {
                                     RequestedLeaveModel.id = i?.id
                                     leavelist.add(RequestedLeaveModel)
                                 }
-
-                                if (isFirstPage) leaveAdapter.updateData(leavelist) else
-                                    leaveAdapter.addData(leavelist)
-                                mIsLoading = false
-                                mIsLastPage = mCurrentPage == resource.data?.leavepagination?.next_page!!.toInt()
-
-//                                leaveAdapter.updateData(leavelist)
+                                leaveAdapter.updateData(leavelist)
 
                                 if (leavelist.size > 0) {
                                     fragmentMssBinding.includeLeave.cbCheckAll.visibility =
@@ -720,28 +568,26 @@ class MssFragment : Fragment() {
     }
 
 
+    private fun mssAttendanceList(date: String) {
 
-    private fun mssAttendanceList(date: String, isFirstPage: Boolean) {
-
-        mIsLoading = true
-        mCurrentPage += 1
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
 
-            mssAttendancelistViewModel.getMSSAttendanceList(authtoken = "Bearer " + sessionManager?.getToken(),
-                MssAttendanceRequest(attendenceDate = date, page = mCurrentPage.toString()))
+            mssAttendancelistViewModel.getMSSAttendanceList(
+                authtoken = "Bearer " + sessionManager?.getToken(),
+                MssAttendanceRequest(date)
+            )
                 .observe(mainActivity) {
                     it?.let { resource ->
                         when (resource.status) {
                             Status.SUCCESS -> {
                                 hideProgressDialog()
                                 leavelist = ArrayList<RequestedLeaveModel>()
-//                                fragmentMssBinding.includeAttendance.rvAttendance.layoutManager =
-//                                    LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false)
-//                                fragmentMssBinding.includeAttendance.rvAttendance.adapter = attendanceAdapter
-//
-//
-
+                                attendanceAdapter = MssAttendaceAdapter(mainActivity, this)
+                                fragmentMssBinding.includeAttendance.rvAttendance.layoutManager =
+                                    LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false)
+                                fragmentMssBinding.includeAttendance.rvAttendance.adapter =
+                                    attendanceAdapter
                                 /* for (i in it.data?.data!!) {
                                      val RequestedLeaveModel = Data()
                                      RequestedLeaveModel.name = i?.name + " " + i?.data?.last_name
@@ -751,13 +597,7 @@ class MssFragment : Fragment() {
                                      RequestedLeaveModel.id = i?.id
                                      leavelist.add(RequestedLeaveModel)
                                  }*/
-
-                                if (isFirstPage) attendanceAdapter.updateData(it.data?.data) else
-                                    attendanceAdapter.addData(it.data?.data)
-                                mIsLoading = false
-                                mIsLastPage = mCurrentPage == resource.data?.attendancepagination?.next_page!!.toInt()
-
-//                                attendanceAdapter.updateData(it.data?.data)
+                                attendanceAdapter.updateData(it.data?.data)
 
                             }
                             Status.ERROR -> {
@@ -809,7 +649,7 @@ class MssFragment : Fragment() {
                             if (fragmentMssBinding.llAccept.isVisible)
                                 fragmentMssBinding.llAccept.visibility = View.GONE
                             fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
-                            shiftchangelist(true)
+                            shiftchangelist()
                             Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT)
                                 .show()
 
@@ -861,7 +701,7 @@ class MssFragment : Fragment() {
                             fragmentMssBinding.llAccept.visibility = View.GONE
 
                         fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
-                        shiftchangelist(true)
+                        shiftchangelist()
                         Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT).show()
 
                     }
@@ -905,7 +745,7 @@ class MssFragment : Fragment() {
                     when (resource.status) {
                         Status.SUCCESS -> {
                             hideProgressDialog()
-                            leavelist(true)
+                            leavelist()
                             if (fragmentMssBinding.llAccept.isVisible)
                                 fragmentMssBinding.llAccept.visibility = View.GONE
 
@@ -963,7 +803,7 @@ class MssFragment : Fragment() {
                     when (resource.status) {
                         Status.SUCCESS -> {
                             hideProgressDialog()
-                            leavelist(true)
+                            leavelist()
                             Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT)
                                 .show()
 
@@ -1079,14 +919,6 @@ class MssFragment : Fragment() {
             dialog.dismiss()
         }
 
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mIsLoading = false
-        mIsLastPage = false
-        mCurrentPage = 0
     }
 
 

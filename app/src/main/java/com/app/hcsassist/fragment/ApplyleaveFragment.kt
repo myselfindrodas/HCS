@@ -1,14 +1,17 @@
 package com.app.hcsassist.fragment
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
@@ -37,6 +40,8 @@ import com.bumptech.glide.Glide
 import com.example.wemu.internet.CheckConnectivity
 import com.example.wemu.session.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.nabinbhandari.android.permissions.PermissionHandler
+import com.nabinbhandari.android.permissions.Permissions
 import kotlinx.android.synthetic.main.layout_applyleave.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -322,11 +327,42 @@ class ApplyleaveFragment : Fragment() {
 
         fragmentApplyleaveBinding.llMarkoutattendance.imgDoc.setOnClickListener {
 
-            ImagePicker.Companion.with(this)
-                .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
-                .start()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                ImagePicker.Companion.with(this)
+                    .crop()
+                    .compress(1024)
+                    .maxResultSize(1080, 1080)
+                    .start()
+            }else{
+
+                val permissions = arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                Permissions.check(
+                    mainActivity /*context*/,
+                    permissions,
+                    null /*rationale*/,
+                    null /*options*/,
+                    object : PermissionHandler() {
+                        override fun onGranted() {
+                            ImagePicker.Companion.with(this@ApplyleaveFragment)
+                                .crop()
+                                .compress(1024)
+                                .maxResultSize(1080, 1080)
+                                .start()
+                        }
+
+
+                        override fun onDenied(
+                            context: Context?,
+                            deniedPermissions: ArrayList<String?>?
+                        ) {
+                            Toast.makeText(mainActivity, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    })
+
+            }
         }
 
 

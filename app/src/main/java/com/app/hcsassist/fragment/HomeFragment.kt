@@ -13,9 +13,8 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.*
+import android.os.Build.VERSION.SDK_INT
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -59,9 +58,8 @@ import com.example.wemu.session.SessionManager
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.location.*
 import com.google.android.libraries.places.api.net.PlacesClient
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
+import com.nabinbhandari.android.permissions.PermissionHandler
+import com.nabinbhandari.android.permissions.Permissions
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -413,9 +411,31 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         fragmentHomeBinding.llDetails.tvReporterhead.setOnClickListener {
 
-            val callIntent = Intent(Intent.ACTION_CALL)
-            callIntent.data = Uri.parse("tel:$phonenumber")
-            startActivity(callIntent)
+            val permissions = arrayOf(
+                Manifest.permission.CALL_PHONE)
+            Permissions.check(
+                mainActivity /*context*/,
+                permissions,
+                null /*rationale*/,
+                null /*options*/,
+                object : PermissionHandler() {
+                    override fun onGranted() {
+                        val callIntent = Intent(Intent.ACTION_CALL)
+                        callIntent.data = Uri.parse("tel:$phonenumber")
+                        startActivity(callIntent)
+                    }
+
+
+                    override fun onDenied(
+                        context: Context?,
+                        deniedPermissions: ArrayList<String?>?
+                    ) {
+                        Toast.makeText(mainActivity, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+
+
         }
 
 
@@ -490,11 +510,43 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         fragmentHomeBinding.llDetails.PrfImg.setOnClickListener {
 
-            ImagePicker.Companion.with(this)
-                .crop()
-                .compress(1024)
-                .maxResultSize(1080, 1080)
-                .start()
+            if (SDK_INT >= Build.VERSION_CODES.R) {
+                ImagePicker.Companion.with(this)
+                    .crop()
+                    .compress(1024)
+                    .maxResultSize(1080, 1080)
+                    .start()
+            }else{
+
+                val permissions = arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                Permissions.check(
+                    mainActivity /*context*/,
+                    permissions,
+                    null /*rationale*/,
+                    null /*options*/,
+                    object : PermissionHandler() {
+                        override fun onGranted() {
+                            ImagePicker.Companion.with(this@HomeFragment)
+                                .crop()
+                                .compress(1024)
+                                .maxResultSize(1080, 1080)
+                                .start()
+                        }
+
+
+                        override fun onDenied(
+                            context: Context?,
+                            deniedPermissions: ArrayList<String?>?
+                        ) {
+                            Toast.makeText(mainActivity, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    })
+
+            }
+
         }
     }
 

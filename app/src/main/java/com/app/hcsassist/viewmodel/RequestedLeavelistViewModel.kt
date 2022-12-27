@@ -11,11 +11,11 @@ import kotlinx.coroutines.Dispatchers
 
 class RequestedLeavelistViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
-    fun requestedleavelist(authtoken: String) = liveData(Dispatchers.IO) {
+    fun requestedleavelist(authtoken: String, page: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
 
         try {
-            emit(Resource.success(data = mainRepository.requestedleavelist(authtoken)))
+            emit(Resource.success(data = mainRepository.requestedleavelist(authtoken, page)))
         } catch (e: Exception) {
             emit(Resource.error(data = null, message = e.message ?: "Error Occurred!"))
         }

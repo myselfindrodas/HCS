@@ -66,9 +66,10 @@ interface ApiInterface {
     ): ShiftChangeResponse
 
 
-    @GET("shift-change-request-list")
+    @GET("shift-change-request-list-v1/{page}")
     suspend fun shiftchangelist(
         @Header("Authorization") Authorization: String,
+        @Path("page") page:String,
     ): ShiftChangeListResponse
 
 
@@ -118,9 +119,11 @@ interface ApiInterface {
 
 
 
-    @GET("requested-leave-list")
+
+    @GET("requested-leave-list-v1/{page}")
     suspend fun requestedleavelist(
         @Header("Authorization") Authorization: String,
+        @Path("page") page:String,
     ): LeaveResponse
 
 
@@ -167,7 +170,7 @@ interface ApiInterface {
     ): PunchoutResponse
 
 
-    @POST("mss-attendance-list")
+    @POST("mss-attendance-list-v1")
     suspend fun mssAttendancelist(
         @Header("Authorization") Authorization: String,
         @Body requestBody: MssAttendanceRequest

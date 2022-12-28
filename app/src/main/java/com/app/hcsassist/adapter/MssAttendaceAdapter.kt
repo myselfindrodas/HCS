@@ -39,11 +39,11 @@ class MssAttendaceAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvType.text = mssAttandanceModelArrayList[position].empTypeName
-        holder.tvStatus.text = mssAttandanceModelArrayList[position].attendance?.replaceFirstChar {
+        holder.tvType.text = mssAttandanceModelArrayList[position].empTypeName?:""
+        holder.tvStatus.text = mssAttandanceModelArrayList[position].attendance?:"".replaceFirstChar {
             it.uppercase()
         }
-        holder.tvName.text = "${mssAttandanceModelArrayList[position].name} ${mssAttandanceModelArrayList[position].lastName}"
+        holder.tvName.text = "${mssAttandanceModelArrayList[position].name?:""} ${mssAttandanceModelArrayList[position].lastName?:""}"
 
         Glide.with(ctx)
             .load(mssAttandanceModelArrayList[position].profileImage)

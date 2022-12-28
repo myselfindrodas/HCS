@@ -126,6 +126,7 @@
                             android:textSize="@dimen/_10sdp"/>
 
                         <TextView
+                            android:id="@+id/tvNametitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
@@ -135,6 +136,7 @@
                             android:fontFamily="@font/intermedium"/>
 
                         <TextView
+                            android:id="@+id/tvDatatitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Date"
@@ -143,6 +145,7 @@
                             android:fontFamily="@font/intermedium"/>
 
                         <TextView
+                            android:id="@+id/tvActiontitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Action"

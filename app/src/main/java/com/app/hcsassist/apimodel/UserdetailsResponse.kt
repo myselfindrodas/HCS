@@ -85,6 +85,15 @@ data class data(
 
     @field:SerializedName("user_type")
     val user_type: user_type? = null,
+
+    @field:SerializedName("lat")
+    val lat: String? = null,
+
+    @field:SerializedName("long")
+    val long: String? = null,
+
+    @field:SerializedName("emp_designation_title")
+    val emp_designation_title: String? = null,
 )
 
 data class fulladdress(

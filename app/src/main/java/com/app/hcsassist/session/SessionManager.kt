@@ -205,6 +205,15 @@ class SessionManager(  // Context
     }
 
 
+    fun setDesignation(designation: String?){
+        pref.edit().putString("designation", designation).commit()
+    }
+
+    fun getDesignation(): String?{
+        return  pref.getString("designation", "")
+    }
+
+
     fun setsnapShot(snapShot: String?){
         pref.edit().putString("snapShot", snapShot).commit()
     }

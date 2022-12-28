@@ -7,6 +7,7 @@ class RequestedLeaveModel {
     var status: String? = null
     var leave_type:String?=null
     var name:String?=null
+    var lastname:String?=null
     var id:String?=null
     var comment:String?=null
     var attachment:String?=null

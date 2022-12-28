@@ -33,11 +33,11 @@ class ShiftChangeListAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvUsername.text = shiftchangelistModelArrayList[position].name
-        holder.tvCurrentShift.text = shiftchangelistModelArrayList[position].current_shift?.replaceFirstChar {
+        holder.tvUsername.text = shiftchangelistModelArrayList[position].name?:""
+        holder.tvCurrentShift.text = shiftchangelistModelArrayList[position].current_shift?:"".replaceFirstChar {
             it.uppercase()
         }
-        holder.tvRequestedShift.text = shiftchangelistModelArrayList[position].shift_title?.replaceFirstChar {
+        holder.tvRequestedShift.text = shiftchangelistModelArrayList[position].shift_title?:"".replaceFirstChar {
             it.uppercase()
         }
         holder.CbCheck.isChecked = shiftchangelistModelArrayList[position].isChecked == true

@@ -167,9 +167,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 //            Log.d(TAG, "latlong-->"+latitude + " , "+ longitude)
 //            Log.d(TAG, "latlong response-->"+sessionManager?.getfencingLat()!!.toDouble() + " , "+ sessionManager?.getfencingLong()!!.toDouble())
-            if (sessionManager?.getfencingLat()!!.isNotEmpty() && sessionManager?.getfencingLong()!!
-                    .isNotEmpty()
-            ) {
+            if (sessionManager?.getfencingLat()!!.isNotEmpty() && sessionManager?.getfencingLong()!!.isNotEmpty()) {
 
                 if (distanceinmeter(
                         sessionManager?.getfencingLat()!!.toDouble(),
@@ -211,23 +209,22 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             sessionManager?.getfencingLong()!!.toDouble(),
                             latitude?.toDouble()!!,
                             longitude?.toDouble()!!
-                        ) < 100
-                    ) {
+                        ) < 100) {
 
-                        fragmentHomeBinding.btMarkattendance.isClickable = true
-                        fragmentHomeBinding.btMarkattendance.isEnabled = true
-                        fragmentHomeBinding.btMarkattendance.background =
+                        fragmentHomeBinding.btMarkattendanceout.isClickable = true
+                        fragmentHomeBinding.btMarkattendanceout.isEnabled = true
+                        fragmentHomeBinding.btMarkattendanceout.background =
                             mainActivity.resources.getDrawable(
-                                R.drawable.button_bg,
+                                R.drawable.button_bgred,
                                 mainActivity.resources.newTheme()
                             )
 
 
                     } else {
 
-                        fragmentHomeBinding.btMarkattendance.isClickable = false
-                        fragmentHomeBinding.btMarkattendance.isEnabled = false
-                        fragmentHomeBinding.btMarkattendance.background =
+                        fragmentHomeBinding.btMarkattendanceout.isClickable = false
+                        fragmentHomeBinding.btMarkattendanceout.isEnabled = false
+                        fragmentHomeBinding.btMarkattendanceout.background =
                             mainActivity.resources.getDrawable(
                                 R.drawable.button_bg2,
                                 mainActivity.resources.newTheme()
@@ -258,8 +255,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         fragmentHomeBinding.btMarkattendance.background =
                             mainActivity.resources.getDrawable(
                                 R.drawable.button_bg,
-                                mainActivity.resources.newTheme()
-                            )
+                                mainActivity.resources.newTheme())
 
                     } else {
 
@@ -268,8 +264,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         fragmentHomeBinding.btMarkattendance.background =
                             mainActivity.resources.getDrawable(
                                 R.drawable.button_bg2,
-                                mainActivity.resources.newTheme()
-                            )
+                                mainActivity.resources.newTheme())
 
                     }
                 }
@@ -905,8 +900,46 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                 hideProgressDialog()
                                 if (resource.data?.status == true) {
 
-                                    fragmentHomeBinding.llDetails.tvUsername.text =
-                                        resource.data.data?.name?: "" + " " + resource.data.data?.last_name?: ""
+                                    fragmentHomeBinding.llDetails.tvUsername.text = resource.data.data?.name?.capitalize()?:""
+                                    fragmentHomeBinding.llDetails.tvUsernameLast.text = resource.data.data?.last_name?.toLowerCase()?: ""
+                                    fragmentHomeBinding.llDetails.tvEmpcode.text = resource.data.data?.usercode?: ""
+                                    fragmentHomeBinding.llDetails.tvEmail.text = resource.data.data?.email?:""
+
+                                    if (resource.data.data?.reporting_manager?.user?.name == null &&
+                                        resource.data.data?.reporting_manager?.user?.last_name != null){
+
+                                        fragmentHomeBinding.llDetails.tvReporterhead.text = ""+resource.data.data?.reporting_manager?.user?.last_name
+                                        sessionManager?.setmanager(""+resource.data.data.reporting_manager.user.last_name)
+
+                                    }else if (resource.data.data?.reporting_manager?.user?.name != null &&
+                                        resource.data.data.reporting_manager.user.last_name == null){
+
+                                        fragmentHomeBinding.llDetails.tvReporterhead.text = resource.data.data.reporting_manager.user.name + ""
+                                        sessionManager?.setmanager(resource.data.data.reporting_manager.user.name + "")
+
+                                    }else if (resource.data.data?.reporting_manager?.user?.name == null &&
+                                        resource.data.data?.reporting_manager?.user?.last_name == null){
+
+                                        fragmentHomeBinding.llDetails.tvReporterhead.text = ""
+                                        sessionManager?.setmanager("")
+
+                                    }else{
+
+                                        fragmentHomeBinding.llDetails.tvReporterhead.text = resource.data.data.reporting_manager.user.name+" "+resource.data.data.reporting_manager.user.last_name
+                                        sessionManager?.setmanager(resource.data.data.reporting_manager.user.name+" "+resource.data.data.reporting_manager.user.last_name)
+
+                                    }
+
+                                    if (resource.data.data?.locations.isNullOrEmpty()) {
+                                        fragmentHomeBinding.llDetails.tvLocation.text = ""
+                                        sessionManager?.setempaddress("")
+                                    } else {
+                                        fragmentHomeBinding.llDetails.tvLocation.text =
+                                            resource.data.data?.locations
+                                        sessionManager?.setempaddress(resource.data.data?.locations)
+
+                                    }
+
                                     sessionManager?.setempname(resource.data.data?.name)
                                     sessionManager?.setsnapShot(resource.data.data?.snapshot)
                                     sessionManager?.setpunchinLocation(resource.data.data?.punch_in_loc)
@@ -914,19 +947,17 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                     sessionManager?.setdefultShift(resource.data.data?.default_shift?.shift_title)
                                     sessionManager?.setisHoliday(resource.data.data?.is_holiday)
                                     sessionManager?.setisonLeave(resource.data.data?.is_on_leave)
+                                    sessionManager?.setfencingLat(resource.data.data?.lat)
+                                    sessionManager?.setfencingLong(resource.data.data?.long)
+                                    sessionManager?.setDesignation(resource.data.data?.emp_designation_title)
                                     spShifttime()
                                     sessionManager?.setprofimage(resource.data.data?.profile_image)
                                     Glide.with(mainActivity)
                                         .load(resource.data.data?.profile_image)
                                         .error(R.drawable.user)
                                         .into(fragmentHomeBinding.llDetails.PrfImg)
-                                    if (resource.data.data?.email==null){
-                                        fragmentHomeBinding.llDetails.tvEmail.text = ""
-                                    }else{
-                                        fragmentHomeBinding.llDetails.tvEmail.text = resource.data.data?.email
-                                    }
+
                                     sessionManager?.setempemail(resource.data.data?.email)
-                                    fragmentHomeBinding.llDetails.tvEmpcode.text = resource.data.data?.usercode?: ""
                                     sessionManager?.setempcode(resource.data.data?.usercode)
                                     sessionManager?.setUsertypename(resource.data.data?.user_type?.user_type_name)
                                     sessionManager?.setpunchinId(resource.data.data?.punch_in_id.toString())
@@ -949,8 +980,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                                 sessionManager?.getfencingLat()!!.toDouble(),
                                                 sessionManager?.getfencingLong()!!.toDouble(),
                                                 latitude?.toDouble()!!,
-                                                longitude?.toDouble()!!
-                                            ) < 100) {
+                                                longitude?.toDouble()!!) < 100) {
 
                                             fragmentHomeBinding.btMarkattendance.isClickable = true
                                             fragmentHomeBinding.btMarkattendance.isEnabled = true
@@ -1010,30 +1040,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                     }
 
 
-                                    if (resource.data.data?.reporting_manager?.user?.name == null &&
-                                        resource.data.data?.reporting_manager?.user?.last_name != null){
 
-                                        fragmentHomeBinding.llDetails.tvReporterhead.text = ""+resource.data.data?.reporting_manager?.user?.last_name
-                                        sessionManager?.setmanager(""+resource.data.data.reporting_manager.user.last_name)
-
-                                    }else if (resource.data.data?.reporting_manager?.user?.name != null &&
-                                        resource.data.data.reporting_manager.user.last_name == null){
-
-                                        fragmentHomeBinding.llDetails.tvReporterhead.text = resource.data.data.reporting_manager.user.name + ""
-                                        sessionManager?.setmanager(resource.data.data.reporting_manager.user.name + "")
-
-                                    }else if (resource.data.data?.reporting_manager?.user?.name == null &&
-                                        resource.data.data?.reporting_manager?.user?.last_name == null){
-
-                                        fragmentHomeBinding.llDetails.tvReporterhead.text = ""
-                                        sessionManager?.setmanager("")
-
-                                    }else{
-
-                                        fragmentHomeBinding.llDetails.tvReporterhead.text = resource.data.data.reporting_manager.user.name+" "+resource.data.data.reporting_manager.user.last_name
-                                        sessionManager?.setmanager(resource.data.data.reporting_manager.user.name+" "+resource.data.data.reporting_manager.user.last_name)
-
-                                    }
 
 
 //                                    if (resource.data.data?.reporting_manager?.user?.name == null &&
@@ -1053,15 +1060,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                                     phonenumber = resource.data.data?.phone.toString()?: ""
                                     sessionManager?.setphnumber(resource.data.data?.phone.toString())
-                                    if (resource.data.data?.locations.isNullOrEmpty()) {
-                                        fragmentHomeBinding.llDetails.tvLocation.text = ""
-                                        sessionManager?.setempaddress("")
-                                    } else {
-                                        fragmentHomeBinding.llDetails.tvLocation.text =
-                                            resource.data.data?.locations
-                                        sessionManager?.setempaddress(resource.data.data?.locations)
 
-                                    }
 
                                     if (!resource.data.data?.profile_image.isNullOrEmpty()) {
                                         fragmentHomeBinding.llDetails.tvNameinit.visibility =

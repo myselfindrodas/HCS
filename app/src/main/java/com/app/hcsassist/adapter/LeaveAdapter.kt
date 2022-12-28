@@ -33,9 +33,56 @@ class LeaveAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvUsername.text = requestedleaveModelArrayList[position].name
-        holder.tvFromdate.text = requestedleaveModelArrayList[position].leave_date_from
-        holder.tvTodate.text = requestedleaveModelArrayList[position].leave_date_to
+
+        if (requestedleaveModelArrayList[position].approved_status.equals("1")){
+            holder.CbCheck.visibility = View.VISIBLE
+            holder.btnAccepetleave.visibility = View.VISIBLE
+            holder.btnRejectleave.visibility = View.VISIBLE
+            holder.btnVert.visibility = View.GONE
+            holder.tvStatus.visibility = View.GONE
+            holder.rlMain.isClickable = false
+            holder.rlMain.isEnabled = false
+
+        }else if (requestedleaveModelArrayList[position].approved_status.equals("2")){
+            holder.CbCheck.visibility = View.GONE
+            holder.btnAccepetleave.visibility = View.GONE
+            holder.btnRejectleave.visibility = View.GONE
+            holder.btnVert.visibility = View.GONE
+            holder.tvStatus.visibility = View.VISIBLE
+            holder.tvStatus.text = "Approved"
+            holder.tvStatus.setTextColor(ctx.getResources().getColor(R.color.teal_200))
+            holder.rlMain.isClickable = false
+            holder.rlMain.isEnabled = false
+
+        }else if (requestedleaveModelArrayList[position].approved_status.equals("0")){
+
+            holder.CbCheck.visibility = View.GONE
+            holder.btnAccepetleave.visibility = View.GONE
+            holder.btnRejectleave.visibility = View.GONE
+            holder.btnVert.visibility = View.VISIBLE
+            holder.tvStatus.visibility = View.VISIBLE
+            holder.tvStatus.text = "Cancel"
+            holder.tvStatus.setTextColor(ctx.getResources().getColor(R.color.red))
+            holder.rlMain.isClickable = true
+            holder.rlMain.isEnabled = true
+
+        }else if (requestedleaveModelArrayList[position].approved_status.equals("3")){
+
+            holder.CbCheck.visibility = View.GONE
+            holder.btnAccepetleave.visibility = View.GONE
+            holder.btnRejectleave.visibility = View.GONE
+            holder.btnVert.visibility = View.VISIBLE
+            holder.tvStatus.visibility = View.VISIBLE
+            holder.tvStatus.text = "Rejected"
+            holder.tvStatus.setTextColor(ctx.getResources().getColor(R.color.red))
+            holder.rlMain.isClickable = true
+            holder.rlMain.isEnabled = true
+        }
+
+        holder.tvUsername.text = requestedleaveModelArrayList[position].name + " "+
+                requestedleaveModelArrayList[position].lastname
+        holder.tvFromdate.text = requestedleaveModelArrayList[position].leave_date_from?:""
+        holder.tvTodate.text = requestedleaveModelArrayList[position].leave_date_to?:""
         holder.CbCheck.isChecked = requestedleaveModelArrayList[position].isChecked == true
 //        val params =
 //            RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
@@ -172,18 +219,22 @@ class LeaveAdapter(
         var tvUsername: TextView
         var tvFromdate: TextView
         var tvTodate: TextView
+        var tvStatus: TextView
         var btnAccepetleave: ImageView
         var btnRejectleave: ImageView
+        var btnVert: ImageView
 
         init {
             rlMain = itemView.findViewById(R.id.rlMain)
             CbCheck = itemView.findViewById(R.id.CbCheck)
             tvUsername = itemView.findViewById(R.id.tvUsername)
+            tvStatus = itemView.findViewById(R.id.tvStatus)
             PrfImg = itemView.findViewById(R.id.PrfImg)
             tvFromdate = itemView.findViewById(R.id.tvFromdate)
             tvTodate = itemView.findViewById(R.id.tvTodate)
             btnAccepetleave = itemView.findViewById(R.id.btnAccepetleave)
             btnRejectleave = itemView.findViewById(R.id.btnRejectleave)
+            btnVert = itemView.findViewById(R.id.btnVert)
         }
     }
 

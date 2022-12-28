@@ -251,7 +251,10 @@ class MssFragment : Fragment() {
 
         fragmentMssBinding.includeLeave.btnPending.setOnClickListener {
 
-
+            fragmentMssBinding.includeLeave.tvActiontitle.text = "Action"
+            fragmentMssBinding.includeLeave.tvNametitle.text = "Name"
+            fragmentMssBinding.includeLeave.tvDatatitle.text = "Date"
+            fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.VISIBLE
             leavelist(true)
 
 
@@ -260,7 +263,10 @@ class MssFragment : Fragment() {
 
         fragmentMssBinding.includeLeave.btnApproved.setOnClickListener {
 
-
+            fragmentMssBinding.includeLeave.tvActiontitle.text = "Status"
+            fragmentMssBinding.includeLeave.tvNametitle.text = "Name"
+            fragmentMssBinding.includeLeave.tvDatatitle.text = "Date"
+            fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.GONE
             approvedleavelist(true)
 
         }
@@ -269,7 +275,12 @@ class MssFragment : Fragment() {
         fragmentMssBinding.includeLeave.btnCancelreject.setOnClickListener {
 
 
+            fragmentMssBinding.includeLeave.tvActiontitle.text = "Status"
+            fragmentMssBinding.includeLeave.tvNametitle.text = "Name"
+            fragmentMssBinding.includeLeave.tvDatatitle.text = "Date"
+            fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.GONE
             cancelrejectleavelist(true)
+
 
         }
 
@@ -695,7 +706,8 @@ class MssFragment : Fragment() {
                                     if (i?.approved_status.equals("1")) {
                                         val RequestedLeaveModel = RequestedLeaveModel()
                                         RequestedLeaveModel.approved_status = i?.approved_status
-                                        RequestedLeaveModel.name = i?.data?.name + " " + i?.data?.last_name
+                                        RequestedLeaveModel.name = i?.data?.name?:""
+                                        RequestedLeaveModel.lastname = i?.data?.last_name?:""
                                         RequestedLeaveModel.leave_date_from = i?.leave_date_from
                                         RequestedLeaveModel.leave_date_to = i?.leave_date_to
                                         RequestedLeaveModel.image = i?.data?.full_profile_image
@@ -788,7 +800,8 @@ class MssFragment : Fragment() {
                                     if (i?.approved_status.equals("2")) {
                                         val RequestedLeaveModel = RequestedLeaveModel()
                                         RequestedLeaveModel.approved_status = i?.approved_status
-                                        RequestedLeaveModel.name = i?.data?.name + " " + i?.data?.last_name
+                                        RequestedLeaveModel.name = i?.data?.name?:""
+                                        RequestedLeaveModel.lastname = i?.data?.last_name?:""
                                         RequestedLeaveModel.leave_date_from = i?.leave_date_from
                                         RequestedLeaveModel.leave_date_to = i?.leave_date_to
                                         RequestedLeaveModel.image = i?.data?.full_profile_image
@@ -807,14 +820,14 @@ class MssFragment : Fragment() {
 
 //                                leaveAdapter.updateData(leavelist)
 
-                                if (leavelist.size > 0) {
-                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-                                        View.VISIBLE
-                                } else {
-                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-                                        View.GONE
-
-                                }
+//                                if (leavelist.size > 0) {
+//                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+//                                        View.VISIBLE
+//                                } else {
+//                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+//                                        View.GONE
+//
+//                                }
 
                             }
                             Status.ERROR -> {
@@ -882,7 +895,8 @@ class MssFragment : Fragment() {
                                         i?.approved_status.equals("0")) {
                                         val RequestedLeaveModel = RequestedLeaveModel()
                                         RequestedLeaveModel.approved_status = i?.approved_status
-                                        RequestedLeaveModel.name = i?.data?.name + " " + i?.data?.last_name
+                                        RequestedLeaveModel.name = i?.data?.name?:""
+                                        RequestedLeaveModel.lastname = i?.data?.last_name?:""
                                         RequestedLeaveModel.leave_date_from = i?.leave_date_from
                                         RequestedLeaveModel.leave_date_to = i?.leave_date_to
                                         RequestedLeaveModel.image = i?.data?.full_profile_image
@@ -901,14 +915,14 @@ class MssFragment : Fragment() {
 
 //                                leaveAdapter.updateData(leavelist)
 
-                                if (leavelist.size > 0) {
-                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-                                        View.VISIBLE
-                                } else {
-                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-                                        View.GONE
-
-                                }
+//                                if (leavelist.size > 0) {
+//                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+//                                        View.VISIBLE
+//                                } else {
+//                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
+//                                        View.GONE
+//
+//                                }
 
                             }
                             Status.ERROR -> {

@@ -73,6 +73,7 @@ class ProfiledetailsFragment : Fragment() {
         fragmentProfiledetailsBinding.etName.setText(sessionManager?.getempname()?: "")
         fragmentProfiledetailsBinding.etEmail.setText(sessionManager?.getempemail()?: "")
         fragmentProfiledetailsBinding.etDesignation.setText(sessionManager?.getUsertypename()?: "")
+        fragmentProfiledetailsBinding.etNewDesignation.setText(sessionManager?.getDesignation()?: "")
         fragmentProfiledetailsBinding.etEmpcode.setText(sessionManager?.getempcode()?: "")
         fragmentProfiledetailsBinding.etLocation.setText(sessionManager?.getempaddress()?: "")
         fragmentProfiledetailsBinding.etPhone.setText(sessionManager?.getphnumber()?: "")

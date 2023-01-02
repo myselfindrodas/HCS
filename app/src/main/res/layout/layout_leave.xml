@@ -3,168 +3,169 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
+        android:background="@color/bgbackground"
         android:id="@+id/ll_leave">
 
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/bgbackground">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <RelativeLayout
+                android:id="@+id/rlTop"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent">
+                android:layout_height="wrap_content">
 
-                <RelativeLayout
+                <LinearLayout
+                    android:id="@+id/lltopsubtitle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/rlTop">
-
-                    <LinearLayout
-                        android:id="@+id/lltopsubtitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:background="#EBEBEB">
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@drawable/blue_gradient"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnPending"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/_34sdp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_bg4"
                             android:fontFamily="@font/intermedium"
                             android:text="Pending"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/black"
                             android:textAlignment="center" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnApproved"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/_34sdp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_bg4"
                             android:fontFamily="@font/intermedium"
+                            android:layout_marginLeft="@dimen/_7sdp"
                             android:text="Approved"
+                            android:textSize="@dimen/_10sdp"
+                            android:textAllCaps="false"
                             android:textAlignment="center" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnCancelreject"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/_34sdp"
                             android:layout_weight="1"
+                            android:background="@drawable/button_bg4"
                             android:fontFamily="@font/intermedium"
                             android:text="Cancel / Reject"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_5sdp"
                             android:textAlignment="center" />
 
                     </LinearLayout>
 
-                    <LinearLayout
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_below="@+id/lltopsubtitle"
+                    android:background="#EBEBEB"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbCheckAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:orientation="horizontal">
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/intermedium"
+                        android:text="All"
+                        android:textSize="@dimen/_10sdp" />
 
-                        <View
-                            android:id="@+id/viewpending"
-                            android:layout_width="wrap_content"
-                            android:layout_height="4dp"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:layout_weight="1"
-                            android:background="#1086CC" />
-
-
-                        <View
-                            android:id="@+id/viewapproved"
-                            android:layout_width="wrap_content"
-                            android:layout_height="4dp"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:layout_weight="1"
-                            android:background="#1086CC"
-                            android:visibility="invisible" />
-
-                        <View
-                            android:id="@+id/viewcancel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="4dp"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:layout_weight="1"
-                            android:background="#1086CC"
-                            android:visibility="invisible" />
-
-                    </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ll_subtitle"
-                        android:layout_below="@+id/lltopsubtitle"
+                    <TextView
+                        android:id="@+id/tvNametitle"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:background="#EBEBEB">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_weight="0.8"
+                        android:fontFamily="@font/intermedium"
+                        android:text="Name"
+                        android:textSize="@dimen/_11sdp" />
 
-                        <CheckBox
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="All"
-                            android:id="@+id/cbCheckAll"
-                            android:layout_weight="1"
-                            android:layout_marginLeft="@dimen/_3sdp"
-                            android:fontFamily="@font/intermedium"
-                            android:textSize="@dimen/_10sdp"/>
+                    <TextView
+                        android:id="@+id/tvDatatitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/intermedium"
+                        android:text="Date"
+                        android:textSize="@dimen/_11sdp" />
 
-                        <TextView
-                            android:id="@+id/tvNametitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="Name"
-                            android:layout_weight="0.8"
-                            android:textSize="@dimen/_11sdp"
-                            android:fontFamily="@font/intermedium"/>
-
-                        <TextView
-                            android:id="@+id/tvDatatitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Date"
-                            android:layout_weight="1"
-                            android:textSize="@dimen/_11sdp"
-                            android:fontFamily="@font/intermedium"/>
-
-                        <TextView
-                            android:id="@+id/tvActiontitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Action"
-                            android:layout_weight="1"
-                            android:textAlignment="center"
-                            android:textSize="@dimen/_11sdp"
-                            android:fontFamily="@font/intermedium"/>
+                    <TextView
+                        android:id="@+id/tvActiontitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/intermedium"
+                        android:text="Action"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_11sdp" />
 
 
-                    </LinearLayout>
+                </LinearLayout>
 
-                </RelativeLayout>
+            </RelativeLayout>
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvleave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/rlTop" />
+                    android:layout_below="@+id/rlTop" />
+
+
+                <ImageView
+                    android:id="@+id/ImgNoevent"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/report"
+                    android:visibility="gone" />
+
+
+
+                    <TextView
+                        android:id="@+id/tvStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/interbold"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="Cancel Leave list is empty"
+                        android:textAlignment="center"
+                        android:visibility="gone"
+                        android:layout_below="@+id/ImgNoevent"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/_12sdp" />
+
+
+
                 <!-- <RelativeLayout
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
@@ -173,10 +174,11 @@
                      app:layout_constraintTop_toBottomOf="@+id/rlTop">
      -->
                 <!--            </RelativeLayout>-->
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
 
 
-        </ScrollView>
+
+
         <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -217,5 +219,5 @@
                 android:textSize="@dimen/_14sdp"
                 android:visibility="visible" />
         </LinearLayout>-->
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

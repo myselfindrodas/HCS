@@ -138,7 +138,8 @@
                     android:text="View Profile"
                     android:textAllCaps="false"
                     android:textColor="#019BFF"
-                    android:textSize="@dimen/_8sdp" />
+                    android:textSize="@dimen/_8sdp"
+                    tools:ignore="TouchTargetSizeCheck" />
 
 
             </LinearLayout>
@@ -167,7 +168,7 @@
                     android:gravity="start"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_11sdp" />
 
             </RelativeLayout>
 
@@ -195,11 +196,11 @@
                     android:gravity="start"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_11sdp" />
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -208,26 +209,28 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/interregular"
                     android:text="Reporting Officer:"
+                    android:layout_weight="0.6"
                     android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvReporterhead"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_weight="0.4"
                     android:autoLink="phone"
+                    android:textAlignment="textEnd"
                     android:drawableRight="@drawable/ic_call"
+                    android:drawablePadding="@dimen/_5sdp"
                     android:fontFamily="@font/interregular"
-                    android:gravity="start"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_11sdp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -254,7 +257,7 @@
                     android:gravity="start"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_11sdp" />
 
             </RelativeLayout>
 
@@ -282,7 +285,8 @@
                     android:drawableRight="@drawable/ic_dropdown"
                     android:fontFamily="@font/interregular"
                     android:hint="Morning"
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_10sdp"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
 
             </LinearLayout>

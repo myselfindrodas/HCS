@@ -42,6 +42,8 @@ data class DataArray(
     @field:SerializedName("approved_by")
     val approved_by: String? = null,
 
+    @field:SerializedName("status")
+    val status: String? = null,
 
     @field:SerializedName("comment")
     val comment: String? = null,

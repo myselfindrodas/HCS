@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:text="Departmant meeting"
                 android:id="@+id/tvEventName"
+                android:drawableRight="@drawable/ic_more"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textColor="@color/textcolor"
                 android:fontFamily="@font/intermedium"

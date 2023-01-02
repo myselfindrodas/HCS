@@ -8,14 +8,14 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_height="@dimen/_260sdp"
         android:layout_margin="@dimen/_15sdp"
         app:cardCornerRadius="@dimen/_5sdp">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
+            android:layout_height="@dimen/_260sdp"
             android:orientation="vertical">
 
 
@@ -33,9 +33,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/intermedium"
-                    android:text="Event Details"
+                    android:text="Events"
+                    android:textAlignment="center"
                     android:textColor="#007AC3"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_14sdp" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="#A8A8A8" />
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -49,25 +56,82 @@
                         android:orientation="vertical">
 
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/intermedium"
+                            android:text="Events"
+                            android:textColor="@color/lightgrey"
+                            android:textSize="@dimen/_12sdp" />
+
+
                     <TextView
                         android:id="@+id/tveventName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/interregular"
+                        android:fontFamily="@font/interbold"
                         android:text="Event Name"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_14sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
 
                         <TextView
-                            android:id="@+id/tvEventTime"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:fontFamily="@font/interregular"
+                            android:fontFamily="@font/intermedium"
+                            android:text="Start Date:"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textColor="@color/lightgrey"
+                            android:textSize="@dimen/_12sdp" />
+
+
+                        <TextView
+                            android:id="@+id/tvstartEventTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/interbold"
                             android:text="Event Time"
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_14sdp" />
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/intermedium"
+                            android:text="End Date:"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textColor="@color/lightgrey"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+                            android:id="@+id/tvendEventTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/interbold"
+                            android:text="Event Time"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/intermedium"
+                            android:text="Location:"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textColor="@color/lightgrey"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/interbold"
+                            android:text="All Location"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+
+
 
                     </LinearLayout>
 

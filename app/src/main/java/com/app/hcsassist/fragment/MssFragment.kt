@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.hcsassist.MainActivity
 import com.app.hcsassist.R
@@ -64,6 +63,7 @@ class MssFragment : Fragment() {
     lateinit var requestedLeavelistViewModel: RequestedLeavelistViewModel
     lateinit var mssAttendancelistViewModel: MssAttendanceListViewModel
     var myCalendarfromdate = Calendar.getInstance()
+
     // initialise loading state
     var mIsLoading = false
     var mIsLastPage = false
@@ -121,29 +121,27 @@ class MssFragment : Fragment() {
         //attendance adapter layout set
         val mLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(mainActivity, 1)
         fragmentMssBinding.includeAttendance.rvAttendance.layoutManager = mLayoutManager
-        fragmentMssBinding.includeAttendance.rvAttendance.addOnScrollListener(recyclerattendanceOnScroll)
+        fragmentMssBinding.includeAttendance.rvAttendance.addOnScrollListener(
+            recyclerattendanceOnScroll
+        )
         fragmentMssBinding.includeAttendance.rvAttendance.itemAnimator = DefaultItemAnimator()
         fragmentMssBinding.includeAttendance.rvAttendance.adapter = attendanceAdapter
 
         // ShiftChange adapter layout set
         val mLayoutManagerShiftchange: RecyclerView.LayoutManager = GridLayoutManager(mainActivity, 1)
         fragmentMssBinding.includeShiftchange.rvShiftchangelist.layoutManager = mLayoutManagerShiftchange
-        fragmentMssBinding.includeShiftchange.rvShiftchangelist.addOnScrollListener(recyclerOnScroll)
         fragmentMssBinding.includeShiftchange.rvShiftchangelist.itemAnimator = DefaultItemAnimator()
         fragmentMssBinding.includeShiftchange.rvShiftchangelist.adapter = shiftChangeListAdapter
 
         //leave adapter layout set
         val mLayoutManagerLeave: RecyclerView.LayoutManager = GridLayoutManager(mainActivity, 1)
         fragmentMssBinding.includeLeave.rvleave.layoutManager = mLayoutManagerLeave
-        fragmentMssBinding.includeLeave.rvleave.addOnScrollListener(recyclerleaveOnScroll)
         fragmentMssBinding.includeLeave.rvleave.itemAnimator = DefaultItemAnimator()
         fragmentMssBinding.includeLeave.rvleave.adapter = leaveAdapter
 
 
-
-
         val c: Calendar = Calendar.getInstance()
-        c.set(Calendar.DAY_OF_MONTH, 1);
+        c.set(Calendar.DAY_OF_MONTH, 1)
         c.add(Calendar.MONTH, 0)
         mssAttendanceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time), true)
 
@@ -165,7 +163,10 @@ class MssFragment : Fragment() {
             val c: Calendar = Calendar.getInstance()
             c.set(Calendar.DAY_OF_MONTH, 1);
             c.add(Calendar.MONTH, 0)
-            mssAttendanceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time), true)
+            mssAttendanceList(
+                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time),
+                true
+            )
 
         }
 
@@ -234,9 +235,24 @@ class MssFragment : Fragment() {
             mIsLoading = false
             mIsLastPage = false
             mCurrentPage = 0
-            fragmentMssBinding.tvAttendance.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
-            fragmentMssBinding.tvLeave.setTextColor(resources.getColor(R.color.selectedtextcolor, resources.newTheme()))
-            fragmentMssBinding.tvShiftchange.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+            fragmentMssBinding.tvAttendance.setTextColor(
+                resources.getColor(
+                    R.color.diselectedtextcolor,
+                    resources.newTheme()
+                )
+            )
+            fragmentMssBinding.tvLeave.setTextColor(
+                resources.getColor(
+                    R.color.selectedtextcolor,
+                    resources.newTheme()
+                )
+            )
+            fragmentMssBinding.tvShiftchange.setTextColor(
+                resources.getColor(
+                    R.color.diselectedtextcolor,
+                    resources.newTheme()
+                )
+            )
             fragmentMssBinding.viewattendance.visibility = View.INVISIBLE
             fragmentMssBinding.viewleave.visibility = View.VISIBLE
             fragmentMssBinding.viewshiftchange.visibility = View.INVISIBLE
@@ -244,7 +260,7 @@ class MssFragment : Fragment() {
             fragmentMssBinding.includeLeave.llLeave.visibility = View.VISIBLE
             //fragmentMssBinding.includeLeave.llAccept.visibility = View.GONE
             fragmentMssBinding.includeShiftchange.llShiftchange.visibility = View.GONE
-            leavelist(true)
+            leavelist()
 
         }
 
@@ -255,7 +271,7 @@ class MssFragment : Fragment() {
             fragmentMssBinding.includeLeave.tvNametitle.text = "Name"
             fragmentMssBinding.includeLeave.tvDatatitle.text = "Date"
             fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.VISIBLE
-            leavelist(true)
+            leavelist()
 
 
         }
@@ -267,7 +283,7 @@ class MssFragment : Fragment() {
             fragmentMssBinding.includeLeave.tvNametitle.text = "Name"
             fragmentMssBinding.includeLeave.tvDatatitle.text = "Date"
             fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.GONE
-            approvedleavelist(true)
+            approvedleavelist()
 
         }
 
@@ -279,8 +295,41 @@ class MssFragment : Fragment() {
             fragmentMssBinding.includeLeave.tvNametitle.text = "Name"
             fragmentMssBinding.includeLeave.tvDatatitle.text = "Date"
             fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.GONE
-            cancelrejectleavelist(true)
+            cancelrejectleavelist()
 
+
+        }
+
+
+        fragmentMssBinding.includeShiftchange.btnshiftchangePending.setOnClickListener {
+
+            fragmentMssBinding.includeShiftchange.tvActiontitle.text = "Action"
+            fragmentMssBinding.includeShiftchange.tvNametitle.text = "Name"
+            fragmentMssBinding.includeShiftchange.tvShifttitle.text = "Shift"
+            fragmentMssBinding.includeShiftchange.cbCheckAll.visibility = View.VISIBLE
+            shiftchangelist()
+
+        }
+
+
+        fragmentMssBinding.includeShiftchange.btnshiftchangeApproved.setOnClickListener {
+
+            fragmentMssBinding.includeShiftchange.tvActiontitle.text = "Status"
+            fragmentMssBinding.includeShiftchange.tvNametitle.text = "Name"
+            fragmentMssBinding.includeShiftchange.tvShifttitle.text = "Shift"
+            fragmentMssBinding.includeShiftchange.cbCheckAll.visibility = View.GONE
+            shiftchangeapprovedlist()
+
+        }
+
+
+        fragmentMssBinding.includeShiftchange.btnshiftchangeCancelreject.setOnClickListener {
+
+            fragmentMssBinding.includeShiftchange.tvActiontitle.text = "Status"
+            fragmentMssBinding.includeShiftchange.tvNametitle.text = "Name"
+            fragmentMssBinding.includeShiftchange.tvShifttitle.text = "Shift"
+            fragmentMssBinding.includeShiftchange.cbCheckAll.visibility = View.GONE
+            shiftchangerejectlist()
 
         }
 
@@ -449,7 +498,7 @@ class MssFragment : Fragment() {
             fragmentMssBinding.includeLeave.llLeave.visibility = View.GONE
             //fragmentMssBinding.llAccept.visibility = View.GONE
             fragmentMssBinding.includeShiftchange.llShiftchange.visibility = View.VISIBLE
-            shiftchangelist(true)
+            shiftchangelist()
 
 
         }
@@ -459,6 +508,10 @@ class MssFragment : Fragment() {
 
 
     private fun fromdateupdateLabel() {
+
+        mIsLoading = false
+        mIsLastPage = false
+        mCurrentPage = 0
         val dateFormat3 = SimpleDateFormat("dd MMM yyyy E")
         val selecteddate2 = dateFormat3.format(myCalendarfromdate.time)
         fragmentMssBinding.includeAttendance.calenderTXT.text = selecteddate2
@@ -479,17 +532,22 @@ class MssFragment : Fragment() {
 
     }
 
-    private fun shiftchangelist(isFirstPage: Boolean) {
+    private fun shiftchangelist() {
 
-        mIsLoading = true
-        mCurrentPage += 1
+        fragmentMssBinding.includeShiftchange.btnshiftchangePending.setTextColor(resources.getColor(R.color.white, resources.newTheme()))
+        fragmentMssBinding.includeShiftchange.btnshiftchangeApproved.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeShiftchange.btnshiftchangeCancelreject.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeShiftchange.btnshiftchangePending.setBackgroundResource(R.drawable.button_bg5)
+        fragmentMssBinding.includeShiftchange.btnshiftchangeApproved.setBackgroundResource(R.drawable.button_bg4)
+        fragmentMssBinding.includeShiftchange.btnshiftchangeCancelreject.setBackgroundResource(R.drawable.button_bg4)
+
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
 
             showMultiSelect(false)
             fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
 
-            shiftChangeListViewModel.shiftchangelist(authtoken = "Bearer " + sessionManager?.getToken(), page = mCurrentPage.toString())
+            shiftChangeListViewModel.shiftchangelist(authtoken = "Bearer " + sessionManager?.getToken())
                 .observe(mainActivity) {
                     it?.let { resource ->
                         when (resource.status) {
@@ -497,24 +555,28 @@ class MssFragment : Fragment() {
                                 hideProgressDialog()
                                 shiftChangeList = ArrayList<ShiftChangeListModel>()
                                 for (i in it.data?.result!!) {
-                                    val shiftChangeListModel = ShiftChangeListModel()
-                                    shiftChangeListModel.name = i?.user?.name + " " + i?.user?.last_name
-                                    shiftChangeListModel.shift_title = i?.shift?.shift_title
-                                    shiftChangeListModel.full_profile_image = i?.user?.full_profile_image
-                                    shiftChangeListModel.current_shift = i?.currentShift?.shift_title
-                                    shiftChangeListModel.comment = i?.comment
-                                    shiftChangeListModel.id = i?.id
-                                    shiftChangeList.add(shiftChangeListModel)
+                                    if (i?.status.equals("1")) {
+                                        val shiftChangeListModel = ShiftChangeListModel()
+                                        shiftChangeListModel.name = i?.user?.name ?: ""
+                                        shiftChangeListModel.last_name = i?.user?.last_name ?: ""
+                                        shiftChangeListModel.status = i?.status ?: ""
+                                        shiftChangeListModel.shift_title =
+                                            i?.shift?.shift_title ?: ""
+                                        shiftChangeListModel.full_profile_image =
+                                            i?.user?.full_profile_image ?: ""
+                                        shiftChangeListModel.current_shift =
+                                            i?.currentShift?.shift_title ?: ""
+                                        shiftChangeListModel.comment = i?.comment ?: ""
+                                        shiftChangeListModel.id = i?.id ?: ""
+                                        shiftChangeList.add(shiftChangeListModel)
+
+                                    }
                                 }
 
 
-                                if (isFirstPage) shiftChangeListAdapter.updateData(shiftChangeList) else
-                                    shiftChangeListAdapter.addData(shiftChangeList)
-                                mIsLoading = false
-                                mIsLastPage = mCurrentPage == resource.data?.pagination?.next_page!!.toInt()
 
 
-//                                shiftChangeListAdapter.updateData(shiftChangeList)
+                                shiftChangeListAdapter.updateData(shiftChangeList)
 //                                fragmentMssBinding.includeShiftchange.rvShiftchangelist.setAdapter(
 //                                    shiftChangeListAdapter
 //                                )
@@ -527,11 +589,112 @@ class MssFragment : Fragment() {
 //                                )
 
                                 if (shiftChangeList.size > 0) {
-                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility =
-                                        View.VISIBLE
+                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeShiftchange.ImgNoevent.visibility = View.GONE
+                                    fragmentMssBinding.includeShiftchange.tvStatus.visibility = View.GONE
                                 } else {
-                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility =
-                                        View.GONE
+                                    fragmentMssBinding.includeShiftchange.cbCheckAll.visibility = View.GONE
+                                    fragmentMssBinding.includeShiftchange.ImgNoevent.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeShiftchange.tvStatus.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeShiftchange.tvStatus.text = "Pending Shift Change list is Empty"
+
+                                }
+
+
+                            }
+                            Status.ERROR -> {
+                                hideProgressDialog()
+                                val builder = AlertDialog.Builder(mainActivity)
+                                builder.setMessage(it.message)
+                                builder.setPositiveButton(
+                                    "Ok"
+                                ) { dialog, which ->
+
+                                    dialog.cancel()
+
+                                }
+                                val alert = builder.create()
+                                alert.show()
+                            }
+
+                            Status.LOADING -> {
+                                showProgressDialog()
+                            }
+
+                        }
+
+                    }
+                }
+
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+
+    }
+
+
+    private fun shiftchangeapprovedlist() {
+
+        fragmentMssBinding.includeShiftchange.btnshiftchangePending.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeShiftchange.btnshiftchangeApproved.setTextColor(resources.getColor(R.color.white, resources.newTheme()))
+        fragmentMssBinding.includeShiftchange.btnshiftchangeCancelreject.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeShiftchange.btnshiftchangePending.setBackgroundResource(R.drawable.button_bg4)
+        fragmentMssBinding.includeShiftchange.btnshiftchangeApproved.setBackgroundResource(R.drawable.button_bg5)
+        fragmentMssBinding.includeShiftchange.btnshiftchangeCancelreject.setBackgroundResource(R.drawable.button_bg4)
+
+        if (CheckConnectivity.getInstance(mainActivity).isOnline) {
+
+            showMultiSelect(false)
+            fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
+
+            shiftChangeListViewModel.shiftchangelist(authtoken = "Bearer " + sessionManager?.getToken())
+                .observe(mainActivity) {
+                    it?.let { resource ->
+                        when (resource.status) {
+                            Status.SUCCESS -> {
+                                hideProgressDialog()
+                                shiftChangeList = ArrayList<ShiftChangeListModel>()
+                                for (i in it.data?.result!!) {
+                                    if (i?.status.equals("2")) {
+
+                                        val shiftChangeListModel = ShiftChangeListModel()
+                                        shiftChangeListModel.name = i?.user?.name ?: ""
+                                        shiftChangeListModel.last_name = i?.user?.last_name ?: ""
+                                        shiftChangeListModel.shift_title = i?.shift?.shift_title
+                                        shiftChangeListModel.status = i?.status ?: ""
+                                        shiftChangeListModel.full_profile_image = i?.user?.full_profile_image
+                                        shiftChangeListModel.current_shift = i?.currentShift?.shift_title
+                                        shiftChangeListModel.comment = i?.comment?:""
+                                        shiftChangeListModel.id = i?.id
+                                        shiftChangeList.add(shiftChangeListModel)
+
+                                    }
+                                }
+
+
+
+
+                                shiftChangeListAdapter.updateData(shiftChangeList)
+//                                fragmentMssBinding.includeShiftchange.rvShiftchangelist.setAdapter(
+//                                    shiftChangeListAdapter
+//                                )
+//                                fragmentMssBinding.includeShiftchange.rvShiftchangelist.setLayoutManager(
+//                                    LinearLayoutManager(
+//                                        mainActivity,
+//                                        LinearLayoutManager.VERTICAL,
+//                                        false
+//                                    )
+//                                )
+//
+                                if (shiftChangeList.size > 0) {
+                                    fragmentMssBinding.includeShiftchange.ImgNoevent.visibility = View.GONE
+                                    fragmentMssBinding.includeShiftchange.tvStatus.visibility = View.GONE
+                                } else {
+                                    fragmentMssBinding.includeShiftchange.ImgNoevent.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeShiftchange.tvStatus.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeShiftchange.tvStatus.text = "Approved Shift Change list is Empty"
 
                                 }
 
@@ -569,37 +732,101 @@ class MssFragment : Fragment() {
     }
 
 
-    val recyclerOnScroll = object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
+    private fun shiftchangerejectlist() {
+
+        fragmentMssBinding.includeShiftchange.btnshiftchangePending.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeShiftchange.btnshiftchangeApproved.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeShiftchange.btnshiftchangeCancelreject.setTextColor(resources.getColor(R.color.white, resources.newTheme()))
+        fragmentMssBinding.includeShiftchange.btnshiftchangePending.setBackgroundResource(R.drawable.button_bg4)
+        fragmentMssBinding.includeShiftchange.btnshiftchangeApproved.setBackgroundResource(R.drawable.button_bg4)
+        fragmentMssBinding.includeShiftchange.btnshiftchangeCancelreject.setBackgroundResource(R.drawable.button_bg5)
+
+        if (CheckConnectivity.getInstance(mainActivity).isOnline) {
+
+            showMultiSelect(false)
+            fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
+
+            shiftChangeListViewModel.shiftchangelist(authtoken = "Bearer " + sessionManager?.getToken())
+                .observe(mainActivity) {
+                    it?.let { resource ->
+                        when (resource.status) {
+                            Status.SUCCESS -> {
+                                hideProgressDialog()
+                                shiftChangeList = ArrayList<ShiftChangeListModel>()
+                                for (i in it.data?.result!!) {
+                                    if (i?.status.equals("3") || i?.status.equals("0")) {
+
+                                        val shiftChangeListModel = ShiftChangeListModel()
+                                        shiftChangeListModel.name = i?.user?.name ?: ""
+                                        shiftChangeListModel.last_name = i?.user?.last_name ?: ""
+                                        shiftChangeListModel.shift_title = i?.shift?.shift_title?:""
+                                        shiftChangeListModel.status = i?.status ?: ""
+                                        shiftChangeListModel.full_profile_image = i?.user?.full_profile_image?:""
+                                        shiftChangeListModel.current_shift = i?.currentShift?.shift_title?:""
+                                        shiftChangeListModel.comment = i?.comment?:""
+                                        shiftChangeListModel.id = i?.id
+                                        shiftChangeList.add(shiftChangeListModel)
+                                    }
+                                }
+
+
+
+
+                                shiftChangeListAdapter.updateData(shiftChangeList)
+//                                fragmentMssBinding.includeShiftchange.rvShiftchangelist.setAdapter(
+//                                    shiftChangeListAdapter
+//                                )
+//                                fragmentMssBinding.includeShiftchange.rvShiftchangelist.setLayoutManager(
+//                                    LinearLayoutManager(
+//                                        mainActivity,
+//                                        LinearLayoutManager.VERTICAL,
+//                                        false
+//                                    )
+//                                )
+//
+                                if (shiftChangeList.size > 0) {
+                                    fragmentMssBinding.includeShiftchange.ImgNoevent.visibility = View.GONE
+                                    fragmentMssBinding.includeShiftchange.tvStatus.visibility = View.GONE
+                                } else {
+                                    fragmentMssBinding.includeShiftchange.ImgNoevent.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeShiftchange.tvStatus.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeShiftchange.tvStatus.text = "Cancel Shift Change list is Empty"
+
+                                }
+
+                            }
+                            Status.ERROR -> {
+                                hideProgressDialog()
+                                val builder = AlertDialog.Builder(mainActivity)
+                                builder.setMessage(it.message)
+                                builder.setPositiveButton(
+                                    "Ok"
+                                ) { dialog, which ->
+
+                                    dialog.cancel()
+
+                                }
+                                val alert = builder.create()
+                                alert.show()
+                            }
+
+                            Status.LOADING -> {
+                                showProgressDialog()
+                            }
+
+                        }
+
+                    }
+                }
+
+        } else {
+            Toast.makeText(mainActivity, "Ooops! Internet Connection Error", Toast.LENGTH_SHORT)
+                .show()
         }
 
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
 
-            // number of visible items
-            val visibleItemCount = recyclerView.layoutManager?.childCount;
-            // number of items in layout
-            val totalItemCount = recyclerView.layoutManager?.itemCount;
-            // the position of first visible item
-            val firstVisibleItemPosition =
-                (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
-
-            val isNotLoadingAndNotLastPage = !mIsLoading && !mIsLastPage;
-            // flag if number of visible items is at the last
-            val isAtLastItem = firstVisibleItemPosition + visibleItemCount!! >= totalItemCount!!;
-            // validate non negative values
-            val isValidFirstItem = firstVisibleItemPosition >= 0;
-            // validate total items are more than possible visible items
-            val totalIsMoreThanVisible = totalItemCount >= pageSize;
-            // flag to know whether to load more
-            val shouldLoadMore =
-                isValidFirstItem && isAtLastItem && totalIsMoreThanVisible && isNotLoadingAndNotLastPage
-
-            if (shouldLoadMore)
-                shiftchangelist(false)
-        }
     }
+
 
     val recyclerattendanceOnScroll = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -628,74 +855,38 @@ class MssFragment : Fragment() {
             val shouldLoadMore =
                 isValidFirstItem && isAtLastItem && totalIsMoreThanVisible && isNotLoadingAndNotLastPage
 
-            if (shouldLoadMore){
+            if (shouldLoadMore) {
                 val c: Calendar = Calendar.getInstance()
                 c.set(Calendar.DAY_OF_MONTH, 1);
                 c.add(Calendar.MONTH, 0)
-                mssAttendanceList(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(c.time), false)
+                mssAttendanceList(
+                    SimpleDateFormat(
+                        "yyyy-MM-dd",
+                        Locale.getDefault()
+                    ).format(c.time), false
+                )
 
             }
         }
     }
 
-    val recyclerleaveOnScroll = object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-        }
 
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
+    private fun leavelist() {
 
-            // number of visible items
-            val visibleItemCount = recyclerView.layoutManager?.childCount;
-            // number of items in layout
-            val totalItemCount = recyclerView.layoutManager?.itemCount;
-            // the position of first visible item
-            val firstVisibleItemPosition =
-                (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
-
-            val isNotLoadingAndNotLastPage = !mIsLoading && !mIsLastPage;
-            // flag if number of visible items is at the last
-            val isAtLastItem = firstVisibleItemPosition + visibleItemCount!! >= totalItemCount!!;
-            // validate non negative values
-            val isValidFirstItem = firstVisibleItemPosition >= 0;
-            // validate total items are more than possible visible items
-            val totalIsMoreThanVisible = totalItemCount >= pageSize;
-            // flag to know whether to load more
-            val shouldLoadMore =
-                isValidFirstItem && isAtLastItem && totalIsMoreThanVisible && isNotLoadingAndNotLastPage
-
-            if (shouldLoadMore)
-                leavelist(false)
-        }
-    }
-
-
-
-
-
-    private fun leavelist(isFirstPage: Boolean) {
-
-        mIsLoading = false
-        mIsLastPage = false
-        mCurrentPage = 0
-        fragmentMssBinding.includeLeave.btnPending.setTextColor(resources.getColor(R.color.selectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.btnPending.setTextColor(resources.getColor(R.color.white, resources.newTheme()))
         fragmentMssBinding.includeLeave.btnApproved.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
         fragmentMssBinding.includeLeave.btnCancelreject.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
-        fragmentMssBinding.includeLeave.viewpending.visibility = View.VISIBLE
-        fragmentMssBinding.includeLeave.viewapproved.visibility = View.INVISIBLE
-        fragmentMssBinding.includeLeave.viewcancel.visibility = View.INVISIBLE
+        fragmentMssBinding.includeLeave.btnPending.setBackgroundResource(R.drawable.button_bg5)
+        fragmentMssBinding.includeLeave.btnApproved.setBackgroundResource(R.drawable.button_bg4)
+        fragmentMssBinding.includeLeave.btnCancelreject.setBackgroundResource(R.drawable.button_bg4)
 
-        mIsLoading = true
-        mCurrentPage += 1
-        leavelist.clear()
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
 
             showMultiSelect(false)
             fragmentMssBinding.includeLeave.cbCheckAll.isChecked = false
 
-            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken(), page = mCurrentPage.toString())
+            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken())
                 .observe(mainActivity) {
                     it?.let { resource ->
                         when (resource.status) {
@@ -706,32 +897,33 @@ class MssFragment : Fragment() {
                                     if (i?.approved_status.equals("1")) {
                                         val RequestedLeaveModel = RequestedLeaveModel()
                                         RequestedLeaveModel.approved_status = i?.approved_status
-                                        RequestedLeaveModel.name = i?.data?.name?:""
-                                        RequestedLeaveModel.lastname = i?.data?.last_name?:""
+                                        RequestedLeaveModel.name = i?.data?.name ?: ""
+                                        RequestedLeaveModel.lastname = i?.data?.last_name ?: ""
                                         RequestedLeaveModel.leave_date_from = i?.leave_date_from
                                         RequestedLeaveModel.leave_date_to = i?.leave_date_to
                                         RequestedLeaveModel.image = i?.data?.full_profile_image
-                                        RequestedLeaveModel.comment = i?.comment
-                                        RequestedLeaveModel.comment_cancel_reject = i?.comment_cancel_reject
+                                        RequestedLeaveModel.comment = i?.comment?:""
+                                        RequestedLeaveModel.comment_cancel_reject =
+                                            i?.comment_cancel_reject
                                         RequestedLeaveModel.attachment = i?.attachment
                                         RequestedLeaveModel.id = i?.id
                                         leavelist.add(RequestedLeaveModel)
+
                                     }
                                 }
 
-                                if (isFirstPage) leaveAdapter.updateData(leavelist) else
-                                    leaveAdapter.addData(leavelist)
-                                mIsLoading = false
-                                mIsLastPage = mCurrentPage == resource.data?.leavepagination?.next_page!!.toInt()
 
-//                                leaveAdapter.updateData(leavelist)
+                                leaveAdapter.updateData(leavelist)
 
                                 if (leavelist.size > 0) {
-                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-                                        View.VISIBLE
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeLeave.ImgNoevent.visibility = View.GONE
+                                    fragmentMssBinding.includeLeave.tvStatus.visibility = View.GONE
                                 } else {
-                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-                                        View.GONE
+                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility = View.GONE
+                                    fragmentMssBinding.includeLeave.ImgNoevent.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeLeave.tvStatus.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeLeave.tvStatus.text = "Pending Leave list is Empty"
 
                                 }
 
@@ -768,20 +960,15 @@ class MssFragment : Fragment() {
 
     }
 
-    private fun approvedleavelist(isFirstPage: Boolean) {
+    private fun approvedleavelist() {
 
-        mIsLoading = false
-        mIsLastPage = false
-        mCurrentPage = 0
         fragmentMssBinding.includeLeave.btnPending.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
-        fragmentMssBinding.includeLeave.btnApproved.setTextColor(resources.getColor(R.color.selectedtextcolor, resources.newTheme()))
+        fragmentMssBinding.includeLeave.btnApproved.setTextColor(resources.getColor(R.color.white, resources.newTheme()))
         fragmentMssBinding.includeLeave.btnCancelreject.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
-        fragmentMssBinding.includeLeave.viewpending.visibility = View.INVISIBLE
-        fragmentMssBinding.includeLeave.viewapproved.visibility = View.VISIBLE
-        fragmentMssBinding.includeLeave.viewcancel.visibility = View.INVISIBLE
+        fragmentMssBinding.includeLeave.btnPending.setBackgroundResource(R.drawable.button_bg4)
+        fragmentMssBinding.includeLeave.btnApproved.setBackgroundResource(R.drawable.button_bg5)
+        fragmentMssBinding.includeLeave.btnCancelreject.setBackgroundResource(R.drawable.button_bg4)
 
-        mIsLoading = true
-        mCurrentPage += 1
         leavelist.clear()
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
@@ -789,7 +976,7 @@ class MssFragment : Fragment() {
             showMultiSelect(false)
             fragmentMssBinding.includeLeave.cbCheckAll.isChecked = false
 
-            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken(), page = mCurrentPage.toString())
+            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken())
                 .observe(mainActivity) {
                     it?.let { resource ->
                         when (resource.status) {
@@ -800,34 +987,32 @@ class MssFragment : Fragment() {
                                     if (i?.approved_status.equals("2")) {
                                         val RequestedLeaveModel = RequestedLeaveModel()
                                         RequestedLeaveModel.approved_status = i?.approved_status
-                                        RequestedLeaveModel.name = i?.data?.name?:""
-                                        RequestedLeaveModel.lastname = i?.data?.last_name?:""
+                                        RequestedLeaveModel.name = i?.data?.name ?: ""
+                                        RequestedLeaveModel.lastname = i?.data?.last_name ?: ""
                                         RequestedLeaveModel.leave_date_from = i?.leave_date_from
                                         RequestedLeaveModel.leave_date_to = i?.leave_date_to
                                         RequestedLeaveModel.image = i?.data?.full_profile_image
-                                        RequestedLeaveModel.comment = i?.comment
-                                        RequestedLeaveModel.comment_cancel_reject = i?.comment_cancel_reject
+                                        RequestedLeaveModel.comment = i?.comment?:""
+                                        RequestedLeaveModel.comment_cancel_reject =
+                                            i?.comment_cancel_reject
                                         RequestedLeaveModel.attachment = i?.attachment
                                         RequestedLeaveModel.id = i?.id
                                         leavelist.add(RequestedLeaveModel)
                                     }
                                 }
 
-                                if (isFirstPage) leaveAdapter.updateData(leavelist) else
-                                    leaveAdapter.addData(leavelist)
-                                mIsLoading = false
-                                mIsLastPage = mCurrentPage == resource.data?.leavepagination?.next_page!!.toInt()
 
-//                                leaveAdapter.updateData(leavelist)
+                                leaveAdapter.updateData(leavelist)
 
-//                                if (leavelist.size > 0) {
-//                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-//                                        View.VISIBLE
-//                                } else {
-//                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-//                                        View.GONE
-//
-//                                }
+                                if (leavelist.size > 0) {
+                                    fragmentMssBinding.includeLeave.ImgNoevent.visibility = View.GONE
+                                    fragmentMssBinding.includeLeave.tvStatus.visibility = View.GONE
+                                } else {
+                                    fragmentMssBinding.includeLeave.ImgNoevent.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeLeave.tvStatus.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeLeave.tvStatus.text = "Approved Leave list is Empty"
+
+                                }
 
                             }
                             Status.ERROR -> {
@@ -862,20 +1047,15 @@ class MssFragment : Fragment() {
 
     }
 
-    private fun cancelrejectleavelist(isFirstPage: Boolean) {
+    private fun cancelrejectleavelist() {
 
-        mIsLoading = false
-        mIsLastPage = false
-        mCurrentPage = 0
         fragmentMssBinding.includeLeave.btnPending.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
         fragmentMssBinding.includeLeave.btnApproved.setTextColor(resources.getColor(R.color.diselectedtextcolor, resources.newTheme()))
-        fragmentMssBinding.includeLeave.btnCancelreject.setTextColor(resources.getColor(R.color.selectedtextcolor, resources.newTheme()))
-        fragmentMssBinding.includeLeave.viewpending.visibility = View.INVISIBLE
-        fragmentMssBinding.includeLeave.viewapproved.visibility = View.INVISIBLE
-        fragmentMssBinding.includeLeave.viewcancel.visibility = View.VISIBLE
+        fragmentMssBinding.includeLeave.btnCancelreject.setTextColor(resources.getColor(R.color.white, resources.newTheme()))
+        fragmentMssBinding.includeLeave.btnPending.setBackgroundResource(R.drawable.button_bg4)
+        fragmentMssBinding.includeLeave.btnApproved.setBackgroundResource(R.drawable.button_bg4)
+        fragmentMssBinding.includeLeave.btnCancelreject.setBackgroundResource(R.drawable.button_bg5)
 
-        mIsLoading = true
-        mCurrentPage += 1
         leavelist.clear()
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
@@ -883,7 +1063,7 @@ class MssFragment : Fragment() {
             showMultiSelect(false)
             fragmentMssBinding.includeLeave.cbCheckAll.isChecked = false
 
-            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken(), page = mCurrentPage.toString())
+            requestedLeavelistViewModel.requestedleavelist(authtoken = "Bearer " + sessionManager?.getToken())
                 .observe(mainActivity) {
                     it?.let { resource ->
                         when (resource.status) {
@@ -891,16 +1071,15 @@ class MssFragment : Fragment() {
                                 hideProgressDialog()
                                 leavelist = ArrayList<RequestedLeaveModel>()
                                 for (i in it.data?.result!!) {
-                                    if (i?.approved_status.equals("3") ||
-                                        i?.approved_status.equals("0")) {
+                                    if (i?.approved_status.equals("3") || i?.approved_status.equals("0")) {
                                         val RequestedLeaveModel = RequestedLeaveModel()
                                         RequestedLeaveModel.approved_status = i?.approved_status
-                                        RequestedLeaveModel.name = i?.data?.name?:""
-                                        RequestedLeaveModel.lastname = i?.data?.last_name?:""
+                                        RequestedLeaveModel.name = i?.data?.name ?: ""
+                                        RequestedLeaveModel.lastname = i?.data?.last_name ?: ""
                                         RequestedLeaveModel.leave_date_from = i?.leave_date_from
                                         RequestedLeaveModel.leave_date_to = i?.leave_date_to
                                         RequestedLeaveModel.image = i?.data?.full_profile_image
-                                        RequestedLeaveModel.comment = i?.comment
+                                        RequestedLeaveModel.comment = i?.comment?:""
                                         RequestedLeaveModel.comment_cancel_reject = i?.comment_cancel_reject
                                         RequestedLeaveModel.attachment = i?.attachment
                                         RequestedLeaveModel.id = i?.id
@@ -908,21 +1087,18 @@ class MssFragment : Fragment() {
                                     }
                                 }
 
-                                if (isFirstPage) leaveAdapter.updateData(leavelist) else
-                                    leaveAdapter.addData(leavelist)
-                                mIsLoading = false
-                                mIsLastPage = mCurrentPage == resource.data?.leavepagination?.next_page!!.toInt()
 
-//                                leaveAdapter.updateData(leavelist)
+                                leaveAdapter.updateData(leavelist)
 
-//                                if (leavelist.size > 0) {
-//                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-//                                        View.VISIBLE
-//                                } else {
-//                                    fragmentMssBinding.includeLeave.cbCheckAll.visibility =
-//                                        View.GONE
-//
-//                                }
+                                if (leavelist.size > 0) {
+                                    fragmentMssBinding.includeLeave.ImgNoevent.visibility = View.GONE
+                                    fragmentMssBinding.includeLeave.tvStatus.visibility = View.GONE
+                                } else {
+                                    fragmentMssBinding.includeLeave.ImgNoevent.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeLeave.tvStatus.visibility = View.VISIBLE
+                                    fragmentMssBinding.includeLeave.tvStatus.text = "Cancel Leave list is Empty"
+
+                                }
 
                             }
                             Status.ERROR -> {
@@ -956,9 +1132,6 @@ class MssFragment : Fragment() {
 
 
     }
-
-
-
 
 
     private fun mssAttendanceList(date: String, isFirstPage: Boolean) {
@@ -968,8 +1141,10 @@ class MssFragment : Fragment() {
 
         if (CheckConnectivity.getInstance(mainActivity).isOnline) {
 
-            mssAttendancelistViewModel.getMSSAttendanceList(authtoken = "Bearer " + sessionManager?.getToken(),
-                MssAttendanceRequest(attendenceDate = date, page = mCurrentPage.toString()))
+            mssAttendancelistViewModel.getMSSAttendanceList(
+                authtoken = "Bearer " + sessionManager?.getToken(),
+                MssAttendanceRequest(attendenceDate = date, page = mCurrentPage.toString())
+            )
                 .observe(mainActivity) {
                     it?.let { resource ->
                         when (resource.status) {
@@ -995,7 +1170,8 @@ class MssFragment : Fragment() {
                                 if (isFirstPage) attendanceAdapter.updateData(it.data?.data) else
                                     attendanceAdapter.addData(it.data?.data)
                                 mIsLoading = false
-                                mIsLastPage = mCurrentPage == resource.data?.attendancepagination?.next_page!!.toInt()
+                                mIsLastPage =
+                                    mCurrentPage == resource.data?.attendancepagination?.next_page!!.toInt()
 
 //                                attendanceAdapter.updateData(it.data?.data)
 
@@ -1049,7 +1225,7 @@ class MssFragment : Fragment() {
                             if (fragmentMssBinding.llAccept.isVisible)
                                 fragmentMssBinding.llAccept.visibility = View.GONE
                             fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
-                            shiftchangelist(true)
+                            shiftchangelist()
                             Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT)
                                 .show()
 
@@ -1101,7 +1277,7 @@ class MssFragment : Fragment() {
                             fragmentMssBinding.llAccept.visibility = View.GONE
 
                         fragmentMssBinding.includeShiftchange.cbCheckAll.isChecked = false
-                        shiftchangelist(true)
+                        shiftchangelist()
                         Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT).show()
 
                     }
@@ -1145,7 +1321,7 @@ class MssFragment : Fragment() {
                     when (resource.status) {
                         Status.SUCCESS -> {
                             hideProgressDialog()
-                            leavelist(true)
+                            leavelist()
                             if (fragmentMssBinding.llAccept.isVisible)
                                 fragmentMssBinding.llAccept.visibility = View.GONE
 
@@ -1203,7 +1379,7 @@ class MssFragment : Fragment() {
                     when (resource.status) {
                         Status.SUCCESS -> {
                             hideProgressDialog()
-                            leavelist(true)
+                            leavelist()
                             Toast.makeText(mainActivity, resource.message, Toast.LENGTH_SHORT)
                                 .show()
 
@@ -1292,7 +1468,7 @@ class MssFragment : Fragment() {
 
     }
 
-    fun shiftChangereasonpopup(shiftChangeListModel: ShiftChangeListModel){
+    fun shiftChangereasonpopup(shiftChangeListModel: ShiftChangeListModel) {
 
 
         val btnPopupclose: TextView

@@ -3,68 +3,127 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <RelativeLayout
         android:id="@+id/ll_shiftchange"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
         android:background="@color/bgbackground">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <LinearLayout
+                    android:id="@+id/lltopsubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@drawable/blue_gradient"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnshiftchangePending"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_34sdp"
+                            android:background="@drawable/button_bg4"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/intermedium"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/_10sdp"
+                            android:text="Pending"
+                            android:textAlignment="center" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnshiftchangeApproved"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_34sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_bg4"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:fontFamily="@font/intermedium"
+                            android:text="Approved"
+                            android:textSize="@dimen/_10sdp"
+                            android:textAllCaps="false"
+                            android:textAlignment="center" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnshiftchangeCancelreject"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_34sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_bg4"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:fontFamily="@font/intermedium"
+                            android:text="Cancel / Reject"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_subtitle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
+                    android:layout_below="@+id/lltopsubtitle"
+                    android:background="#EBEBEB"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:background="#EBEBEB">
+                    android:orientation="horizontal">
 
                     <CheckBox
+                        android:id="@+id/cbCheckAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="All"
-                        android:id="@+id/cbCheckAll"
-                        android:layout_weight="1"
                         android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_weight="1"
                         android:fontFamily="@font/intermedium"
-                        android:textSize="@dimen/_10sdp"/>
+                        android:text="All"
+                        android:textSize="@dimen/_10sdp" />
 
 
                     <TextView
+                        android:id="@+id/tvNametitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_10sdp"
-                        android:text="Name"
                         android:layout_weight="0.8"
-                        android:textSize="@dimen/_11sdp"
-                        android:fontFamily="@font/intermedium"/>
+                        android:fontFamily="@font/intermedium"
+                        android:text="Name"
+                        android:textSize="@dimen/_11sdp" />
 
                     <TextView
+                        android:id="@+id/tvShifttitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/intermedium"
                         android:text="Shift"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/_11sdp"
-                        android:fontFamily="@font/intermedium"/>
+                        android:textSize="@dimen/_11sdp" />
 
                     <TextView
+                        android:id="@+id/tvActiontitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Action"
                         android:layout_weight="1"
+                        android:fontFamily="@font/intermedium"
+                        android:text="Action"
                         android:textAlignment="center"
-                        android:textSize="@dimen/_11sdp"
-                        android:fontFamily="@font/intermedium"/>
+                        android:textSize="@dimen/_11sdp" />
 
 
                 </LinearLayout>
@@ -74,15 +133,39 @@
                     android:id="@+id/rv_shiftchangelist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ll_subtitle"/>
+                    android:layout_below="@+id/ll_subtitle" />
+
+
+                <ImageView
+                    android:id="@+id/ImgNoevent"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/report"
+                    android:visibility="gone" />
+
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ImgNoevent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/interbold"
+                    android:gravity="center"
+                    android:text="Shift Change Leave list is empty"
+                    android:textAlignment="center"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone" />
 
 
             </RelativeLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
 
-    </ScrollView>
+    </RelativeLayout>
 
 </layout>

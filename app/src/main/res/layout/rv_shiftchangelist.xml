@@ -85,6 +85,27 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/intermedium"
+                    android:text="Status"
+                    android:layout_weight="0.8"
+                    android:visibility="gone"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+
+
+                <ImageView
+                    android:id="@+id/btnVert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_vert" />
+
 
 
                 <ImageView

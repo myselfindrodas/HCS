@@ -63,8 +63,18 @@ class LeaveAdapter(
             holder.tvStatus.visibility = View.VISIBLE
             holder.tvStatus.text = "Cancel"
             holder.tvStatus.setTextColor(ctx.getResources().getColor(R.color.red))
-            holder.rlMain.isClickable = true
-            holder.rlMain.isEnabled = true
+            if (requestedleaveModelArrayList[position].comment.equals("") &&
+                requestedleaveModelArrayList[position].attachment.equals("")){
+
+                holder.rlMain.isClickable = false
+                holder.rlMain.isEnabled = false
+            }else{
+
+                holder.rlMain.isClickable = true
+                holder.rlMain.isEnabled = true
+            }
+
+
 
         }else if (requestedleaveModelArrayList[position].approved_status.equals("3")){
 
@@ -75,9 +85,19 @@ class LeaveAdapter(
             holder.tvStatus.visibility = View.VISIBLE
             holder.tvStatus.text = "Rejected"
             holder.tvStatus.setTextColor(ctx.getResources().getColor(R.color.red))
-            holder.rlMain.isClickable = true
-            holder.rlMain.isEnabled = true
+            if (requestedleaveModelArrayList[position].comment.equals("") &&
+                requestedleaveModelArrayList[position].attachment.equals("")){
+
+                holder.rlMain.isClickable = false
+                holder.rlMain.isEnabled = false
+            }else{
+
+                holder.rlMain.isClickable = true
+                holder.rlMain.isEnabled = true
+            }
         }
+
+
 
         holder.tvUsername.text = requestedleaveModelArrayList[position].name + " "+
                 requestedleaveModelArrayList[position].lastname

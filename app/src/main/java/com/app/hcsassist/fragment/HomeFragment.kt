@@ -9,6 +9,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
@@ -309,6 +310,14 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         }
 
+
+        try {
+            val pInfo: PackageInfo = context!!.packageManager.getPackageInfo(context!!.packageName, 0)
+            val version: String = pInfo.versionName
+            fragmentHomeBinding.tvAppversion.text = "App Version : "+version
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
 
 
         fragmentHomeBinding.btMarkattendance.setOnClickListener {
@@ -672,8 +681,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
             ActivityCompat.requestPermissions(
                 mainActivity,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_CODE
-            )
+                REQUEST_CODE)
         } else {
 
             setLocationListner()

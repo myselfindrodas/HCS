@@ -33,7 +33,70 @@ class ShiftChangeListAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvUsername.text = shiftchangelistModelArrayList[position].name?:""
+
+        if (shiftchangelistModelArrayList[position].status.equals("1")){
+            holder.CbCheck.visibility = View.VISIBLE
+            holder.btnAccepet.visibility = View.VISIBLE
+            holder.btnReject.visibility = View.VISIBLE
+            holder.btnVert.visibility = View.GONE
+            holder.tvStatus.visibility = View.GONE
+            holder.llMain.isClickable = false
+            holder.llMain.isEnabled = false
+
+        }else if (shiftchangelistModelArrayList[position].status.equals("2")){
+            holder.CbCheck.visibility = View.GONE
+            holder.btnAccepet.visibility = View.GONE
+            holder.btnReject.visibility = View.GONE
+            holder.btnVert.visibility = View.GONE
+            holder.tvStatus.visibility = View.VISIBLE
+            holder.tvStatus.text = "Approved"
+            holder.tvStatus.setTextColor(ctx.getResources().getColor(R.color.teal_200))
+            holder.llMain.isClickable = false
+            holder.llMain.isEnabled = false
+
+        }else if (shiftchangelistModelArrayList[position].status.equals("3")){
+            holder.CbCheck.visibility = View.GONE
+            holder.btnAccepet.visibility = View.GONE
+            holder.btnReject.visibility = View.GONE
+            holder.btnVert.visibility = View.VISIBLE
+            holder.tvStatus.visibility = View.VISIBLE
+            holder.tvStatus.text = "Cancel"
+            holder.tvStatus.setTextColor(ctx.getResources().getColor(R.color.red))
+            if (shiftchangelistModelArrayList[position].comment.equals("")){
+
+                holder.llMain.isClickable = false
+                holder.llMain.isEnabled = false
+            }else{
+
+                holder.llMain.isClickable = true
+                holder.llMain.isEnabled = true
+            }
+
+        }else if (shiftchangelistModelArrayList[position].status.equals("0")){
+            holder.CbCheck.visibility = View.GONE
+            holder.btnAccepet.visibility = View.GONE
+            holder.btnReject.visibility = View.GONE
+            holder.btnVert.visibility = View.VISIBLE
+            holder.tvStatus.visibility = View.VISIBLE
+            holder.tvStatus.text = "Rejected"
+            holder.tvStatus.setTextColor(ctx.getResources().getColor(R.color.red))
+            if (shiftchangelistModelArrayList[position].comment.equals("")){
+
+                holder.llMain.isClickable = false
+                holder.llMain.isEnabled = false
+
+            }else{
+
+                holder.llMain.isClickable = true
+                holder.llMain.isEnabled = true
+            }
+
+
+        }
+
+
+        holder.tvUsername.text = shiftchangelistModelArrayList[position].name?:"" + " "+
+            shiftchangelistModelArrayList[position].last_name?:""
         holder.tvCurrentShift.text = shiftchangelistModelArrayList[position].current_shift?:"".replaceFirstChar {
             it.uppercase()
         }
@@ -162,6 +225,8 @@ class ShiftChangeListAdapter(
         var tvUsername: TextView
         var tvCurrentShift: TextView
         var tvRequestedShift: TextView
+        var tvStatus: TextView
+        var btnVert: ImageView
         var btnAccepet: ImageView
         var btnReject: ImageView
 
@@ -174,6 +239,9 @@ class ShiftChangeListAdapter(
             tvRequestedShift = itemView.findViewById(R.id.tvRequestedShift)
             btnAccepet = itemView.findViewById(R.id.btnAccepet)
             btnReject = itemView.findViewById(R.id.btnReject)
+            btnVert = itemView.findViewById(R.id.btnVert)
+            tvStatus = itemView.findViewById(R.id.tvStatus)
+
         }
     }
 

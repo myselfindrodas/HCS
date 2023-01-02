@@ -66,10 +66,9 @@ interface ApiInterface {
     ): ShiftChangeResponse
 
 
-    @GET("shift-change-request-list-v1/{page}")
+    @GET("shift-change-request-list")
     suspend fun shiftchangelist(
         @Header("Authorization") Authorization: String,
-        @Path("page") page:String,
     ): ShiftChangeListResponse
 
 
@@ -120,10 +119,9 @@ interface ApiInterface {
 
 
 
-    @GET("requested-leave-list-v1/{page}")
+    @GET("requested-leave-list")
     suspend fun requestedleavelist(
         @Header("Authorization") Authorization: String,
-        @Path("page") page:String,
     ): LeaveResponse
 
 

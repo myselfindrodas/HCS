@@ -245,7 +245,7 @@ class CalenderFragment : Fragment() {
 
                                             btnCalenderdetails.setOnClickListener {
 
-                                                detailspopup(tvEventName.text.toString(), tvEventTime.text.toString())
+                                                detailspopup(tvEventName.text.toString(), eventList!![i].startDate.toString(), eventList!![i].endDate.toString())
 
                                             }
 
@@ -283,7 +283,8 @@ class CalenderFragment : Fragment() {
 
                                             btnCalenderdetails.setOnClickListener {
 
-                                                detailspopup(tvEventName.text.toString(), tvEventTime.text.toString())
+                                                detailspopup(tvEventName.text.toString(), eventList!![i].startDate.toString(), eventList!![i].endDate.toString())
+
 
                                             }
 
@@ -293,8 +294,14 @@ class CalenderFragment : Fragment() {
 
                                         val titleEmpty=TextView(mainActivity)
                                         titleEmpty.setText("No Events available")
-                                        if (eventList!!.isEmpty() && holidayList!!.isEmpty())
+                                        titleEmpty.setGravity(Gravity.CENTER)
+                                        if (eventList!!.isEmpty() && holidayList!!.isEmpty()){
                                             llEventContainer.addView(titleEmpty)
+                                            fragmentCalenderBinding.ImgNoevent.visibility=View.VISIBLE
+                                        }else{
+                                            fragmentCalenderBinding.ImgNoevent.visibility=View.GONE
+
+                                        }
 
                                         responseDate.forEach {itLocalDate->
 
@@ -344,10 +351,11 @@ class CalenderFragment : Fragment() {
 
     }
 
-    private fun detailspopup(eventname:String, eventtime:String){
+    private fun detailspopup(eventname:String, eventstarttime:String, eventendtime:String){
         val btnPopupclose: TextView
         val tveventName: TextView
-        val tvEventTime: TextView
+        val tvstartEventTime: TextView
+        val tvendEventTime: TextView
         val dialog = Dialog(mainActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val params = WindowManager.LayoutParams()
@@ -361,10 +369,12 @@ class CalenderFragment : Fragment() {
         dialog.show()
         btnPopupclose = dialog.findViewById(R.id.btnPopupclose)
         tveventName = dialog.findViewById(R.id.tveventName)
-        tvEventTime = dialog.findViewById(R.id.tvEventTime)
+        tvstartEventTime = dialog.findViewById(R.id.tvstartEventTime)
+        tvendEventTime = dialog.findViewById(R.id.tvendEventTime)
 
         tveventName.text = eventname
-        tvEventTime.text = eventtime
+        tvstartEventTime.text = eventstarttime
+        tvendEventTime.text = eventendtime
 
         btnPopupclose.setOnClickListener {
 

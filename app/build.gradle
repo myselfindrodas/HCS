@@ -10,10 +10,10 @@ android {
 
     defaultConfig {
         applicationId "com.app.hcsassist"
-        minSdk 23
+        minSdk 21
         targetSdk 33
-        versionCode 12
-        versionName "2.1"
+        versionCode 18
+        versionName "2.5"
         renderscriptTargetApi 25
         renderscriptSupportModeEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

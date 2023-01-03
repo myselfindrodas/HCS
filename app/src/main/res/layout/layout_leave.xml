@@ -37,42 +37,45 @@
                             android:id="@+id/btnPending"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_34sdp"
+                            android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_weight="1"
                             android:background="@drawable/button_bg4"
                             android:fontFamily="@font/intermedium"
                             android:text="Pending"
-                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:textAlignment="center"
                             android:textAllCaps="false"
-                            android:textSize="@dimen/_10sdp"
                             android:textColor="@color/black"
-                            android:textAlignment="center" />
+                            android:textSize="@dimen/_10sdp"
+                            tools:ignore="TouchTargetSizeCheck" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnApproved"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_34sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
                             android:layout_weight="1"
                             android:background="@drawable/button_bg4"
                             android:fontFamily="@font/intermedium"
-                            android:layout_marginLeft="@dimen/_7sdp"
                             android:text="Approved"
-                            android:textSize="@dimen/_10sdp"
+                            android:textAlignment="center"
                             android:textAllCaps="false"
-                            android:textAlignment="center" />
+                            android:textSize="@dimen/_10sdp"
+                            tools:ignore="TouchTargetSizeCheck" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnCancelreject"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_34sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_5sdp"
                             android:layout_weight="1"
                             android:background="@drawable/button_bg4"
                             android:fontFamily="@font/intermedium"
                             android:text="Cancel / Reject"
+                            android:textAlignment="center"
                             android:textAllCaps="false"
                             android:textSize="@dimen/_10sdp"
-                            android:layout_marginLeft="@dimen/_7sdp"
-                            android:layout_marginRight="@dimen/_5sdp"
-                            android:textAlignment="center" />
+                            tools:ignore="TouchTargetSizeCheck" />
 
                     </LinearLayout>
 

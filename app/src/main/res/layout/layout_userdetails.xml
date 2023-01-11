@@ -145,7 +145,7 @@
             </LinearLayout>
 
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -157,22 +157,23 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/interregular"
                     android:text="Emp Code:"
+                    android:layout_marginRight="@dimen/_5sdp"
                     android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvEmpcode"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:fontFamily="@font/interregular"
-                    android:gravity="start"
+                    android:textAlignment="textEnd"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/_11sdp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -185,20 +186,20 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/interregular"
                     android:text="Email:"
+                    android:layout_marginRight="@dimen/_5sdp"
                     android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvEmail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:fontFamily="@font/interregular"
-                    android:gravity="start"
+                    android:textAlignment="textEnd"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/_11sdp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -232,7 +233,7 @@
 
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -246,20 +247,20 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/interregular"
                     android:text="Work Location:"
+                    android:layout_marginRight="@dimen/_5sdp"
                     android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLocation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:fontFamily="@font/interregular"
-                    android:gravity="start"
+                    android:textAlignment="textEnd"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/_11sdp" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -312,7 +312,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
         try {
-            val pInfo: PackageInfo = context!!.packageManager.getPackageInfo(context!!.packageName, 0)
+            val pInfo: PackageInfo = mainActivity.packageManager.getPackageInfo(mainActivity.packageName, 0)
             val version: String = pInfo.versionName
             fragmentHomeBinding.tvAppversion.text = "App Version : "+version
         } catch (e: PackageManager.NameNotFoundException) {
@@ -359,11 +359,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
                 punchoutshiftlist.forEach { itString ->
                     if (selectedshiftname == itString) {
-                        Toast.makeText(
-                            mainActivity,
-                            "Today you have already given attendance for this shift",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(mainActivity, "Today you have already given attendance for this shift", Toast.LENGTH_SHORT).show()
                         return@setOnClickListener
                     }
 
@@ -958,7 +954,6 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                     sessionManager?.setfencingLat(resource.data.data?.lat)
                                     sessionManager?.setfencingLong(resource.data.data?.long)
                                     sessionManager?.setDesignation(resource.data.data?.emp_designation_title)
-                                    spShifttime()
                                     sessionManager?.setprofimage(resource.data.data?.profile_image)
                                     Glide.with(mainActivity)
                                         .load(resource.data.data?.profile_image)
@@ -1026,16 +1021,14 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                                 sessionManager?.getfencingLat()!!.toDouble(),
                                                 sessionManager?.getfencingLong()!!.toDouble(),
                                                 latitude?.toDouble()!!,
-                                                longitude?.toDouble()!!
-                                            ) < 100) {
+                                                longitude?.toDouble()!!) < 100) {
 
                                             fragmentHomeBinding.btMarkattendance.isClickable = true
                                             fragmentHomeBinding.btMarkattendance.isEnabled = true
                                             fragmentHomeBinding.btMarkattendance.background =
                                                 mainActivity.resources.getDrawable(
                                                     R.drawable.button_bg,
-                                                    mainActivity.resources.newTheme()
-                                                )
+                                                    mainActivity.resources.newTheme())
 
 
                                         } else {
@@ -1071,10 +1064,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
                                     if (!resource.data.data?.profile_image.isNullOrEmpty()) {
-                                        fragmentHomeBinding.llDetails.tvNameinit.visibility =
-                                            View.GONE
-                                        fragmentHomeBinding.llDetails.PrfImg.visibility =
-                                            View.VISIBLE
+                                        fragmentHomeBinding.llDetails.tvNameinit.visibility = View.GONE
+                                        fragmentHomeBinding.llDetails.PrfImg.visibility = View.VISIBLE
                                         sessionManager?.setprofimage(resource.data.data?.profile_image)
                                         Glide.with(mainActivity)
                                             .load(resource.data.data?.profile_image)
@@ -1082,8 +1073,7 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                                     } else {
                                         sessionManager?.setprofimage("")
-                                        fragmentHomeBinding.llDetails.tvNameinit.visibility =
-                                            View.VISIBLE
+                                        fragmentHomeBinding.llDetails.tvNameinit.visibility = View.VISIBLE
                                         fragmentHomeBinding.llDetails.PrfImg.visibility = View.GONE
                                         fragmentHomeBinding.llDetails.tvNameinit.text =
                                             resource.data.data?.name?.substring(0, 1)?.capitalize()
@@ -1098,6 +1088,8 @@ class HomeFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                     } catch (e: Exception) {
                                         e.printStackTrace()
                                     }
+
+                                    spShifttime()
 
 
                                 } else {
